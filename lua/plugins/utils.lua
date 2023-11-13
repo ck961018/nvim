@@ -44,7 +44,7 @@ return {
                 },
             }
             )
-            vim.keymap.set({ "n", "v" }, "<leader>e", [[<cmd>Neotree<CR>]])
+            vim.keymap.set({ "n", "v" }, "<leader>e", "<cmd>Neotree<CR>")
         end,
     },
     {

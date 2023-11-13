@@ -14,10 +14,10 @@ keymap.set("n", "<leader>sv", "<c-w>v")
 keymap.set("n", "<leader>sx", "<cmd>close<cr>")
 
 -- move
-keymap.set("n", "<c-h>", "<c-w>h")
-keymap.set("n", "<c-l>", "<c-w>l")
-keymap.set("n", "<c-j>", "<c-w>j")
-keymap.set("n", "<c-k>", "<c-w>k")
+keymap.set("n", "<a-h>", "<c-w>h")
+keymap.set("n", "<a-l>", "<c-w>l")
+keymap.set("n", "<a-j>", "<c-w>j")
+keymap.set("n", "<a-k>", "<c-w>k")
 keymap.set("n", "gt", "<cmd>bn<cr>")
 keymap.set("n", "gT", "<cmd>bN<cr>")
 

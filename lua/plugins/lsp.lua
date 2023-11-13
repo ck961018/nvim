@@ -23,7 +23,10 @@ return {
                     },
                 },
             },
-            clangd = {},
+            clangd = {
+                filetypes = { "c", "cpp", "objc", "objcpp", "h" },
+            },
+            neocmake = {},
         }
         local on_attach = function(_, bufnr)
             local nmap = function(keys, func, desc)
@@ -57,7 +60,9 @@ return {
         require("neodev").setup()
         require("fidget").setup()
         require("lspsaga").setup()
-        require("mason").setup()
+        require("mason").setup({
+            ensure_installed = { "cmakelang", "cmakelint" }
+        })
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         require("mason-lspconfig").setup({
             ensure_installed = vim.tbl_keys(servers),
