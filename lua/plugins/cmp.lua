@@ -26,7 +26,7 @@ return {
         require("luasnip.loaders.from_vscode").lazy_load()
         local luasnip = require("luasnip")
         local cmp = require("cmp")
-        cmp.setup {
+        cmp.setup({
             snippet = {
                 expand = function(args)
                     require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
@@ -39,7 +39,7 @@ return {
                 { name = "buffer" },
             },
             mapping = cmp.mapping.preset.insert {
-                ["<tab>"] = cmp.mapping(function(fallback)
+                ["<c-n>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
                         -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
@@ -53,7 +53,7 @@ return {
                     end
                 end, { "i", "s" }),
 
-                ["<s-tab>"] = cmp.mapping(function(fallback)
+                ["<c-p>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_prev_item()
                     elseif luasnip.jumpable(-1) then
@@ -62,12 +62,12 @@ return {
                         fallback()
                     end
                 end, { "i", "s" }),
-                ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+                ["<tab>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
             },
             experimental = {
                 ghost_text = true,
             },
-        }
+        })
 
         cmp.setup.cmdline("/", {
             mapping = cmp.mapping.preset.cmdline(),

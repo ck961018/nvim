@@ -3,11 +3,14 @@ local buffer          = vim.b
 local global          = vim.g
 
 option.tabstop        = 4
+option.softtabstop    = 4
 option.shiftwidth     = 4
 option.expandtab      = true
+option.smartindent    = true
 option.shiftround     = true
 option.autoindent     = true
 option.smarttab       = true
+
 option.smartcase      = true
 option.number         = true
 option.relativenumber = true
@@ -25,6 +28,7 @@ option.title          = true
 option.swapfile       = false
 option.exrc           = true
 option.signcolumn     = "yes"
+
 option.clipboard:append("unnamedplus")
 
 buffer.fileencoding = "utf-8"
