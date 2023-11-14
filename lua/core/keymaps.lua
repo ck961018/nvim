@@ -5,10 +5,6 @@ vim.g.mapleader = " "
 -- save
 keymap.set("n", "<leader>w", "<cmd>w<cr>", { noremap = true, silent = true })
 
--- quit
-keymap.set("n", "<leader>wq", "<cmd>w<cr><cmd>lua QuitBuffer()<cr>", { noremap = true, silent = true })
-keymap.set("n", "<leader>q", "<cmd>lua QuitBuffer()<cr>", { noremap = true, silent = true })
-
 -- spilt
 keymap.set("n", "<leader>sv", "<c-w>v")
 keymap.set("n", "<leader>sx", "<cmd>close<cr>")
@@ -30,13 +26,3 @@ keymap.set("v", "K", ":m '<-2<cr>gv=gv")
 -- view
 keymap.set('n', '<cr>', ':nohlsearch<cr><cr>', { noremap = true, silent = true })
 
--- function
-function QuitBuffer()
-    local buf_listed = vim.fn.filter(vim.fn.range(1, vim.fn.bufnr()), "buflisted(v:val)")
-
-    if #buf_listed > 1 then
-        vim.cmd('bdelete')
-    else
-        vim.cmd('quit')
-    end
-end

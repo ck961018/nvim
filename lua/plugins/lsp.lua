@@ -34,6 +34,12 @@ return {
                     "--all-scopes-completion",
                     "--completion-style=detailed",
                 },
+                on_new_config = function(new_config, _)
+                    local status, cmake = pcall(require, "cmake-tools")
+                    if status then
+                        cmake.clangd_on_new_config(new_config)
+                    end
+                end,
             },
             neocmake = {},
         }
@@ -54,7 +60,7 @@ return {
             nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
             nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
             nmap('<leader>wl', function()
-                print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+                print(vim.inspect(vim.lsp.buf.list_workspace_folders))
             end, '[W]orkspace [L]ist Folders')
             nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
             nmap('<leader>rn', "<cmd>Lspsaga rename ++project<cr>", '[R]e[n]ame')

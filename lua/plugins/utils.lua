@@ -22,30 +22,41 @@ return {
         },
     },
     {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
+        "nvim-tree/nvim-tree.lua",
         dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-            "MunifTanjim/nui.nvim",
-            -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+            "nvim-tree/nvim-web-devicons",
         },
         config = function()
-            require("neo-tree").setup({
-                window = {
-                    mappings = {
-                        ["<leader>e"] = "close_window",
+            vim.g.loaded_netrw = 1
+            vim.g.loaded_netrwPlugin = 1
+            require("nvim-tree").setup({
+
+                on_attach = function(bufnr)
+                    local api = require("nvim-tree.api")
+                    local function opts(desc)
+                        return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+                    end
+
+                    api.config.mappings.default_on_attach(bufnr)
+                    vim.keymap.set("n", "<leader>e", api.tree.close, opts("Close"))
+                    vim.keymap.set("n", "<leader>q", api.tree.close, opts("Close"))
+                end,
+                view = {
+                    width = 30,
+                    adaptive_size = true,
+                    signcolumn = "yes",
+                },
+                renderer = {
+                    group_empty = false,
+                },
+                actions = {
+                    open_file = {
+                        resize_window = false,
                     },
                 },
-                filesystem = {
-                    filtered_items = {
-                        visible = true,
-                    },
-                },
-            }
-            )
-            vim.keymap.set({ "n" }, "<leader>e", "<cmd>Neotree<CR>")
-        end,
+            })
+            vim.keymap.set({ "n" }, "<leader>e", "<cmd>NvimTreeFocus<cr>", { noremap = true, silent = true })
+        end
     },
     {
         "folke/which-key.nvim",

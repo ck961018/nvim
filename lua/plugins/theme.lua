@@ -9,14 +9,14 @@ return {
         },
         config = function()
             vim.cmd [[colorscheme tokyonight-moon]]
-            require('lualine').setup({
+            require("lualine").setup({
                 options = {
-                    theme = 'tokyonight',
+                    theme = "tokyonight",
                 },
             })
-            require('barbecue').setup {
-                theme = 'tokyonight',
-            }
+            require("barbecue").setup({
+                theme = "tokyonight",
+            })
         end
     },
 }

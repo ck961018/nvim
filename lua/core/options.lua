@@ -22,6 +22,7 @@ option.autoread       = true
 option.updatetime     = 50
 option.undofile       = true
 option.splitright     = true
+option.splitbelow     = true
 option.hidden         = true
 option.wrap           = false
 option.title          = true
@@ -32,3 +33,4 @@ option.signcolumn     = "yes"
 option.clipboard:append("unnamedplus")
 
 buffer.fileencoding = "utf-8"
+

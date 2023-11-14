@@ -6,9 +6,10 @@ return {
                 options = {
                     offsets = {
                         {
-                            filetype = "neo-tree",
+                            filetype = "NvimTree",
                             text = "File Explorer",
                             separator = true,
+                            highlight = "Directory",
                             text_align = "left",
                         }
                     },
@@ -19,6 +20,12 @@ return {
                     numbers = function(opts)
                         return opts.ordinal
                     end,
+                    custom_filter = function(buf_number, _)
+                        -- filter out filetypes you don't want to see
+                        if vim.bo[buf_number].filetype ~= "cmake_tools_terminal" then
+                            return true
+                        end
+                    end,
                 }
             })
             vim.keymap.set("n", "g1", "<cmd>BufferLineGoToBuffer 1<cr>", { noremap = true, silent = true })
@@ -26,6 +33,34 @@ return {
             vim.keymap.set("n", "g3", "<cmd>BufferLineGoToBuffer 3<cr>", { noremap = true, silent = true })
             vim.keymap.set("n", "g4", "<cmd>BufferLineGoToBuffer 4<cr>", { noremap = true, silent = true })
             vim.keymap.set("n", "g5", "<cmd>BufferLineGoToBuffer 5<cr>", { noremap = true, silent = true })
+
+
+            vim.keymap.set("n", "<leader>q", "<cmd>w<cr><cmd>lua QuitBuffer()<cr>", { noremap = true, silent = true })
+
+            function QuitBuffer()
+                local buffer_line = require("bufferline")
+                local elements = buffer_line.get_elements().elements
+                local cnt = #elements
+
+                if cnt > 1 then
+                    local cur_pos
+                    local cur_id = vim.fn.bufnr()
+                    for i, e in ipairs(elements) do
+                        if e.id == cur_id then
+                            cur_pos = i
+                            break
+                        end
+                    end
+                    if cur_pos == cnt then
+                        vim.cmd("BufferLineGoToBuffer " .. cur_pos - 1)
+                    else
+                        vim.cmd("BufferLineGoToBuffer " .. cur_pos + 1)
+                    end
+                    vim.cmd("bd " .. cur_id)
+                else
+                    vim.cmd("qa")
+                end
+            end
         end,
     },
     {
