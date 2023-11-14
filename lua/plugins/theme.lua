@@ -17,6 +17,6 @@ return {
             require('barbecue').setup {
                 theme = 'tokyonight',
             }
-        end,
+        end
     },
 }

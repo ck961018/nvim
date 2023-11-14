@@ -20,6 +20,8 @@ keymap.set("n", "<a-j>", "<c-w>j")
 keymap.set("n", "<a-k>", "<c-w>k")
 keymap.set("n", "gt", "<cmd>bn<cr>")
 keymap.set("n", "gT", "<cmd>bN<cr>")
+keymap.set({ "n", "v" }, "<leader>h", "^")
+keymap.set({ "n", "v" }, "<leader>l", "$")
 
 -- edit
 keymap.set("v", "J", ":m '>+1<cr>gv=gv")

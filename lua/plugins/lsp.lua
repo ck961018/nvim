@@ -25,6 +25,15 @@ return {
             },
             clangd = {
                 filetypes = { "c", "cpp", "objc", "objcpp", "h" },
+                cmd = {
+                    "clangd",
+                    "--header-insertion=never",
+                    "--clang-tidy",
+                    "--clang-tidy-checks=performance-*,bugprone-*",
+                    "--background-index",
+                    "--all-scopes-completion",
+                    "--completion-style=detailed",
+                },
             },
             neocmake = {},
         }

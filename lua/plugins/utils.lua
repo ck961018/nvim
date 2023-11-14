@@ -44,7 +44,7 @@ return {
                 },
             }
             )
-            vim.keymap.set({ "n", "v" }, "<leader>e", "<cmd>Neotree<CR>")
+            vim.keymap.set({ "n" }, "<leader>e", "<cmd>Neotree<CR>")
         end,
     },
     {
@@ -54,13 +54,7 @@ return {
             vim.o.timeout = true
             vim.o.timeoutlen = 500
         end,
-        opts = {
-            triggers_blacklist = {
-                -- list of mode / prefixes that should never be hooked by WhichKey
-                -- this is mostly relevant for keymaps that start with a native binding
-                i = { "<leader>" },
-            },
-        },
+        opts = {},
     },
 
 }
