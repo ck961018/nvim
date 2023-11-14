@@ -25,4 +25,3 @@ keymap.set("v", "K", ":m '<-2<cr>gv=gv")
 
 -- view
 keymap.set('n', '<cr>', ':nohlsearch<cr><cr>', { noremap = true, silent = true })
-

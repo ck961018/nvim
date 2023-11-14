@@ -33,7 +33,10 @@ return {
             vim.keymap.set("n", "g3", "<cmd>BufferLineGoToBuffer 3<cr>", { noremap = true, silent = true })
             vim.keymap.set("n", "g4", "<cmd>BufferLineGoToBuffer 4<cr>", { noremap = true, silent = true })
             vim.keymap.set("n", "g5", "<cmd>BufferLineGoToBuffer 5<cr>", { noremap = true, silent = true })
-
+            vim.keymap.set("n", "g6", "<cmd>BufferLineGoToBuffer 6<cr>", { noremap = true, silent = true })
+            vim.keymap.set("n", "g7", "<cmd>BufferLineGoToBuffer 7<cr>", { noremap = true, silent = true })
+            vim.keymap.set("n", "g8", "<cmd>BufferLineGoToBuffer 8<cr>", { noremap = true, silent = true })
+            vim.keymap.set("n", "g9", "<cmd>BufferLineGoToBuffer 999999999<cr>", { noremap = true, silent = true })
 
             vim.keymap.set("n", "<leader>q", "<cmd>w<cr><cmd>lua QuitBuffer()<cr>", { noremap = true, silent = true })
 
