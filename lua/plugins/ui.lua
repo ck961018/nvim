@@ -49,32 +49,57 @@ return {
                 local cnt = #elements
                 local cur_id = vim.fn.bufnr()
 
-                if vim.bo[cur_id].filetype ~= "cmake_tools_terminal" and vim.bo[cur_id].filetype ~= "alpha" and vim.bo[cur_id].filetype ~= "qf" and vim.bo[cur_id].filetype ~= "" then
-                    vim.cmd("silent w")
-                end
+                local ignored_filetypes = {
+                    "",
+                    "qf",
+                    "lazy",
+                    "help",
+                    "alpha",
+                    "camek_tools_terminal",
+                }
 
-                if cnt > 1 then
-                    local cur_pos
-                    for i, e in ipairs(elements) do
-                        if e.id == cur_id then
-                            cur_pos = i
+                local is_ignored = function(str)
+                    local found = false
+                    for _, filetype in ipairs(ignored_filetypes) do
+                        if (str == filetype) then
+                            found = true
                             break
                         end
                     end
+                    return found
+                end
+
+                if is_ignored(vim.bo[cur_id].filetype) == false then
+                    vim.cmd("silent w")
+                end
+
+                local cur_pos = -1
+                for i, e in ipairs(elements) do
+                    if e.id == cur_id then
+                        cur_pos = i
+                        break
+                    end
+                end
+                if cur_pos == -1 then
+                    vim.cmd.q()
+                    return
+                end
+
+                if cnt > 1 then
                     local nxt_pos;
                     if cur_pos == cnt then
                         nxt_pos = cur_pos - 1
                     else
                         nxt_pos = cur_pos + 1
                     end
-                    if cnt == 2 and (vim.bo[elements[nxt_pos].id].filetype == "qf" or vim.bo[elements[nxt_pos].id].filetype == "cmake_tools_terminal") then
-                        vim.cmd("qa")
+                    if cnt == 2 and is_ignored(vim.bo[elements[nxt_pos].id].filetype) then
+                        vim.cmd.qa()
                     else
-                        vim.cmd("BufferLineGoToBuffer " .. nxt_pos)
-                        vim.cmd("bd " .. cur_id)
+                        vim.cmd.BufferLineGoToBuffer(nxt_pos)
+                        vim.cmd.bd(cur_id)
                     end
                 else
-                    vim.cmd("qa")
+                    vim.cmd.qa()
                 end
             end
         end,
