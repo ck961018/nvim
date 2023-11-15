@@ -32,5 +32,4 @@ option.signcolumn     = "yes"
 
 option.clipboard:append("unnamedplus")
 
-buffer.fileencoding = "utf-8"
-
+option.fileencoding = "utf-8"

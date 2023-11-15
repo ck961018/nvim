@@ -22,44 +22,57 @@ return {
                     end,
                     custom_filter = function(buf_number, _)
                         -- filter out filetypes you don't want to see
-                        if vim.bo[buf_number].filetype ~= "cmake_tools_terminal" then
+                        if vim.bo[buf_number].filetype ~= "cmake_tools_terminal" and vim.bo[buf_number].filetype ~= "qf" then
                             return true
                         end
                     end,
                 }
             })
-            vim.keymap.set("n", "g1", "<cmd>BufferLineGoToBuffer 1<cr>", { noremap = true, silent = true })
-            vim.keymap.set("n", "g2", "<cmd>BufferLineGoToBuffer 2<cr>", { noremap = true, silent = true })
-            vim.keymap.set("n", "g3", "<cmd>BufferLineGoToBuffer 3<cr>", { noremap = true, silent = true })
-            vim.keymap.set("n", "g4", "<cmd>BufferLineGoToBuffer 4<cr>", { noremap = true, silent = true })
-            vim.keymap.set("n", "g5", "<cmd>BufferLineGoToBuffer 5<cr>", { noremap = true, silent = true })
-            vim.keymap.set("n", "g6", "<cmd>BufferLineGoToBuffer 6<cr>", { noremap = true, silent = true })
-            vim.keymap.set("n", "g7", "<cmd>BufferLineGoToBuffer 7<cr>", { noremap = true, silent = true })
-            vim.keymap.set("n", "g8", "<cmd>BufferLineGoToBuffer 8<cr>", { noremap = true, silent = true })
-            vim.keymap.set("n", "g9", "<cmd>BufferLineGoToBuffer 999999999<cr>", { noremap = true, silent = true })
+            vim.keymap.set({ "n", "v" }, "g1", "<cmd>BufferLineGoToBuffer 1<cr>", { noremap = true, silent = true })
+            vim.keymap.set({ "n", "v" }, "g2", "<cmd>BufferLineGoToBuffer 2<cr>", { noremap = true, silent = true })
+            vim.keymap.set({ "n", "v" }, "g3", "<cmd>BufferLineGoToBuffer 3<cr>", { noremap = true, silent = true })
+            vim.keymap.set({ "n", "v" }, "g4", "<cmd>BufferLineGoToBuffer 4<cr>", { noremap = true, silent = true })
+            vim.keymap.set({ "n", "v" }, "g5", "<cmd>BufferLineGoToBuffer 5<cr>", { noremap = true, silent = true })
+            vim.keymap.set({ "n", "v" }, "g6", "<cmd>BufferLineGoToBuffer 6<cr>", { noremap = true, silent = true })
+            vim.keymap.set({ "n", "v" }, "g7", "<cmd>BufferLineGoToBuffer 7<cr>", { noremap = true, silent = true })
+            vim.keymap.set({ "n", "v" }, "g8", "<cmd>BufferLineGoToBuffer 8<cr>", { noremap = true, silent = true })
+            vim.keymap.set({ "n", "v" }, "g9", "<cmd>BufferLineGoToBuffer 9<cr>", { noremap = true, silent = true })
 
-            vim.keymap.set("n", "<leader>q", "<cmd>w<cr><cmd>lua QuitBuffer()<cr>", { noremap = true, silent = true })
+            vim.keymap.set("n", "gt", "<cmd>BufferLineCycleNext<cr>")
+            vim.keymap.set("n", "gT", "<cmd>BufferLineCyclePrev<cr>")
+
+            vim.keymap.set({ "n", "v" }, "<leader>q", "<cmd>lua QuitBuffer()<cr>", { noremap = true, silent = true })
 
             function QuitBuffer()
                 local buffer_line = require("bufferline")
                 local elements = buffer_line.get_elements().elements
                 local cnt = #elements
+                local cur_id = vim.fn.bufnr()
+
+                if vim.bo[cur_id].filetype ~= "cmake_tools_terminal" and vim.bo[cur_id].filetype ~= "alpha" and vim.bo[cur_id].filetype ~= "qf" and vim.bo[cur_id].filetype ~= "" then
+                    vim.cmd("silent w")
+                end
 
                 if cnt > 1 then
                     local cur_pos
-                    local cur_id = vim.fn.bufnr()
                     for i, e in ipairs(elements) do
                         if e.id == cur_id then
                             cur_pos = i
                             break
                         end
                     end
+                    local nxt_pos;
                     if cur_pos == cnt then
-                        vim.cmd("BufferLineGoToBuffer " .. cur_pos - 1)
+                        nxt_pos = cur_pos - 1
                     else
-                        vim.cmd("BufferLineGoToBuffer " .. cur_pos + 1)
+                        nxt_pos = cur_pos + 1
                     end
-                    vim.cmd("bd " .. cur_id)
+                    if cnt == 2 and (vim.bo[elements[nxt_pos].id].filetype == "qf" or vim.bo[elements[nxt_pos].id].filetype == "cmake_tools_terminal") then
+                        vim.cmd("qa")
+                    else
+                        vim.cmd("BufferLineGoToBuffer " .. nxt_pos)
+                        vim.cmd("bd " .. cur_id)
+                    end
                 else
                     vim.cmd("qa")
                 end

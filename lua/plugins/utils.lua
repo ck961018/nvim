@@ -46,6 +46,9 @@ return {
                     adaptive_size = true,
                     signcolumn = "yes",
                 },
+                filters = {
+                    git_ignored = false,
+                },
                 renderer = {
                     group_empty = false,
                 },
@@ -67,5 +70,7 @@ return {
         end,
         opts = {},
     },
-
+    {
+        "ms-jpq/lua-async-await",
+    },
 }

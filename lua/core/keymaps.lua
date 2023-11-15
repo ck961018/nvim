@@ -14,8 +14,6 @@ keymap.set("n", "<a-h>", "<c-w>h")
 keymap.set("n", "<a-l>", "<c-w>l")
 keymap.set("n", "<a-j>", "<c-w>j")
 keymap.set("n", "<a-k>", "<c-w>k")
-keymap.set("n", "gt", "<cmd>bn<cr>")
-keymap.set("n", "gT", "<cmd>bN<cr>")
 keymap.set({ "n", "v" }, "<leader>h", "^")
 keymap.set({ "n", "v" }, "<leader>l", "$")
 

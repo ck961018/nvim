@@ -56,7 +56,7 @@ return {
             nmap('gd', require "telescope.builtin".lsp_definitions, '[G]oto [D]efinition')
             nmap('K', "<cmd>Lspsaga hover_doc<CR>", 'Hover Documentation')
             nmap('gi', require "telescope.builtin".lsp_implementations, '[G]oto [I]mplementation')
-            nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+            nmap('<c-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
             nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
             nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
             nmap('<leader>wl', function()
