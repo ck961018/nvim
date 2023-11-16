@@ -45,6 +45,7 @@ return {
                     width = 30,
                     adaptive_size = true,
                     signcolumn = "yes",
+                    preserve_window_proportions = true,
                 },
                 filters = {
                     git_ignored = false,
@@ -57,8 +58,16 @@ return {
                         resize_window = false,
                     },
                 },
+
+                -- for project
+                sync_root_with_cwd = true,
+                respect_buf_cwd = true,
+                update_focused_file = {
+                    enable = true,
+                    update_root = true,
+                },
             })
-            vim.keymap.set({ "n" }, "<leader>e", "<cmd>NvimTreeFocus<cr>", { noremap = true, silent = true })
+            vim.keymap.set({ "n" }, "<leader>e", "<cmd>NvimTreeFocus<CR>", { noremap = true, silent = true })
         end
     },
     {

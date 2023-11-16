@@ -68,7 +68,7 @@ return {
                 refresh_rate_ms = 100, -- how often to iterate icons
             },
         })
-        vim.keymap.set({ "n" }, "<c-F7>", "<cmd>CMakeGenerate<CR>")
+        vim.keymap.set({ "n" }, "<C-F7>", "<cmd>CMakeSelectCwd ./<CR>")
         vim.keymap.set({ "n" }, "<F7>", "<cmd>CMakeBuild<CR>")
         -- vim.keymap.set({ "n" }, "<F5>", "<cmd>CMakeRun<CR>")
     end,

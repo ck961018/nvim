@@ -1,5 +1,5 @@
 vim.g.sqlite_clib_path = vim.fn.stdpath("config") ..
-    "\\dependencies\\bin\\sqlite-dll-win-x64-3440000\\sqlite3.dll" --for sqlite3
+    "\\dependencies\\lib\\sqlite-dll-win-x64-3440000\\sqlite3.dll" --for sqlite3
 return {
     "JuanZoran/Trans.nvim",
     dependencies = { "kkharji/sqlite.lua", },
@@ -29,7 +29,7 @@ return {
                     animation = {
                         open = "slid", -- "fold", "slid"
                         close = "slid",
-                        interval = 7,
+                        interval = 5,
                     },
                     timeout   = 2000,
                 },

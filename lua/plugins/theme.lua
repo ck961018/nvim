@@ -8,7 +8,7 @@ return {
             "SmiteshP/nvim-navic",
         },
         config = function()
-            vim.cmd [[colorscheme tokyonight-moon]]
+            vim.cmd [[colorscheme tokyonight-storm]]
             require("lualine").setup({
                 options = {
                     theme = "tokyonight",

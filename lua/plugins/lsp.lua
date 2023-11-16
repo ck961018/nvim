@@ -61,22 +61,17 @@ return {
             nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
             nmap("gi", require "telescope.builtin".lsp_implementations, "[G]oto [I]mplementation")
 
-            nmap("<c-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-            nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
-            nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
-            nmap("<leader>wl", function()
-                print(vim.inspect(vim.lsp.buf.list_workspace_folders))
-            end, "[W]orkspace [L]ist Folders")
+            nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
             nmap("K", "<cmd>Lspsaga hover_doc<CR>", "Hover Documentation")
             nmap("<leader>lf", "<cmd>Lspsaga finder<CR>", "Lspsaga Finder")
             nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
-            nmap("<leader>rn", "<cmd>Lspsaga rename ++project<cr>", "[R]e[n]ame")
+            nmap("<leader>rn", "<cmd>Lspsaga rename ++project<CR>", "[R]e[n]ame")
             nmap("<leader>ca", "<cmd>Lspsaga code_action<CR>", "[C]ode [A]ction")
             --nmap("<leader>da", require "telescope.builtin".diagnostics, "[D]i[A]gnostics")
-            nmap("<leader>da", "<cmd>lua vim.diagnostic.open_float()<cr>", "[D]i[A]gnostics")
-            nmap("<leader>dn", "<cmd>lua vim.diagnostic.goto_next()<cr>", "[D]iagnostics [N]ext")
-            nmap("<leader>dp", "<cmd>lua vim.diagnostic.goto_prev()<cr>", "[D]iagnostics [P]revious")
+            nmap("<leader>da", "<cmd>lua vim.diagnostic.open_float()<CR>", "[D]i[A]gnostics")
+            nmap("<leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>", "[D]iagnostics [N]ext")
+            nmap("<leader>dp", "<cmd>lua vim.diagnostic.goto_prev()<CR>", "[D]iagnostics [P]revious")
             nmap("<space>f", function()
                 vim.lsp.buf.format { async = true }
             end, "[F]ormat code")
@@ -88,7 +83,7 @@ return {
             finder = {
                 keys = {
                     quit = "<leader>q",
-                    toggle_or_open = "<cr>",
+                    toggle_or_open = "<CR>",
                     tabnew = "n",
                 },
             },

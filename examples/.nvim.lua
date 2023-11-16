@@ -1,8 +1,6 @@
-
 local keymap = vim.keymap
-local api = vim.api
 
-local exe_path = "path_to_exe"
+local exe_path = [[path_to_exe]]
 local async = require("async")
 local buf_id
 
@@ -27,11 +25,10 @@ function StartCmdAndExe()
     end
 
     vim.cmd("new")
-    vim.bo.filetype = 'qf'
+    vim.bo.filetype = "qf"
     buf_id = vim.fn.bufnr();
     wait_and_close()
     vim.cmd(cur_id .. "wincmd w")
 end
 
-keymap.set("n", "<F5>", ":lua StartCmdAndExe()<cr>", { noremap = true, silent = true })
-
+keymap.set("n", "<F5>", ":lua StartCmdAndExe()<CR>", { noremap = true, silent = true })
