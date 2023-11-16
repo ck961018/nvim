@@ -30,5 +30,5 @@ keymap.set("n", "<CR>", ":nohlsearch<CR><CR>", { noremap = true, silent = true }
 keymap.set("n", "<leader>t", ":lua Test()<CR>")
 
 function Test()
-    print(vim.fn.getcwd())
+    vim.print(vim.fn.expand(vim.fn.stdpath("state")))
 end

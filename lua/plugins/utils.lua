@@ -3,6 +3,9 @@ return {
         "windwp/nvim-autopairs",
         opts = {
             enable_check_bracket_line = false,
+            ignored_next_char = "[%w%.]",
+            check_ts = true,
+            fast_wrap = {},
         },
     },
     {
@@ -69,6 +72,32 @@ return {
             })
             vim.keymap.set({ "n" }, "<leader>e", "<cmd>NvimTreeFocus<CR>", { noremap = true, silent = true })
         end
+    },
+    {
+        "danymat/neogen",
+        dependencies = "nvim-treesitter/nvim-treesitter",
+        config = function()
+            require("neogen").setup()
+            vim.api.nvim_set_keymap("n", "<Leader>nc", ":lua require('neogen').generate({type = 'class'})<CR>",
+                { noremap = true, silent = true })
+            vim.api.nvim_set_keymap("n", "<Leader>nf", ":lua require('neogen').generate({type = 'func'})<CR>",
+                { noremap = true, silent = true })
+        end,
+    },
+    {
+        "stevearc/aerial.nvim",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons"
+        },
+        config = function()
+            require("aerial").setup({
+                keymaps = {
+                    ["<leader>a"] = "actions.close",
+                },
+            })
+            vim.keymap.set("n", "<leader>a", "<cmd>AerialOpen<CR>")
+        end,
     },
     {
         "folke/which-key.nvim",

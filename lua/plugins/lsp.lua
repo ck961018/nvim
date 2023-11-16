@@ -64,7 +64,7 @@ return {
             nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
             nmap("K", "<cmd>Lspsaga hover_doc<CR>", "Hover Documentation")
-            nmap("<leader>lf", "<cmd>Lspsaga finder<CR>", "Lspsaga Finder")
+            nmap("<leader>fr", "<cmd>Lspsaga finder<CR>", "Lspsaga [F]inde[r]")
             nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
             nmap("<leader>rn", "<cmd>Lspsaga rename ++project<CR>", "[R]e[n]ame")
             nmap("<leader>ca", "<cmd>Lspsaga code_action<CR>", "[C]ode [A]ction")

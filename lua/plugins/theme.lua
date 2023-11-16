@@ -1,6 +1,7 @@
 return {
     {
         "folke/tokyonight.nvim",
+        lazy = false,
         dependencies = {
             "nvim-lualine/lualine.nvim",
             "utilyre/barbecue.nvim",
@@ -8,7 +9,12 @@ return {
             "SmiteshP/nvim-navic",
         },
         config = function()
-            vim.cmd [[colorscheme tokyonight-storm]]
+            require("tokyonight").setup({
+                style = "storm",
+                styles = {
+                    comments = { italic = false }
+                }
+            })
             require("lualine").setup({
                 options = {
                     theme = "tokyonight",
@@ -17,6 +23,7 @@ return {
             require("barbecue").setup({
                 theme = "tokyonight",
             })
+            vim.cmd [[colorscheme tokyonight]]
         end
     },
 }

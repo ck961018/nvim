@@ -1,5 +1,5 @@
 return {
-    -- https://github.com/NeogitOrg/neogit/pull/917
+    -- TODO https://github.com/NeogitOrg/neogit/pull/917
     --
     -- "NeogitOrg/neogit",
     -- dependencies = {

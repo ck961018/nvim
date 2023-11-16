@@ -55,6 +55,7 @@ return {
                     "lazy",
                     "help",
                     "alpha",
+                    "aerial",
                     "camek_tools_terminal",
                 }
 
@@ -144,7 +145,7 @@ return {
             fp.setup({
                 default_keybindings = false
             })
-            vim.keymap.set("n", "<leader>pf", fp.toggle_preview)
+            vim.keymap.set("n", "<leader>pf", fp.toggle_preview, { desc = "[P]review [F]olding" })
         end
     },
 }
