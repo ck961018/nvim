@@ -1,6 +1,6 @@
 local option          = vim.opt
-local buffer          = vim.b
-local global          = vim.g
+--local buffer          = vim.b
+--local global          = vim.g
 
 option.tabstop        = 4
 option.softtabstop    = 4
