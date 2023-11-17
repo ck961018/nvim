@@ -2,8 +2,11 @@ return {
     {
         "akinsho/bufferline.nvim",
         config = function()
+            ---@diagnostic disable-next-line: missing-fields
             require("bufferline").setup({
+                ---@diagnostic disable-next-line: missing-fields
                 options = {
+
                     offsets = {
                         {
                             filetype = "NvimTree",
@@ -17,14 +20,12 @@ return {
                     separator_style = { "", "" },
                     show_close_icon = false,
                     show_buffer_close_icons = false,
-                    numbers = function(opts)
-                        return opts.ordinal
-                    end,
                     custom_filter = function(buf_number, _)
                         -- filter out filetypes you don't want to see
                         if vim.bo[buf_number].filetype ~= "cmake_tools_terminal" and vim.bo[buf_number].filetype ~= "qf" then
                             return true
                         end
+                        return false
                     end,
                 }
             })
@@ -56,6 +57,7 @@ return {
                     "help",
                     "alpha",
                     "aerial",
+                    "sagafinder",
                     "camek_tools_terminal",
                 }
 
@@ -137,6 +139,7 @@ return {
             "kevinhwang91/promise-async",
         },
         config = function()
+            ---@diagnostic disable-next-line: missing-fields
             require("ufo").setup({
                 provider_selector = function()
                     return { "treesitter", "indent" }

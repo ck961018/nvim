@@ -15,6 +15,7 @@ option.smartcase      = true
 option.number         = true
 option.relativenumber = true
 option.showmode       = false
+option.showmatch      = true
 option.wildmenu       = true
 option.cursorline     = true
 option.termguicolors  = true

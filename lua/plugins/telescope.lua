@@ -2,6 +2,7 @@ return {
     {
         "nvim-telescope/telescope.nvim",
         dependencies = {
+            "nvim-telescope/telescope-ui-select.nvim",
             "nvim-lua/plenary.nvim",
             "debugloop/telescope-undo.nvim",
             {
@@ -45,18 +46,25 @@ return {
                                 ["u"] = require("telescope-undo.actions").restore,
                             },
                         },
-                    }
+                    },
+                    ["ui-select"] = {
+                        require("telescope.themes").get_dropdown {
+                            -- even more opts
+                        },
+                    },
                 }
             })
             require("project_nvim").setup({
                 detection_methods = { "pattern", },
                 patterns = { ".git", ".clang-format", },
                 show_hidden = true,
+                open_file_finder = false,
             })
 
             require("telescope").load_extension("fzf")
             require("telescope").load_extension("undo")
             require("telescope").load_extension("projects")
+            require("telescope").load_extension("ui-select")
 
 
             local builtin = require("telescope.builtin")

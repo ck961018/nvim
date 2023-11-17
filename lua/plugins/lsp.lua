@@ -82,7 +82,7 @@ return {
         require("lspsaga").setup({
             finder = {
                 keys = {
-                    quit = "<leader>q",
+                    quit = "<ESC>",
                     toggle_or_open = "<CR>",
                     tabnew = "n",
                 },

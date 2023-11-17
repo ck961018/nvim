@@ -73,6 +73,7 @@ return {
             vim.keymap.set({ "n" }, "<leader>e", "<cmd>NvimTreeFocus<CR>", { noremap = true, silent = true })
         end
     },
+    -- Doxygen插件
     {
         "danymat/neogen",
         dependencies = "nvim-treesitter/nvim-treesitter",
@@ -84,6 +85,7 @@ return {
                 { noremap = true, silent = true })
         end,
     },
+    -- 代码大纲
     {
         "stevearc/aerial.nvim",
         dependencies = {
@@ -97,6 +99,14 @@ return {
                 },
             })
             vim.keymap.set("n", "<leader>a", "<cmd>AerialOpen<CR>")
+        end,
+    },
+    {
+        "Shatur/neovim-session-manager",
+        config = function()
+            require("session_manager").setup({
+                autoload_mode = require("session_manager.config").AutoloadMode.Disabled,
+            })
         end,
     },
     {

@@ -7,6 +7,7 @@ return {
     main = "nvim-treesitter.configs",
     build = ":TSUpdate",
     opts = function(_, opts)
+        ---@diagnostic disable-next-line: missing-fields
         require("nvim-treesitter.configs").setup({
             ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc", "query", "elixir", "heex", "html", "markdown", "markdown_inline" },
             sync_install = false,

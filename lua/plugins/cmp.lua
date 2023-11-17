@@ -26,6 +26,7 @@ return {
         require("luasnip.loaders.from_vscode").lazy_load()
         local luasnip = require("luasnip")
         local cmp = require("cmp")
+        ---@diagnostic disable-next-line: missing-fields
         cmp.setup({
             snippet = {
                 expand = function(args)
@@ -69,13 +70,14 @@ return {
             },
         })
 
+        ---@diagnostic disable-next-line: missing-fields
         cmp.setup.cmdline("/", {
             mapping = cmp.mapping.preset.cmdline(),
             sources = {
                 { name = "buffer" },
             },
         })
-
+        ---@diagnostic disable-next-line: missing-fields
         cmp.setup.cmdline(":", {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources({

@@ -10,14 +10,14 @@ keymap.set("n", "<leader>sv", "<C-w>v")
 keymap.set("n", "<leader>sx", "<Cmd>close<CR>")
 
 -- move
-keymap.set("n", "<A-h>", "<C-w>h")
-keymap.set("n", "<A-l>", "<C-w>l")
-keymap.set("n", "<A-j>", "<C-w>j")
-keymap.set("n", "<A-k>", "<C-w>k")
+keymap.set("n", "<C-h>", "<C-w>h")
+keymap.set("n", "<C-l>", "<C-w>l")
+keymap.set("n", "<C-j>", "<C-w>j")
+keymap.set("n", "<C-k>", "<C-w>k")
 keymap.set({ "n", "v" }, "<leader>h", "^")
 keymap.set({ "n", "v" }, "<leader>l", "$")
-keymap.set({ "n", "v" }, "qj", "10<C-e>M")
-keymap.set({ "n", "v" }, "qk", "10<C-y>M")
+keymap.set({ "n", "v" }, "<A-j>", "10<C-e>M")
+keymap.set({ "n", "v" }, "<A-k>", "10<C-y>M")
 
 
 -- edit
@@ -26,9 +26,10 @@ keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- view
 keymap.set("n", "<CR>", ":nohlsearch<CR><CR>", { noremap = true, silent = true })
-
 keymap.set("n", "<leader>t", ":lua Test()<CR>")
 
+-- disable
+keymap.set("n", "q", "<NOP>", { noremap = true, silent = true })
+
 function Test()
-    vim.print(vim.fn.expand(vim.fn.stdpath("state")))
 end
