@@ -17,8 +17,5 @@ return {
             vim.list_extend(opts.ensure_installed, { "cmake" })
         end
         -- refer to the configuration section below
-        vim.opt.foldmethod = "expr"
-        vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-        vim.opt.foldenable = false
     end
 }

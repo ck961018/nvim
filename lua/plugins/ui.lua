@@ -105,19 +105,17 @@ return {
             end
         end,
     },
+    -- TODO 缩进存在bug，此插件正在尝试解决
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
-        config = true,
+        --     config = true,
     },
     {
         "lewis6991/gitsigns.nvim",
         config = function()
             require("gitsigns").setup({
-                on_attach = function()
-                    local gs = package.loaded.gitsigns
-                    gs.toggle_current_line_blame()
-                end
+                current_line_blame = true,
             })
         end
     },
@@ -134,18 +132,23 @@ return {
         end,
     },
     {
-        "anuvyklack/pretty-fold.nvim",
-        config = true,
-    },
-    {
-        "anuvyklack/fold-preview.nvim",
+        "kevinhwang91/nvim-ufo",
+        dependencies = {
+            "kevinhwang91/promise-async",
+        },
         config = function()
-            local fp = require("fold-preview")
-
-            fp.setup({
-                default_keybindings = false
+            require("ufo").setup({
+                provider_selector = function()
+                    return { "treesitter", "indent" }
+                end,
             })
-            vim.keymap.set("n", "<leader>pf", fp.toggle_preview, { desc = "[P]review [F]olding" })
-        end
+            vim.o.foldcolumn = "1"
+            vim.o.foldlevel = 99
+            vim.o.foldlevelstart = 99
+            vim.o.foldenable = true
+            vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+            vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+        end,
+
     },
 }

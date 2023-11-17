@@ -16,8 +16,8 @@ keymap.set("n", "<A-j>", "<C-w>j")
 keymap.set("n", "<A-k>", "<C-w>k")
 keymap.set({ "n", "v" }, "<leader>h", "^")
 keymap.set({ "n", "v" }, "<leader>l", "$")
-keymap.set({ "n", "v" }, "<leader>j", "10<C-e>M")
-keymap.set({ "n", "v" }, "<leader>k", "10<C-y>M")
+keymap.set({ "n", "v" }, "qj", "10<C-e>M")
+keymap.set({ "n", "v" }, "qk", "10<C-y>M")
 
 
 -- edit

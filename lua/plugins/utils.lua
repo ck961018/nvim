@@ -77,7 +77,7 @@ return {
         "danymat/neogen",
         dependencies = "nvim-treesitter/nvim-treesitter",
         config = function()
-            require("neogen").setup()
+            require("neogen").setup({})
             vim.api.nvim_set_keymap("n", "<Leader>nc", ":lua require('neogen').generate({type = 'class'})<CR>",
                 { noremap = true, silent = true })
             vim.api.nvim_set_keymap("n", "<Leader>nf", ":lua require('neogen').generate({type = 'func'})<CR>",
