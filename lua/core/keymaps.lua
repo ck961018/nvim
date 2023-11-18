@@ -3,11 +3,14 @@ local keymap = vim.keymap
 vim.g.mapleader = " "
 
 -- save
-keymap.set("n", "<leader>w", "<Cmd>w<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>w", "<cmd>w<CR>", { noremap = true, silent = true })
+
+-- quit
+keymap.set("n", "<leader><TAB>", "<cmd>qa!<CR>")
 
 -- spilt
 keymap.set("n", "<leader>sv", "<C-w>v")
-keymap.set("n", "<leader>sx", "<Cmd>close<CR>")
+keymap.set("n", "<leader>sx", "<cmd>close<CR>")
 
 -- move
 keymap.set("n", "<C-h>", "<C-w>h")
@@ -16,9 +19,8 @@ keymap.set("n", "<C-j>", "<C-w>j")
 keymap.set("n", "<C-k>", "<C-w>k")
 keymap.set({ "n", "v" }, "<leader>h", "^")
 keymap.set({ "n", "v" }, "<leader>l", "$")
-keymap.set({ "n", "v" }, "<A-j>", "10<C-e>M")
-keymap.set({ "n", "v" }, "<A-k>", "10<C-y>M")
-
+keymap.set({ "n", "v" }, "<A-j>", "10jzz")
+keymap.set({ "n", "v" }, "<A-k>", "10kzz")
 
 -- edit
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")

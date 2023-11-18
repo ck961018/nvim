@@ -102,12 +102,7 @@ return {
         end,
     },
     {
-        "Shatur/neovim-session-manager",
-        config = function()
-            require("session_manager").setup({
-                autoload_mode = require("session_manager.config").AutoloadMode.Disabled,
-            })
-        end,
+        -- TODO new session manager
     },
     {
         "folke/which-key.nvim",
@@ -117,8 +112,5 @@ return {
             vim.o.timeoutlen = 500
         end,
         opts = {},
-    },
-    {
-        "ms-jpq/lua-async-await",
     },
 }

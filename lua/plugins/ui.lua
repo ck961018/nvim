@@ -1,12 +1,12 @@
 return {
     {
         "akinsho/bufferline.nvim",
+        dependencies = "nvim-tree/nvim-web-devicons",
         config = function()
             ---@diagnostic disable-next-line: missing-fields
             require("bufferline").setup({
                 ---@diagnostic disable-next-line: missing-fields
                 options = {
-
                     offsets = {
                         {
                             filetype = "NvimTree",
@@ -16,10 +16,12 @@ return {
                             text_align = "left",
                         }
                     },
+                    color_icons = true,
                     diagnostics = "nvim_lsp",
-                    separator_style = { "", "" },
                     show_close_icon = false,
                     show_buffer_close_icons = false,
+                    enforce_regular_tabs = true,
+                    separator_style = "thick",
                     custom_filter = function(buf_number, _)
                         -- filter out filetypes you don't want to see
                         if vim.bo[buf_number].filetype ~= "cmake_tools_terminal" and vim.bo[buf_number].filetype ~= "qf" then
@@ -136,6 +138,7 @@ return {
     {
         "kevinhwang91/nvim-ufo",
         dependencies = {
+            -- 该插件与其它异步插件可能会产生冲突
             "kevinhwang91/promise-async",
         },
         config = function()
