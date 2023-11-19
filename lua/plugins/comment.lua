@@ -1,11 +1,15 @@
 return {
     {
         'numToStr/Comment.nvim',
-        lazy = false,
+        event = { "BufReadPost", "BufNewFile" },
         opts = {},
     },
     {
         "folke/todo-comments.nvim",
+        event = { "BufReadPost", "BufNewFile" },
+        keys = {
+            { "<leader>tt", [[<cmd>TodoTelescope<CR>"]], desc = "[T]odo[T]elescope" },
+        },
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require("todo-comments").setup({
@@ -21,7 +25,6 @@ return {
                     pattern = [[\b(KEYWORDS)\b]],
                 }
             })
-            vim.keymap.set("n", "<leader>tt", "<cmd>TodoTelescope<CR>", { desc = "[T]odo[T]elescope" })
         end,
     },
 }

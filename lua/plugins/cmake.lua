@@ -2,6 +2,15 @@ return {
     -- TODO wait cmake run to be fixed
 
     "Civitasv/cmake-tools.nvim",
+    keys = {
+        { "<C-F6>", mode = "n", [[<cmd>CMakeSelectBuildPreset<CR>]] },
+        { "<C-F7>", mode = "n", [[<cmd>CMakeSelectCwd ./<CR>]], },
+        { "<F7>",   mode = "n", [[<cmd>CMakeBuild<CR>]] },
+
+        { "<C-F6>", mode = "i", [[<Esc><cmd>CMakeSelectBuildPreset<CR>]] },
+        { "<C-F7>", mode = "i", [[<Esc><cmd>CMakeSelectCwd ./<CR>]] },
+        { "<F7>",   mode = "i", [[<Esc><cmd>CMakeBuild<CR>]] },
+    },
     config = function()
         require("cmake-tools").setup({
             cmake_command = "cmake",                                          -- this is used to specify cmake command path
@@ -70,13 +79,5 @@ return {
                 refresh_rate_ms = 100, -- how often to iterate icons
             },
         })
-        vim.keymap.set({ "n" }, "<C-F6>", "<cmd>CMakeSelectBuildPreset<CR>")
-        vim.keymap.set({ "i" }, "<C-F6>", "<ESC><cmd>CMakeSelectBuildPreset<CR>")
-
-        vim.keymap.set({ "n" }, "<C-F7>", "<cmd>CMakeSelectCwd ./<CR>")
-        vim.keymap.set({ "i" }, "<C-F7>", "<ESC><cmd>CMakeSelectCwd ./<CR>")
-        vim.keymap.set({ "n" }, "<F7>", "<cmd>CMakeBuild<CR>")
-        vim.keymap.set({ "i" }, "<F7>", "<ESC><cmd>CMakeBuild<CR>")
-        -- vim.keymap.set({ "n" }, "<F5>", "<cmd>CMakeRun<CR>")
     end,
 }

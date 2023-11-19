@@ -3,8 +3,6 @@ return {
         "folke/tokyonight.nvim",
         lazy = false,
         dependencies = {
-            "nvim-lualine/lualine.nvim",
-            "utilyre/barbecue.nvim",
             "nvim-tree/nvim-web-devicons",
             "SmiteshP/nvim-navic",
         },
@@ -15,15 +13,23 @@ return {
                     comments = { italic = false }
                 }
             })
-            require("lualine").setup({
-                options = {
-                    theme = "tokyonight",
-                },
-            })
-            require("barbecue").setup({
-                theme = "tokyonight",
-            })
-            vim.cmd [[colorscheme tokyonight]]
+            vim.cmd([[colorscheme tokyonight]])
         end
     },
+    {
+        "utilyre/barbecue.nvim",
+        event = "VeryLazy",
+        opts = {
+            theme = "tokyonight",
+        },
+    },
+    {
+        "nvim-lualine/lualine.nvim",
+        event = "VeryLazy",
+        opts = {
+            options = {
+                theme = "tokyonight",
+            },
+        },
+    }
 }

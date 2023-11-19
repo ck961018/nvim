@@ -1,122 +1,77 @@
+local ignored_filetypes = {
+    "qf",
+    "lazy",
+    "help",
+    "alpha",
+    "aerial",
+    "sagafinder",
+    "NvimTree",
+    "camek_tools_terminal",
+}
+
+function QuitBuffer()
+    local cur_id = vim.fn.bufnr()
+
+    if vim.tbl_contains(ignored_filetypes, vim.bo[cur_id].filetype) == true or vim.bo[cur_id].filetype == "" then
+        vim.cmd.q()
+    else
+        vim.cmd.w()
+        if #require("barbar.state").get_buffer_list() == 1 then
+            vim.cmd.qa()
+        else
+            vim.cmd.BufferClose()
+        end
+    end
+end
+
 return {
     {
-        "akinsho/bufferline.nvim",
-        dependencies = "nvim-tree/nvim-web-devicons",
+        "romgrk/barbar.nvim",
+        event = { "BufReadPost", "BufNewFile" },
+        dependencies = {
+            "lewis6991/gitsigns.nvim",     -- OPTIONAL: for git status
+            "nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
+        },
+        init = function() vim.g.barbar_auto_setup = false end,
         config = function()
-            ---@diagnostic disable-next-line: missing-fields
-            require("bufferline").setup({
-                ---@diagnostic disable-next-line: missing-fields
-                options = {
-                    offsets = {
-                        {
-                            filetype = "NvimTree",
-                            text = "File Explorer",
-                            separator = true,
-                            highlight = "Directory",
-                            text_align = "left",
-                        }
-                    },
-                    color_icons = true,
-                    diagnostics = "nvim_lsp",
-                    show_close_icon = false,
-                    show_buffer_close_icons = false,
-                    enforce_regular_tabs = true,
-                    separator_style = "thick",
-                    custom_filter = function(buf_number, _)
-                        -- filter out filetypes you don't want to see
-                        if vim.bo[buf_number].filetype ~= "cmake_tools_terminal" and vim.bo[buf_number].filetype ~= "qf" then
-                            return true
-                        end
-                        return false
-                    end,
-                }
+            require("barbar").setup({
+                clickable = false,
+                sidebar_filetypes = {
+                    -- Use the default values: {event = 'BufWinLeave', text = nil}
+                    NvimTree = true,
+                },
+                exclude_ft = ignored_filetypes,
             })
-            vim.keymap.set({ "n", "v" }, "g1", "<cmd>BufferLineGoToBuffer 1<cr>", { noremap = true, silent = true })
-            vim.keymap.set({ "n", "v" }, "g2", "<cmd>BufferLineGoToBuffer 2<cr>", { noremap = true, silent = true })
-            vim.keymap.set({ "n", "v" }, "g3", "<cmd>BufferLineGoToBuffer 3<cr>", { noremap = true, silent = true })
-            vim.keymap.set({ "n", "v" }, "g4", "<cmd>BufferLineGoToBuffer 4<cr>", { noremap = true, silent = true })
-            vim.keymap.set({ "n", "v" }, "g5", "<cmd>BufferLineGoToBuffer 5<cr>", { noremap = true, silent = true })
-            vim.keymap.set({ "n", "v" }, "g6", "<cmd>BufferLineGoToBuffer 6<cr>", { noremap = true, silent = true })
-            vim.keymap.set({ "n", "v" }, "g7", "<cmd>BufferLineGoToBuffer 7<cr>", { noremap = true, silent = true })
-            vim.keymap.set({ "n", "v" }, "g8", "<cmd>BufferLineGoToBuffer 8<cr>", { noremap = true, silent = true })
-            vim.keymap.set({ "n", "v" }, "g9", "<cmd>BufferLineGoToBuffer 9<cr>", { noremap = true, silent = true })
 
-            vim.keymap.set("n", "gt", "<cmd>BufferLineCycleNext<cr>")
-            vim.keymap.set("n", "gT", "<cmd>BufferLineCyclePrev<cr>")
+            local opts = { noremap = true, silent = true }
 
-            vim.keymap.set({ "n", "v" }, "<leader>q", "<cmd>lua QuitBuffer()<cr>", { noremap = true, silent = true })
+            vim.keymap.set("n", "g1", "<cmd>BufferGoto 1<CR>", opts)
+            vim.keymap.set("n", "g2", "<cmd>BufferGoto 2<CR>", opts)
+            vim.keymap.set("n", "g3", "<cmd>BufferGoto 3<CR>", opts)
+            vim.keymap.set("n", "g4", "<cmd>BufferGoto 4<CR>", opts)
+            vim.keymap.set("n", "g5", "<cmd>BufferGoto 5<CR>", opts)
+            vim.keymap.set("n", "g6", "<cmd>BufferGoto 6<CR>", opts)
+            vim.keymap.set("n", "g7", "<cmd>BufferGoto 7<CR>", opts)
+            vim.keymap.set("n", "g8", "<cmd>BufferGoto 8<CR>", opts)
+            vim.keymap.set("n", "g9", "<cmd>BufferGoto 9<CR>", opts)
 
-            function QuitBuffer()
-                local buffer_line = require("bufferline")
-                local elements = buffer_line.get_elements().elements
-                local cnt = #elements
-                local cur_id = vim.fn.bufnr()
+            vim.keymap.set("n", "gt", "<cmd>BufferNext<CR>", opts)
+            vim.keymap.set("n", "gT", "<cmd>BufferPrevious<CR>", opts)
 
-                local ignored_filetypes = {
-                    "",
-                    "qf",
-                    "lazy",
-                    "help",
-                    "alpha",
-                    "aerial",
-                    "sagafinder",
-                    "camek_tools_terminal",
-                }
-
-                local is_ignored = function(str)
-                    local found = false
-                    for _, filetype in ipairs(ignored_filetypes) do
-                        if (str == filetype) then
-                            found = true
-                            break
-                        end
-                    end
-                    return found
-                end
-
-                if is_ignored(vim.bo[cur_id].filetype) == false then
-                    vim.cmd("silent w")
-                end
-
-                local cur_pos = -1
-                for i, e in ipairs(elements) do
-                    if e.id == cur_id then
-                        cur_pos = i
-                        break
-                    end
-                end
-                if cur_pos == -1 then
-                    vim.cmd.q()
-                    return
-                end
-
-                if cnt > 1 then
-                    local nxt_pos;
-                    if cur_pos == cnt then
-                        nxt_pos = cur_pos - 1
-                    else
-                        nxt_pos = cur_pos + 1
-                    end
-                    if cnt == 2 and is_ignored(vim.bo[elements[nxt_pos].id].filetype) then
-                        vim.cmd.qa()
-                    else
-                        vim.cmd.BufferLineGoToBuffer(nxt_pos)
-                        vim.cmd.bd(cur_id)
-                    end
-                else
-                    vim.cmd.qa()
-                end
-            end
+            vim.keymap.set({ "n", "v" }, "<leader>q", "<cmd>lua QuitBuffer()<CR>", opts)
         end,
+        version = '^1.0.0',
     },
-    -- TODO 缩进存在bug，此插件正在尝试解决
     {
+        -- TODO 缩进存在bug，此插件正在尝试解决
         "lukas-reineke/indent-blankline.nvim",
+        event = { "BufReadPost", "BufNewFile" },
         main = "ibl",
         --     config = true,
     },
     {
         "lewis6991/gitsigns.nvim",
+        event = "VeryLazy",
         config = function()
             require("gitsigns").setup({
                 current_line_blame = true,
@@ -124,19 +79,25 @@ return {
         end
     },
     {
+        -- TODO 切换目录后快捷键失效
         "goolord/alpha-nvim",
         config = function()
-            require("alpha").setup(require "alpha.themes.startify".config)
+            local alpha = require("alpha")
+            local startify = require("alpha.themes.startify")
+            startify.config.opts.autostart = true
+            alpha.setup(startify.config)
         end,
     },
     {
         "RRethy/vim-illuminate",
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
             require("illuminate").configure()
         end,
     },
     {
         "kevinhwang91/nvim-ufo",
+        event = "VeryLazy",
         dependencies = {
             -- 该插件与其它异步插件可能会产生冲突
             "kevinhwang91/promise-async",

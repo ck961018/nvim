@@ -28,10 +28,17 @@ keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- view
 keymap.set("n", "<CR>", ":nohlsearch<CR><CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>t", ":lua Test()<CR>")
 
 -- disable
 keymap.set("n", "q", "<NOP>", { noremap = true, silent = true })
 
+-- test
+keymap.set("n", "<leader>t", ":lua Test()<CR>", { silent = true })
+
 function Test()
+    local status = require("nvim-tree.view").is_visible()
+    vim.print(status)
+    if status then
+        require("nvim-tree.view").close()
+    end
 end

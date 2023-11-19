@@ -2,8 +2,6 @@ vim.g.sqlite_clib_path = vim.fn.stdpath("config") ..
     "\\dependencies\\lib\\sqlite-dll-win-x64-3440000\\sqlite3.dll" --for sqlite3
 return {
     "JuanZoran/Trans.nvim",
-    dependencies = { "kkharji/sqlite.lua", },
-    build = function() require("Trans").install() end,
     keys = {
         -- 可以换成其他你想映射的键
         { "mm", mode = { "n", "x" }, "<Cmd>Translate<CR>", desc = " Translate" },
@@ -11,6 +9,8 @@ return {
         -- 目前这个功能的视窗还没有做好，可以在配置里将view.i改成hover
         -- { "mi", "<Cmd>TranslateInput<CR>", desc = " Translate From Input" },
     },
+    dependencies = { "kkharji/sqlite.lua", },
+    build = function() require("Trans").install() end,
     config = function()
         require("Trans").setup({
             dir = vim.fn.stdpath("data") .. "/lazy/Trans.nvim/database",

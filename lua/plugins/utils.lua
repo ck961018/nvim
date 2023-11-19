@@ -1,6 +1,7 @@
 return {
     {
         "windwp/nvim-autopairs",
+        event = "VeryLazy",
         opts = {
             enable_check_bracket_line = false,
             ignored_next_char = "[%w%.]",
@@ -10,12 +11,11 @@ return {
     },
     {
         "ethanholz/nvim-lastplace",
+        event = { "BufReadPost", "BufNewFile" },
         config = true,
     },
     {
         "folke/flash.nvim",
-        event = "VeryLazy",
-        opts = {},
         keys = {
             { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
             { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
@@ -23,9 +23,13 @@ return {
             { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
             { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
         },
+        opts = {},
     },
     {
         "nvim-tree/nvim-tree.lua",
+        keys = {
+            { "<leader>e", [[<cmd>NvimTreeFocus<CR>]], { desc = "NvimTr[E]e", noremap = true, silent = true } },
+        },
         dependencies = {
             "nvim-tree/nvim-web-devicons",
         },
@@ -70,24 +74,32 @@ return {
                     update_root = true,
                 },
             })
-            vim.keymap.set({ "n" }, "<leader>e", "<cmd>NvimTreeFocus<CR>", { noremap = true, silent = true })
         end
     },
     -- Doxygen插件
     {
         "danymat/neogen",
+        keys = {
+            {
+                "<leader>nc", [[<cmd> require("neogen").generate({type = "class"})<CR>]],
+                { desc = "[G]enerate [C]lass Doxygen", noremap = true, silent = true }
+            },
+            { 
+                "<leader>nf", [[<cmd> require("neogen").generate({type = "func"})<CR>]],
+                { desc = "[G]enerate [F]unction Doxygen", noremap = true, silent = true } 
+             },
+        },
         dependencies = "nvim-treesitter/nvim-treesitter",
         config = function()
             require("neogen").setup({})
-            vim.api.nvim_set_keymap("n", "<Leader>nc", ":lua require('neogen').generate({type = 'class'})<CR>",
-                { noremap = true, silent = true })
-            vim.api.nvim_set_keymap("n", "<Leader>nf", ":lua require('neogen').generate({type = 'func'})<CR>",
-                { noremap = true, silent = true })
         end,
     },
     -- 代码大纲
     {
         "stevearc/aerial.nvim",
+        keys = {
+            { "<leader>a", [[<cmd>AerialOpen<CR>]], { desc = "[A]erial" } }
+        },
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
             "nvim-tree/nvim-web-devicons"
@@ -98,11 +110,43 @@ return {
                     ["<leader>a"] = "actions.close",
                 },
             })
-            vim.keymap.set("n", "<leader>a", "<cmd>AerialOpen<CR>")
         end,
     },
     {
-        -- TODO new session manager
+        "echasnovski/mini.sessions",
+        event = "VeryLazy",
+        version = false,
+        config = function()
+            require("mini.sessions").setup({
+                autoread = false,
+                autowrite = true,
+                force = { read = true, write = true, delete = true },
+                verbose = { read = false, write = false, delete = true },
+                directory = vim.fn.stdpath("data") .. "/sessions",
+                file = "",
+                hooks = {
+                    pre = {
+                        read = nil,
+                        write = function()
+                            if require("nvim-tree.view").is_visible() then
+                                require("nvim-tree.view").close()
+                            end
+                        end,
+                        delete = nil
+                    },
+                    post = { read = nil, write = nil, delete = nil },
+                },
+            })
+            vim.keymap.set("n", "<leader><TAB>", function()
+                if vim.bo[vim.fn.bufnr()].filetype ~= "" then
+                    local project_path = vim.fn.getcwd()
+                    local project_name = string.match(project_path, "\\([^\\]+)$")
+                    require("mini.sessions").write(project_name)
+                end
+                vim.cmd.qa()
+            end)
+        end
+
     },
     {
         "folke/which-key.nvim",

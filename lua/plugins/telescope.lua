@@ -1,83 +1,126 @@
-return {
-    {
-        "nvim-telescope/telescope.nvim",
-        dependencies = {
-            "nvim-telescope/telescope-ui-select.nvim",
-            "nvim-lua/plenary.nvim",
-            "debugloop/telescope-undo.nvim",
-            {
-                "nvim-telescope/telescope-fzf-native.nvim",
-                build =
-                "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-            },
-            "ahmedkhalf/project.nvim",
-        },
-        config = function()
-            require("telescope").setup({
-                defaults = {
-                    mappings = {
-                        n = {
-                            ["<leader>q"] = require("telescope.actions").close,
-                        },
-                    }
+-- TODO 当前project_nvim自动添加project，workspaces设置hooks
+--      后续最好用集成了两个功能的插件替换
+function ListProjects()
+    local projects = require("project_nvim").get_recent_projects()
+    local history_projects = require("workspaces").get()
+    for _, project in ipairs(projects) do
+        local found = false
+        local project_name = string.match(project, "/([^/]+)$")
+        for _, history_project in ipairs(history_projects) do
+            local history_project_name = string.match(history_project.name, "%S+")
+            if project_name == history_project_name then
+                found = true
+                break
+            end
+        end
+        if found == false then
+            require("workspaces").add(project, project_name)
+        end
+    end
+    vim.cmd([[Telescope workspaces]])
+end
 
-                },
-                extensions = {
-                    fzf = {
-                        fuzzy = true,                   -- false will only do exact matching
-                        override_generic_sorter = true, -- override the generic sorter
-                        override_file_sorter = true,    -- override the file sorter
-                        case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
-                        -- the default case_mode is "smart_case"
-                    },
-                    undo = {
-                        mappings = {
-                            i = {
-                                ["<CR>"] = require("telescope-undo.actions").yank_additions,
-                                ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
-                                ["<C-cr>"] = require("telescope-undo.actions").restore,
-                                -- alternative defaults, for users whose terminals do questionable things with modified <CR>
-                                ["<C-y>"] = require("telescope-undo.actions").yank_deletions,
-                                ["<C-r>"] = require("telescope-undo.actions").restore,
-                            },
-                            n = {
-                                ["y"] = require("telescope-undo.actions").yank_additions,
-                                ["Y"] = require("telescope-undo.actions").yank_deletions,
-                                ["u"] = require("telescope-undo.actions").restore,
-                            },
-                        },
-                    },
-                    ["ui-select"] = {
-                        require("telescope.themes").get_dropdown {
-                            -- even more opts
-                        },
+return {
+    "nvim-telescope/telescope.nvim",
+    keys = {
+        -- telescope
+        { "<leader>ff", [[<cmd>Telescope find_files<CR>]], desc = "[F]ind [F]iles" },
+        { "<leader>fg", [[<cmd>Telescope live_grep<CR>]],  desc = "[F]ind with [G]rep" },
+        { "<leader>fb", [[<cmd>Telescope buffers<CR>]],    desc = "[F]ind in [B]uffers" },
+        { "<leader>fh", [[<cmd>Telescope help_tags<CR>]],  desc = "[F]ind [H]elp Tags" },
+        { "<leader>fo", [[<cmd>Telescope oldfiles]],       desc = "[F]ind [O]ldfiles" },
+
+        -- telescope-undo
+        { "<leader>u",  [[<cmd>Telescope undo<CR>]],       desc = "[U]ndo" },
+
+        -- project
+        { "<leader>p",  [[<cmd>lua ListProjects()<CR>]],   { desc = "[P]rojects", noremap = true, silent = true } }
+    },
+    dependencies = {
+        "nvim-telescope/telescope-ui-select.nvim",
+        "nvim-lua/plenary.nvim",
+        "debugloop/telescope-undo.nvim",
+        {
+            "nvim-telescope/telescope-fzf-native.nvim",
+            build =
+            "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+        },
+
+        -- project
+        "ahmedkhalf/project.nvim",
+        "natecraddock/workspaces.nvim",
+    },
+    config = function()
+        require("telescope").setup({
+            defaults = {
+                mappings = {
+                    n = {
+                        ["<leader>q"] = require("telescope.actions").close,
                     },
                 }
-            })
-            require("project_nvim").setup({
-                detection_methods = { "pattern", },
-                patterns = { ".git", ".clang-format", },
-                show_hidden = true,
-                open_file_finder = false,
-            })
 
-            require("telescope").load_extension("fzf")
-            require("telescope").load_extension("undo")
-            require("telescope").load_extension("projects")
-            require("telescope").load_extension("ui-select")
+            },
+            extensions = {
+                fzf = {
+                    fuzzy = true,                   -- false will only do exact matching
+                    override_generic_sorter = true, -- override the generic sorter
+                    override_file_sorter = true,    -- override the file sorter
+                    case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+                },
+                undo = {
+                },
+                ["ui-select"] = {
+                    require("telescope.themes").get_dropdown {
+                    },
+                },
+            }
+
+        })
+        require("workspaces").setup({
+            path = vim.fn.stdpath("data") .. "/project_nvim/workspaces.txt",
+            auto_open = true,
+            hooks = {
+                add = {},
+                remove = {},
+                rename = {},
+                open_pre = {},
+                open = function()
+                    local nvim_lua_path = vim.fn.expand('%:p:h') .. '/.nvim.lua'
+                    if vim.fn.filereadable(nvim_lua_path) == 1 then
+                        vim.cmd.so(".nvim.lua")
+                        vim.print(".nvim.lua is loaded")
+                    end
 
 
-            local builtin = require("telescope.builtin")
-            vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-            vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-            vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-            vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
-            vim.keymap.set("n", "<leader>?", builtin.oldfiles, {})
+                    local project_path = vim.fn.getcwd()
+                    local project_name = string.match(project_path, "\\([^\\]+)$")
 
-            vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<CR>")
+                    local found = false
+                    for session, _ in pairs(require("mini.sessions").detected) do
+                        if tostring(session) == project_name then
+                            found = true
+                            break
+                        end
+                    end
+                    if found == true then
+                        require("mini.sessions").read(project_name)
+                    end
+                end,
+            },
+        })
+        require("project_nvim").setup({
+            detection_methods = { "pattern", },
+            patterns = { ".git", ".clang-format", },
+            show_hidden = true,
+            open_file_finder = false,
+            datapath = vim.fn.stdpath("data"),
+        })
 
-            vim.keymap.set("n", "<leader>p",
-                require("telescope").extensions.projects.projects)
-        end,
-    },
+        require("telescope").load_extension("workspaces")
+        require("telescope").load_extension("projects")
+
+        require("telescope").load_extension("fzf")
+        require("telescope").load_extension("undo")
+        require("telescope").load_extension("ui-select")
+    end,
 }
