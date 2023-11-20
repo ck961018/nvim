@@ -4,8 +4,10 @@ IgnoredFiletypes = {
     "help",
     "alpha",
     "aerial",
-    "sagafinder",
     "NvimTree",
+    "toggleterm",
+    "sagafinder",
+    "spectre_panel",
     "camek_tools_terminal",
 }
 

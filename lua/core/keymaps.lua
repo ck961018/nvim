@@ -35,7 +35,7 @@ keymap.set("n", "<CR>", ":nohlsearch<CR><CR>", { noremap = true, silent = true }
 keymap.set("n", "q", "<NOP>", { noremap = true, silent = true })
 
 -- test
-keymap.set("n", "<leader>t", ":lua Test()<CR>", { silent = true })
+keymap.set("n", "<leader>y", ":lua Test()<CR>", { silent = true })
 
 function Test()
     vim.cmd.UndotreeToggle()
