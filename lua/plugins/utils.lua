@@ -1,3 +1,33 @@
+SaveSession = function()
+    local bufs_list = vim.api.nvim_list_bufs()
+    for _, buf in ipairs(bufs_list) do
+        if vim.tbl_contains(IgnoredFiletypes, buf) then
+            vim.cmd.bd(buf)
+        end
+    end
+    if vim.bo[vim.fn.bufnr()].filetype ~= "" then
+        local project_path = vim.fn.getcwd()
+        local project_name = string.match(project_path, "\\([^\\]+)$")
+        require("mini.sessions").write(project_name)
+    end
+end
+
+LoadSession = function()
+    local project_path = vim.fn.getcwd()
+    local project_name = string.match(project_path, "\\([^\\]+)$")
+
+    local found = false
+    for session, _ in pairs(require("mini.sessions").detected) do
+        if tostring(session) == project_name then
+            found = true
+            break
+        end
+    end
+    if found == true then
+        require("mini.sessions").read(project_name)
+    end
+end
+
 return {
     {
         "windwp/nvim-autopairs",
@@ -84,10 +114,10 @@ return {
                 "<leader>nc", [[<cmd> require("neogen").generate({type = "class"})<CR>]],
                 { desc = "[G]enerate [C]lass Doxygen", noremap = true, silent = true }
             },
-            { 
+            {
                 "<leader>nf", [[<cmd> require("neogen").generate({type = "func"})<CR>]],
-                { desc = "[G]enerate [F]unction Doxygen", noremap = true, silent = true } 
-             },
+                { desc = "[G]enerate [F]unction Doxygen", noremap = true, silent = true }
+            },
         },
         dependencies = "nvim-treesitter/nvim-treesitter",
         config = function()
@@ -137,16 +167,7 @@ return {
                     post = { read = nil, write = nil, delete = nil },
                 },
             })
-            vim.keymap.set("n", "<leader><TAB>", function()
-                if vim.bo[vim.fn.bufnr()].filetype ~= "" then
-                    local project_path = vim.fn.getcwd()
-                    local project_name = string.match(project_path, "\\([^\\]+)$")
-                    require("mini.sessions").write(project_name)
-                end
-                vim.cmd.qa()
-            end)
         end
-
     },
     {
         "folke/which-key.nvim",

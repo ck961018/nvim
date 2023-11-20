@@ -1,3 +1,14 @@
+IgnoredFiletypes = {
+    "qf",
+    "lazy",
+    "help",
+    "alpha",
+    "aerial",
+    "sagafinder",
+    "NvimTree",
+    "camek_tools_terminal",
+}
+
 local option          = vim.opt
 --local buffer          = vim.b
 --local global          = vim.g

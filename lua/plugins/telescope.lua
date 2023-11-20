@@ -49,6 +49,9 @@ return {
         -- project
         "ahmedkhalf/project.nvim",
         "natecraddock/workspaces.nvim",
+
+        -- notify
+        "rcarriga/nvim-notify",
     },
     config = function()
         require("telescope").setup({
@@ -88,23 +91,10 @@ return {
                     local nvim_lua_path = vim.fn.expand('%:p:h') .. '/.nvim.lua'
                     if vim.fn.filereadable(nvim_lua_path) == 1 then
                         vim.cmd.so(".nvim.lua")
-                        vim.print(".nvim.lua is loaded")
+                        vim.notify(".nvim.lua is loaded")
                     end
 
-
-                    local project_path = vim.fn.getcwd()
-                    local project_name = string.match(project_path, "\\([^\\]+)$")
-
-                    local found = false
-                    for session, _ in pairs(require("mini.sessions").detected) do
-                        if tostring(session) == project_name then
-                            found = true
-                            break
-                        end
-                    end
-                    if found == true then
-                        require("mini.sessions").read(project_name)
-                    end
+                    LoadSession()
                 end,
             },
         })
@@ -115,10 +105,12 @@ return {
             open_file_finder = false,
             datapath = vim.fn.stdpath("data"),
         })
+        vim.notify = require("notify")
 
         require("telescope").load_extension("workspaces")
         require("telescope").load_extension("projects")
 
+        require("telescope").load_extension("notify")
         require("telescope").load_extension("fzf")
         require("telescope").load_extension("undo")
         require("telescope").load_extension("ui-select")

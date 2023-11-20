@@ -1,18 +1,7 @@
-local ignored_filetypes = {
-    "qf",
-    "lazy",
-    "help",
-    "alpha",
-    "aerial",
-    "sagafinder",
-    "NvimTree",
-    "camek_tools_terminal",
-}
-
 function QuitBuffer()
     local cur_id = vim.fn.bufnr()
 
-    if vim.tbl_contains(ignored_filetypes, vim.bo[cur_id].filetype) == true or vim.bo[cur_id].filetype == "" then
+    if vim.tbl_contains(IgnoredFiletypes, vim.bo[cur_id].filetype) == true or vim.bo[cur_id].ft == "" then
         vim.cmd.q()
     else
         vim.cmd.w()
@@ -35,12 +24,15 @@ return {
         init = function() vim.g.barbar_auto_setup = false end,
         config = function()
             require("barbar").setup({
-                clickable = false,
+                clickable = true,
                 sidebar_filetypes = {
                     -- Use the default values: {event = 'BufWinLeave', text = nil}
-                    NvimTree = true,
+                    NvimTree = {event = 'BufWinLeave', text = "NvimTree"},
                 },
-                exclude_ft = ignored_filetypes,
+                icons = {
+                    preset = "default"
+                },
+                exclude_ft = IgnoredFiletypes,
             })
 
             local opts = { noremap = true, silent = true }

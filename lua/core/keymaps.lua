@@ -5,8 +5,10 @@ vim.g.mapleader = " "
 -- save
 keymap.set("n", "<leader>w", "<cmd>w<CR>", { noremap = true, silent = true })
 
--- quit
-keymap.set("n", "<leader><TAB>", "<cmd>qa!<CR>")
+vim.keymap.set("n", "<leader><TAB>", function()
+    SaveSession()
+    vim.cmd.qa()
+end)
 
 -- spilt
 keymap.set("n", "<leader>sv", "<C-w>v")
@@ -36,9 +38,5 @@ keymap.set("n", "q", "<NOP>", { noremap = true, silent = true })
 keymap.set("n", "<leader>t", ":lua Test()<CR>", { silent = true })
 
 function Test()
-    local status = require("nvim-tree.view").is_visible()
-    vim.print(status)
-    if status then
-        require("nvim-tree.view").close()
-    end
+    vim.cmd.UndotreeToggle()
 end
