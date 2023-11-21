@@ -94,7 +94,7 @@ return {
                         vim.notify(".nvim.lua is loaded")
                     end
 
-                    LoadSession()
+                    RestoreSession()
                 end,
             },
         })

@@ -12,7 +12,7 @@ SaveSession = function()
     end
 end
 
-LoadSession = function()
+RestoreSession = function()
     local project_path = vim.fn.getcwd()
     local project_name = string.match(project_path, "\\([^\\]+)$")
 
@@ -167,7 +167,7 @@ return {
                     post = { read = nil, write = nil, delete = nil },
                 },
             })
-            vim.keymap.set("n", "<leader>ls", LoadSession, { desc = "[L]oad [S]ession" })
+            vim.keymap.set("n", "<leader>rs", RestoreSession, { desc = "[R]estore [S]ession" })
         end
     },
     {

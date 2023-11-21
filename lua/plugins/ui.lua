@@ -1,15 +1,25 @@
 function QuitBuffer()
     local cur_id = vim.fn.bufnr()
 
-    if vim.tbl_contains(IgnoredFiletypes, vim.bo[cur_id].filetype) == true or vim.bo[cur_id].ft == "" then
-        vim.cmd.q()
-    else
+    if vim.tbl_contains(IgnoredFiletypes, vim.bo[cur_id].filetype) == false and vim.bo[cur_id].ft ~= "" then
         vim.cmd.w()
-        if #require("barbar.state").get_buffer_list() == 1 then
-            vim.cmd.qa()
-        else
-            vim.cmd.BufferClose()
+    end
+
+    local bufs_list = require("barbar.state").get_buffer_list()
+    local found = false
+    for _, buf_id in ipairs(bufs_list) do
+        if buf_id == cur_id then
+            found = true
+            break
         end
+    end
+
+    if #vim.api.nvim_list_wins() > 1 and found == false then
+        vim.cmd.q()
+    elseif #bufs_list == 1 and found then
+        vim.cmd.qa()
+    else
+        vim.cmd.BufferClose()
     end
 end
 
@@ -27,7 +37,7 @@ return {
                 clickable = true,
                 sidebar_filetypes = {
                     -- Use the default values: {event = 'BufWinLeave', text = nil}
-                    NvimTree = {event = 'BufWinLeave', text = "NvimTree"},
+                    NvimTree = { event = 'BufWinLeave', text = "NvimTree" },
                 },
                 icons = {
                     preset = "default"

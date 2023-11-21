@@ -35,8 +35,18 @@ keymap.set("n", "<CR>", ":nohlsearch<CR><CR>", { noremap = true, silent = true }
 keymap.set("n", "q", "<NOP>", { noremap = true, silent = true })
 
 -- test
-keymap.set("n", "<leader>y", ":lua Test()<CR>", { silent = true })
+keymap.set("n", "<leader>t", ":lua Test()<CR>", { silent = true })
 
 function Test()
-    vim.cmd.UndotreeToggle()
+    local cur_id = vim.fn.bufnr()
+    local bufs_list = require("barbar.state").get_buffer_list()
+    local found = false
+    for _, buf_id in ipairs(bufs_list) do
+        if buf_id == cur_id then
+            found = true
+            break
+        end
+    end
+
+    vim.print(#bufs_list, found)
 end
