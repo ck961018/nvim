@@ -70,11 +70,16 @@ return {
                     override_file_sorter = true,    -- override the file sorter
                     case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
                 },
+                -- TODO 作者正在尝试添加差异预览功能
                 undo = {
+                    side_by_side = true,
+                    layout_strategy = "vertical",
+                    layout_config = {
+                        preview_height = 0.7,
+                    },
                 },
                 ["ui-select"] = {
-                    require("telescope.themes").get_dropdown {
-                    },
+                    require("telescope.themes").get_dropdown(),
                 },
             }
 

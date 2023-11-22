@@ -1,4 +1,13 @@
 SaveSession = function()
+    local bufs_of_barbar = require("barbar.state").get_buffer_list()
+    local wins_list = vim.api.nvim_list_wins()
+    for _, win in ipairs(wins_list) do
+        local buf_of_win = vim.api.nvim_win_get_buf(win)
+        if vim.tbl_contains(bufs_of_barbar, buf_of_win) == false then
+            vim.api.nvim_win_close(win, true)
+        end
+    end
+
     local bufs_list = vim.api.nvim_list_bufs()
     for _, buf in ipairs(bufs_list) do
         if vim.tbl_contains(IgnoredFiletypes, buf) then
@@ -126,22 +135,32 @@ return {
     },
     -- 代码大纲
     {
-        "stevearc/aerial.nvim",
-        keys = {
-            { "<leader>a", [[<cmd>AerialOpen<CR>]], { desc = "[A]erial" } }
-        },
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "nvim-tree/nvim-web-devicons"
-        },
+        "simrat39/symbols-outline.nvim",
+        event = "VeryLazy",
         config = function()
-            require("aerial").setup({
+            require("symbols-outline").setup({
                 keymaps = {
-                    ["<leader>a"] = "actions.close",
-                },
+                    close = { "<leader>q", "q" },
+                }
             })
-        end,
+            ToggleSymbolsOutline = function()
+                local so = require("symbols-outline")
+                local so_win = so.view.winnr
+                if so_win == nil then
+                    so.open_outline()
+                else
+                    local cur_win = vim.api.nvim_get_current_win()
+                    if cur_win == so_win then
+                        so.close_outline()
+                    else
+                        vim.api.nvim_set_current_win(so_win)
+                    end
+                end
+            end
+            vim.keymap.set("n", "<leader>o", ToggleSymbolsOutline, { desc = "Symbols [O]utline" })
+        end
     },
+    -- 会话管理
     {
         "echasnovski/mini.sessions",
         event = "VeryLazy",
@@ -170,6 +189,7 @@ return {
             vim.keymap.set("n", "<leader>rs", RestoreSession, { desc = "[R]estore [S]ession" })
         end
     },
+    -- 快捷键提示
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
@@ -179,6 +199,7 @@ return {
         end,
         opts = {},
     },
+    -- 搜索
     {
         "nvim-pack/nvim-spectre",
         keys = {
@@ -188,9 +209,18 @@ return {
             { "<leader>sb", mode = "n", [[<cmd>lua require("spectre").open_file_search({select_word=true})<CR>]], desc = "Spectr [S]earch in Current [B]uffers" },
         },
         config = function()
-            require("spectre").setup()
+            require("spectre").setup({
+                mapping = {
+                    ['send_to_qf'] = {
+                        map = "<leader>sq",
+                        cmd = "<cmd>lua require('spectre.actions').send_to_qf()<CR>",
+                        desc = "[S]end all items to [Q]uickfix"
+                    },
+                }
+            })
         end,
     },
+    -- 浮窗控制台
     {
         "akinsho/toggleterm.nvim",
         keys = {
@@ -213,5 +243,11 @@ return {
             -- if you only want these mappings for toggle term use term://*toggleterm#* instead
             vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
         end,
+    },
+    {
+        "ibhagwan/smartyank.nvim",
+        config = function()
+            require("smartyank").setup()
+        end
     },
 }

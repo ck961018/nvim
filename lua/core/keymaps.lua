@@ -38,15 +38,8 @@ keymap.set("n", "q", "<NOP>", { noremap = true, silent = true })
 keymap.set("n", "<leader>t", ":lua Test()<CR>", { silent = true })
 
 function Test()
-    local cur_id = vim.fn.bufnr()
-    local bufs_list = require("barbar.state").get_buffer_list()
-    local found = false
-    for _, buf_id in ipairs(bufs_list) do
-        if buf_id == cur_id then
-            found = true
-            break
-        end
-    end
-
-    vim.print(#bufs_list, found)
+    local so = require("symbols-outline")
+    local win = vim.api.nvim_get_current_win()
+    vim.print(so.view.winnr, win)
 end
+

@@ -57,28 +57,47 @@ return {
             end
 
             nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-            nmap("gd", require "telescope.builtin".lsp_definitions, "[G]oto [D]efinition")
+            nmap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
             nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-            nmap("gi", require "telescope.builtin".lsp_implementations, "[G]oto [I]mplementation")
+            nmap("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
             nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
-            nmap("K", "<cmd>Lspsaga hover_doc<CR>", "Hover Documentation")
-            nmap("<leader>fr", "<cmd>Lspsaga finder<CR>", "Lspsaga [F]inde[r]")
+            nmap("K", [[<cmd>Lspsaga hover_doc<CR>]], "Hover Documentation")
+            nmap("<leader>fr", [[<cmd>Lspsaga finder<CR>]], "Lspsaga [F]inde[r]")
             nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
-            nmap("<leader>rn", "<cmd>Lspsaga rename ++project<CR>", "[R]e[n]ame")
-            nmap("<leader>ca", "<cmd>Lspsaga code_action<CR>", "[C]ode [A]ction")
+            nmap("<leader>rn", [[<cmd>Lspsaga rename ++project<CR>]], "[R]e[n]ame")
+            nmap("<leader>ca", [[<cmd>Lspsaga code_action<CR>]], "[C]ode [A]ction")
             --nmap("<leader>da", require "telescope.builtin".diagnostics, "[D]i[A]gnostics")
-            nmap("<leader>da", "<cmd>lua vim.diagnostic.open_float()<CR>", "[D]i[A]gnostics")
-            nmap("<leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>", "[D]iagnostics [N]ext")
-            nmap("<leader>dp", "<cmd>lua vim.diagnostic.goto_prev()<CR>", "[D]iagnostics [P]revious")
+            nmap("<leader>da", [[<cmd>lua vim.diagnostic.open_float()<CR>]], "[D]i[A]gnostics")
+            nmap("<leader>dn", [[<cmd>lua vim.diagnostic.goto_next()<CR>]], "[D]iagnostics [N]ext")
+            nmap("<leader>dp", [[<cmd>lua vim.diagnostic.goto_prev()<CR>]], "[D]iagnostics [P]revious")
             nmap("<space>f", function()
                 vim.lsp.buf.format { async = true }
             end, "[F]ormat code")
         end
         require("neoconf").setup()
         require("neodev").setup()
-        require("fidget").setup()
+        -- require("fidget").setup({
+        --     progress = {
+        --         suppress_on_insert = true,
+        --         ignore_done_already = true,
+        --         lsp = {
+        --             -- progress_ringbuf_size = 10, -- Configure the nvim's LSP progress ring buffer size
+        --         },
+        --     },
+        --     notification = {
+        --         poll_rate = 3,
+        --         window = {
+        --         },
+        --
+        --     },
+        --     logger = {
+        --         level = vim.log.levels.WARN, -- Minimum logging level
+        --         float_precision = 0.01,      -- Limit the number of decimals displayed for floats
+        --     },
+        --
+        -- })
         require("lspsaga").setup({
             finder = {
                 keys = {

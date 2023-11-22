@@ -3,7 +3,7 @@ IgnoredFiletypes = {
     "lazy",
     "help",
     "alpha",
-    "aerial",
+    "Outline",
     "NvimTree",
     "toggleterm",
     "sagafinder",

@@ -8,10 +8,10 @@ return {
         },
         config = function()
             require("tokyonight").setup({
-                style = "storm",
+                style = "moon",
                 styles = {
-                    comments = { italic = false }
-                }
+                    comments = { italic = false },
+                },
             })
             vim.cmd([[colorscheme tokyonight]])
         end
