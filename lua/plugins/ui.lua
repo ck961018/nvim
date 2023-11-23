@@ -153,6 +153,8 @@ return {
                             trigger = false,
                         },
                     },
+                    format = {
+                    },
                 },
                 -- you can enable a preset for easier configuration
                 presets = {
@@ -162,6 +164,9 @@ return {
                     inc_rename = false,           -- enables an input dialog for inc-rename.nvim
                     lsp_doc_border = false,       -- add a border to hover docs and signature help
                 },
+            })
+            vim.diagnostic.config({
+                update_in_insert = false,
             })
         end
     },
