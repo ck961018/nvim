@@ -1,6 +1,11 @@
 SaveSession = function()
     local bufs_of_barbar = require("barbar.state").get_buffer_list()
     local wins_list = vim.api.nvim_list_wins()
+
+    if #bufs_of_barbar == 0 then
+        return
+    end
+
     for _, win in ipairs(wins_list) do
         local buf_of_win = vim.api.nvim_win_get_buf(win)
         if vim.tbl_contains(bufs_of_barbar, buf_of_win) == false then

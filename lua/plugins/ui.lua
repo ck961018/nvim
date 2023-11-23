@@ -1,11 +1,17 @@
 function QuitBuffer()
+    local bufs_list = require("barbar.state").get_buffer_list()
+
+    if #bufs_list == 0 then
+        vim.cmd.qa()
+        return
+    end
+
     local cur_id = vim.fn.bufnr()
 
     if vim.tbl_contains(IgnoredFiletypes, vim.bo[cur_id].filetype) == false and vim.bo[cur_id].ft ~= "" then
         vim.cmd.w()
     end
 
-    local bufs_list = require("barbar.state").get_buffer_list()
     local found = false
     for _, buf_id in ipairs(bufs_list) do
         if buf_id == cur_id then
@@ -123,14 +129,6 @@ return {
     {
         "folke/noice.nvim",
         event = "VeryLazy",
-        dependencies = {
-            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-            "MunifTanjim/nui.nvim",
-            -- OPTIONAL:
-            --   `nvim-notify` is only needed, if you want to use the notification view.
-            --   If not available, we use `mini` as the fallback
-            "rcarriga/nvim-notify",
-        },
         config = function()
             -- TODO 优化diagnostic频率
             require("noice").setup({
@@ -139,7 +137,7 @@ return {
                         enabled = true,
                         format = "lsp_progress",
                         format_done = "lsp_progress_done",
-                        throttle = 1000 / 30, -- frequency to update lsp progress message
+                        throttle = 2000 / 30, -- frequency to update lsp progress message
                         view = "mini",
                     },
                     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -164,10 +162,22 @@ return {
                     inc_rename = false,           -- enables an input dialog for inc-rename.nvim
                     lsp_doc_border = false,       -- add a border to hover docs and signature help
                 },
+                routes = {
+                    {
+                        view = "mini",
+                        filter = { event = "lsp", min_length = 80 },
+                        opts = { skip = true }
+                    },
+                }
             })
-            vim.diagnostic.config({
-                update_in_insert = false,
-            })
-        end
+        end,
+        dependencies = {
+            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+            "MunifTanjim/nui.nvim",
+            -- OPTIONAL:
+            --   `nvim-notify` is only needed, if you want to use the notification view.
+            --   If not available, we use `mini` as the fallback
+            "rcarriga/nvim-notify",
+        },
     },
 }

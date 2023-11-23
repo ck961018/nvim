@@ -7,10 +7,6 @@ return {
         "williamboman/mason-lspconfig",
         "folke/neoconf.nvim",
         "folke/neodev.nvim",
-        {
-            "j-hui/fidget.nvim",
-            tag = "legacy",
-        },
         "nvimdev/lspsaga.nvim",
         {
             "nvim-treesitter/nvim-treesitter",
@@ -78,25 +74,6 @@ return {
         end
         require("neoconf").setup()
         require("neodev").setup()
-        -- require("fidget").setup({
-        --     progress = {
-        --         suppress_on_insert = true,
-        --         ignore_done_already = true,
-        --         lsp = {
-        --             -- progress_ringbuf_size = 10, -- Configure the nvim's LSP progress ring buffer size
-        --         },
-        --     },
-        --     notification = {
-        --         poll_rate = 3,
-        --         window = {
-        --         },
-        --
-        --     },
-        --     logger = {
-        --         float_precision = 0.01,      -- Limit the number of decimals displayed for floats
-        --     },
-        --
-        -- })
         require("lspsaga").setup({
             finder = {
                 keys = {

@@ -38,8 +38,11 @@ keymap.set("n", "q", "<NOP>", { noremap = true, silent = true })
 keymap.set("n", "<leader>t", ":lua Test()<CR>", { silent = true })
 
 function Test()
-    local so = require("symbols-outline")
-    local win = vim.api.nvim_get_current_win()
-    vim.print(so.view.winnr, win)
-end
+    local originalString = "dfsa\\2332\\fdsafdf"
 
+    -- 检查是否为路径
+    local is_path = tostring("{originalString}"):match("[/\\]") ~= nil
+    local file_name = originalString:match("[^/\\]+$")
+
+    vim.print(is_path, file_name, "{originalString}")
+end
