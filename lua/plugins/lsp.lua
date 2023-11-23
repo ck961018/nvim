@@ -93,7 +93,6 @@ return {
         --
         --     },
         --     logger = {
-        --         level = vim.log.levels.WARN, -- Minimum logging level
         --         float_precision = 0.01,      -- Limit the number of decimals displayed for floats
         --     },
         --
