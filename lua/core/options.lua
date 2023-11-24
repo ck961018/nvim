@@ -1,4 +1,4 @@
-IgnoredFiletypes = {
+IgnoredFiletypes      = {
     "qf",
     "lazy",
     "help",

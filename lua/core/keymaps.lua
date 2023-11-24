@@ -46,3 +46,15 @@ function Test()
 
     vim.print(is_path, file_name, "{originalString}")
 end
+
+-- neovide
+if vim.g.neovide then
+    keymap.set("n", "<F11>", [[<cmd>lua SwitchScreenMode()<CR>]])
+    function SwitchScreenMode()
+        if vim.g.neovide_fullscreen == true then
+            vim.g.neovide_fullscreen = false
+        else
+            vim.g.neovide_fullscreen = true
+        end
+    end
+end
