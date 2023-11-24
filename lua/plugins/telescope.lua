@@ -105,7 +105,7 @@ return {
         })
         require("project_nvim").setup({
             detection_methods = { "pattern", },
-            patterns = { ".git", ".clang-format", },
+            patterns = { ".git", ".clang-format", "build", },
             show_hidden = true,
             open_file_finder = false,
             datapath = vim.fn.stdpath("data"),
