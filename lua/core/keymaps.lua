@@ -28,24 +28,16 @@ keymap.set({ "n", "v" }, "<A-k>", "10kzz")
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+keymap.set("v", "<leader>y", "\"+y", { noremap = true })
+keymap.set("n", "<leader>p", "\"+p", { noremap = true })
+keymap.set("v", "p", "\"0p", { noremap = true })
+keymap.set("n", "p", "\"0p", { noremap = true })
+
 -- view
 keymap.set("n", "<CR>", ":nohlsearch<CR><CR>", { noremap = true, silent = true })
 
 -- disable
 keymap.set("n", "q", "<NOP>", { noremap = true, silent = true })
-
--- test
-keymap.set("n", "<leader>t", ":lua Test()<CR>", { silent = true })
-
-function Test()
-    local originalString = "dfsa\\2332\\fdsafdf"
-
-    -- 检查是否为路径
-    local is_path = tostring("{originalString}"):match("[/\\]") ~= nil
-    local file_name = originalString:match("[^/\\]+$")
-
-    vim.print(is_path, file_name, "{originalString}")
-end
 
 -- neovide
 if vim.g.neovide then
@@ -57,4 +49,10 @@ if vim.g.neovide then
             vim.g.neovide_fullscreen = true
         end
     end
+end
+
+-- test
+keymap.set("n", "<leader>y", ":lua Test()<CR>", { silent = true })
+
+function Test()
 end

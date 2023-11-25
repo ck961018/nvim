@@ -44,6 +44,4 @@ option.swapfile       = false
 option.exrc           = true
 option.signcolumn     = "yes"
 
-option.clipboard:append("unnamedplus")
-
 option.fileencoding = "utf-8"

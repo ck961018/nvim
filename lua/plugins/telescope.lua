@@ -34,7 +34,7 @@ return {
         { "<leader>u",  [[<cmd>Telescope undo<CR>]],       desc = "[U]ndo" },
 
         -- project
-        { "<leader>p",  [[<cmd>lua ListProjects()<CR>]],   { desc = "[P]rojects", noremap = true, silent = true } }
+        { "<leader>`",  [[<cmd>lua ListProjects()<CR>]],   { desc = "Projects", noremap = true, silent = true } }
     },
     dependencies = {
         "nvim-telescope/telescope-ui-select.nvim",
