@@ -173,9 +173,9 @@ return {
         config = function()
             require("mini.sessions").setup({
                 autoread = false,
-                autowrite = true,
+                autowrite = false,
                 force = { read = true, write = true, delete = true },
-                verbose = { read = false, write = false, delete = true },
+                verbose = { read = false, write = true, delete = true },
                 directory = vim.fn.stdpath("data") .. "/sessions",
                 file = "",
                 hooks = {

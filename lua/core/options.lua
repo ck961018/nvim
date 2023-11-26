@@ -12,8 +12,8 @@ IgnoredFiletypes      = {
 }
 
 local option          = vim.opt
---local buffer          = vim.b
---local global          = vim.g
+local global          = vim.g
+local buffer          = vim.b
 
 option.tabstop        = 4
 option.softtabstop    = 4
@@ -44,4 +44,9 @@ option.swapfile       = false
 option.exrc           = true
 option.signcolumn     = "yes"
 
-option.fileencoding = "utf-8"
+option.fileencoding   = "utf-8"
+
+--neovide
+if global.neovide then
+    global.neovide_scale_factor = 0.8
+end

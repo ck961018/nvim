@@ -57,7 +57,7 @@ return {
             nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
             nmap("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
-            nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+            -- nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
             nmap("K", [[<cmd>Lspsaga hover_doc<CR>]], "Hover Documentation")
             nmap("<leader>fr", [[<cmd>Lspsaga finder<CR>]], "Lspsaga [F]inde[r]")

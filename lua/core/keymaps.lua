@@ -19,8 +19,6 @@ keymap.set("n", "<C-h>", "<C-w>h")
 keymap.set("n", "<C-l>", "<C-w>l")
 keymap.set("n", "<C-j>", "<C-w>j")
 keymap.set("n", "<C-k>", "<C-w>k")
-keymap.set({ "n", "v" }, "<leader>h", "^")
-keymap.set({ "n", "v" }, "<leader>l", "$")
 keymap.set({ "n", "v" }, "<A-j>", "10jzz")
 keymap.set({ "n", "v" }, "<A-k>", "10kzz")
 
@@ -30,8 +28,6 @@ keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 keymap.set("v", "<leader>y", "\"+y", { noremap = true })
 keymap.set("n", "<leader>p", "\"+p", { noremap = true })
-keymap.set("v", "p", "\"0p", { noremap = true })
-keymap.set("n", "p", "\"0p", { noremap = true })
 
 -- view
 keymap.set("n", "<CR>", ":nohlsearch<CR><CR>", { noremap = true, silent = true })
@@ -55,4 +51,5 @@ end
 keymap.set("n", "<leader>y", ":lua Test()<CR>", { silent = true })
 
 function Test()
+    SaveSession()
 end

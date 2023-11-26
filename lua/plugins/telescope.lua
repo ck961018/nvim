@@ -107,7 +107,6 @@ return {
             detection_methods = { "pattern", },
             patterns = { ".git", ".clang-format", "build", },
             show_hidden = true,
-            open_file_finder = false,
             datapath = vim.fn.stdpath("data"),
         })
         vim.notify = require("notify")
