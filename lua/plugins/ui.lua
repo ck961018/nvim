@@ -8,7 +8,7 @@ function QuitBuffer()
 
     local cur_id = vim.fn.bufnr()
 
-    if vim.tbl_contains(IgnoredFiletypes, vim.bo[cur_id].filetype) == false and vim.bo[cur_id].ft ~= "" then
+    if vim.tbl_contains(IgnoredFiletypes, vim.bo[cur_id].filetype) == false and vim.bo[cur_id].ft ~= "" and vim.bo[cur_id].mod then
         vim.cmd.w()
     end
 

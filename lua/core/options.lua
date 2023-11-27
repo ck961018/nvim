@@ -3,10 +3,12 @@ IgnoredFiletypes      = {
     "lazy",
     "help",
     "alpha",
+    "Neogit*",
     "Outline",
     "NvimTree",
     "toggleterm",
     "sagafinder",
+    "DiffviewFiles",
     "spectre_panel",
     "camek_tools_terminal",
 }

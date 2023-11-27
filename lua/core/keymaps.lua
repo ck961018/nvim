@@ -6,6 +6,9 @@ vim.g.mapleader = " "
 keymap.set("n", "<leader>w", "<cmd>w<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader><TAB>", function()
+    if vim.bo.mod then
+        vim.cmd.w()
+    end
     SaveSession()
     vim.cmd.qa()
 end)
@@ -26,8 +29,8 @@ keymap.set({ "n", "v" }, "<A-k>", "10kzz")
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
-keymap.set("v", "<leader>y", "\"+y", { noremap = true })
-keymap.set("n", "<leader>p", "\"+p", { noremap = true })
+keymap.set({"n", "v"}, "<leader>y", "\"+y", { noremap = true })
+keymap.set({"n", "v"}, "<leader>p", "\"+p", { noremap = true })
 
 -- view
 keymap.set("n", "<CR>", ":nohlsearch<CR><CR>", { noremap = true, silent = true })
@@ -51,5 +54,5 @@ end
 keymap.set("n", "<leader>y", ":lua Test()<CR>", { silent = true })
 
 function Test()
-    SaveSession()
+    vim.print(vim.bo.mod)
 end
