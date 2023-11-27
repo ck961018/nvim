@@ -6,10 +6,12 @@ IgnoredFiletypes      = {
     "Neogit*",
     "Outline",
     "NvimTree",
+    "translator",
     "toggleterm",
     "sagafinder",
     "DiffviewFiles",
     "spectre_panel",
+    "translatorborder",
     "camek_tools_terminal",
 }
 
