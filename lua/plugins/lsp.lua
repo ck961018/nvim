@@ -42,6 +42,8 @@ return {
                 end,
             },
             neocmake = {},
+            -- cmakelang = {},
+            -- cmakelint {},
         }
         local on_attach = function(_, bufnr)
             local nmap = function(keys, func, desc)
@@ -83,9 +85,7 @@ return {
                 },
             },
         })
-        require("mason").setup({
-            ensure_installed = { "cmakelang", "cmakelint" }
-        })
+        require("mason").setup()
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         require("mason-lspconfig").setup({
             ensure_installed = vim.tbl_keys(servers),
