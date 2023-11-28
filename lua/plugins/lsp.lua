@@ -44,6 +44,10 @@ return {
             neocmake = {},
             -- cmakelang = {},
             -- cmakelint {},
+            omnisharp = {
+                filetypes = { "cs" },
+                cmd = { "omnisharp" },
+            },
         }
         local on_attach = function(_, bufnr)
             local nmap = function(keys, func, desc)
