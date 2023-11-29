@@ -50,7 +50,7 @@ return {
                         new_task_opts = {},               -- options to pass into the `overseer.new_task` command
                         on_new_task = function(task) end, -- a function that gets overseer.Task when it is created, before calling `task:start`
                     },
-                    terminal = {},                        -- terminal executor uses the values in cmake_terminal
+                    terminal = { "PowerShell" },          -- terminal executor uses the values in cmake_terminal
                 },
             },
             cmake_terminal = {

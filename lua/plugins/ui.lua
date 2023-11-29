@@ -87,7 +87,6 @@ return {
         end
     },
     {
-        -- TODO 切换目录后快捷键失效
         "goolord/alpha-nvim",
         config = function()
             local alpha = require("alpha")
@@ -130,7 +129,6 @@ return {
         "folke/noice.nvim",
         event = "VeryLazy",
         config = function()
-            -- TODO 优化diagnostic频率
             require("noice").setup({
                 lsp = {
                     progress = {
