@@ -84,6 +84,7 @@ return {
             }
 
         })
+        -- TODO 解决只加载一次hook的问题
         require("workspaces").setup({
             path = vim.fn.stdpath("data") .. "/project_nvim/workspaces.txt",
             auto_open = true,
@@ -93,13 +94,14 @@ return {
                 rename = {},
                 open_pre = {},
                 open = function()
+                    RestoreSession()
+
                     local nvim_lua_path = vim.fn.expand('%:p:h') .. '/.nvim.lua'
+                    vim.notify("path:" .. nvim_lua_path)
                     if vim.fn.filereadable(nvim_lua_path) == 1 then
                         vim.cmd.so(".nvim.lua")
                         vim.notify(".nvim.lua is loaded")
                     end
-
-                    RestoreSession()
                 end,
             },
         })

@@ -126,11 +126,11 @@ return {
         keys = {
             {
                 "<leader>nc", [[<cmd> require("neogen").generate({type = "class"})<CR>]],
-                { desc = "[G]enerate [C]lass Doxygen", noremap = true, silent = true }
+                { desc = "[N]eogen [C]lass Doxygen", noremap = true, silent = true }
             },
             {
                 "<leader>nf", [[<cmd> require("neogen").generate({type = "func"})<CR>]],
-                { desc = "[G]enerate [F]unction Doxygen", noremap = true, silent = true }
+                { desc = "[N]eogen [F]unction Doxygen", noremap = true, silent = true }
             },
         },
         dependencies = "nvim-treesitter/nvim-treesitter",
@@ -249,4 +249,11 @@ return {
             vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
         end,
     },
+    -- 编码检测
+    -- {
+    --     "mbbill/fencview",
+    --     config = function()
+    --         vim.g.fencview_autodetect = 1
+    --     end
+    -- }
 }

@@ -48,7 +48,7 @@ option.swapfile       = false
 option.exrc           = true
 option.signcolumn     = "yes"
 
-option.fileencoding   = "utf-8"
+option.fileencodings  = { "ucs-bom", "utf-8", "cp936" }
 
 --neovide
 if global.neovide then

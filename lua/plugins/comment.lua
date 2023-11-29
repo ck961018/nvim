@@ -8,7 +8,7 @@ return {
         "folke/todo-comments.nvim",
         event = { "BufReadPost", "BufNewFile" },
         keys = {
-            { "<leader>tl", [[<cmd>TodoTelescope<CR>"]], desc = "[T]odo [L]ist" },
+            { "<leader>tl", [[<cmd>TodoTelescope<CR>]], desc = "[T]odo [L]ist" },
         },
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()

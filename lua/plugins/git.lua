@@ -1,6 +1,4 @@
 return {
-    -- TODO https://github.com/NeogitOrg/neogit/pull/917
-
     "NeogitOrg/neogit",
     dependencies = {
         "nvim-lua/plenary.nvim",         -- required
