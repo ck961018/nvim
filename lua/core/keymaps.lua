@@ -71,8 +71,7 @@ Test = function()
 
     -- 将获取到的文本连接成一个字符串并返回
     local selected_text = table.concat(lines, "\n")
-    vim.cmd.TranslateW(selected_text)
-    vim.print(selected_text)
+    vim.notify(selected_text)
 end
-keymap.set({ "n", "v" }, "<leader>/", [[:lua Test()<CR>]], { silent = true })
+keymap.set({ "v" }, "<leader>/", [[<Esc><cmd>lua Test()<CR>]], { silent = true })
 

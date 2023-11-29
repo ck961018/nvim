@@ -23,6 +23,6 @@ return {
     "voldikss/vim-translator",
     config = function()
         vim.keymap.set("n", "<leader>tr", [[<cmd>TranslateW<CR>]], { desc = "[Tr]anslate", noremap = true, silent = true })
-        vim.keymap.set("v", "<leader>tr", [[:lua TranslateSelectedText()<CR>]], { desc = "[Tr]anslate", noremap = true, silent = true})
+        vim.keymap.set("v", "<leader>tr", [[<Esc><cmd>lua TranslateSelectedText()<CR>]], { desc = "[Tr]anslate", noremap = true, silent = true})
     end
 }
