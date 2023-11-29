@@ -5,7 +5,6 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
     end,
 })
 
-
 if vim.g.neovide then
     local function set_ime(args)
         if args.event:match("Enter$") then
