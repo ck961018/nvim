@@ -1,6 +1,7 @@
 return {
     -- TODO wait cmake run to be fixed
 
+    -- set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexec-charset=GBK")
     "Civitasv/cmake-tools.nvim",
     keys = {
         { "<C-F6>", mode = "n", [[<cmd>CMakeSelectBuildPreset<CR>]] },
