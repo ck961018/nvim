@@ -39,7 +39,6 @@ RestoreSession = function()
         end
     end
     if found == true then
-        -- TODO 读取时会关闭notification，可能导致no matching notification found to replace
         require("mini.sessions").read(project_name)
     end
 
