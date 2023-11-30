@@ -16,7 +16,7 @@ SaveSession = function()
     local bufs_list = vim.api.nvim_list_bufs()
     for _, buf in ipairs(bufs_list) do
         if vim.tbl_contains(IgnoredFiletypes, vim.bo[buf].filetype) then
-            vim.cmd.bd(buf)
+            vim.cmd("bd!" .. tostring(buf))
         end
     end
 
