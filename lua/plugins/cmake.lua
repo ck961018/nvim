@@ -1,7 +1,8 @@
 return {
+    {
     -- TODO wait cmake run to be fixed
 
-    -- set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexec-charset=GBK")
+    -- add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/source-charset:gbk>")
     "Civitasv/cmake-tools.nvim",
     keys = {
         { "<C-F6>", mode = "n", [[<cmd>CMakeSelectBuildPreset<CR>]] },
@@ -81,4 +82,16 @@ return {
             },
         })
     end,
+    },
+    -- {
+    --     "cdelledonne/vim-cmake",
+    --     keys = {
+    --         { "<C-F7>", mode = "n", [[<cmd>CMakeGenerate<CR>]], },
+    --         { "<F7>",   mode = "n", [[<cmd>CMakeBuild<CR>]] },
+    --
+    --         { "<C-F7>", mode = "i", [[<Esc><cmd>CMakeGenerate<CR>]] },
+    --         { "<F7>",   mode = "i", [[<Esc><cmd>CMakeBuild<CR>]] },
+    --     },
+    --
+    -- }
 }
