@@ -166,7 +166,12 @@ return {
                         filter = { event = "lsp", min_length = 80 },
                         opts = { skip = true }
                     },
-                }
+                    {
+                        view = "notify",
+                        filter = { event = "msg_show", find = [[.*buffers wiped out]] },
+                        opts = { skip = true }
+                    }
+                },
             })
         end,
         dependencies = {

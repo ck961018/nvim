@@ -53,25 +53,25 @@ end
 -- test
 
 Test = function()
-    local start_line = vim.fn.line("'<")
-    local end_line = vim.fn.line("'>")
-    local start_col = vim.fn.col("'<")
-    local end_col = vim.fn.col("'>")
-
-    local lines = vim.fn.getline(start_line, end_line)
-
-    -- 如果只在同一行内选取，则截取选取的列范围
-    if start_line == end_line then
-        lines[1] = lines[1]:sub(start_col, end_col)
-    else
-        -- 如果在多行选取，则截取每一行的选取部分
-        lines[1] = lines[1]:sub(start_col)
-        lines[#lines] = lines[#lines]:sub(1, end_col)
-    end
-
-    -- 将获取到的文本连接成一个字符串并返回
-    local selected_text = table.concat(lines, "\n")
-    vim.notify(selected_text)
+    vim.print(vim.o.shortmess)
+    -- local wins = vim.api.nvim_list_wins()
+    -- for _, win in ipairs(wins) do
+    --     local buf_of_win = vim.api.nvim_win_get_buf(win)
+    --     if vim.bo[buf_of_win].filetype == "notify" then
+    --         vim.api.nvim_win_close(win, true)
+    --     end
+    -- end
+    --
+    -- local list = {}
+    -- local bufs = vim.api.nvim_list_bufs()
+    -- for _, buf in ipairs(bufs) do
+    --     if vim.bo[buf].filetype == "notify" then
+    --         table.insert(list, buf)
+    --         vim.cmd.bd(buf)
+    --     end
+    -- end
+    --
+    -- vim.print(list)
 end
-keymap.set({ "v" }, "<leader>/", [[<Esc><cmd>lua Test()<CR>]], { silent = true })
 
+keymap.set({ "n", "v" }, "<leader>/", [[<Esc><cmd>lua Test()<CR>]], { silent = true })

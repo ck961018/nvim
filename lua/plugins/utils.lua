@@ -15,10 +15,11 @@ SaveSession = function()
 
     local bufs_list = vim.api.nvim_list_bufs()
     for _, buf in ipairs(bufs_list) do
-        if vim.tbl_contains(IgnoredFiletypes, buf) then
+        if vim.tbl_contains(IgnoredFiletypes, vim.bo[buf].filetype) then
             vim.cmd.bd(buf)
         end
     end
+
     if vim.bo[vim.fn.bufnr()].filetype ~= "" then
         local project_path = vim.fn.getcwd()
         local project_name = string.match(project_path, "\\([^\\]+)$")
@@ -38,7 +39,14 @@ RestoreSession = function()
         end
     end
     if found == true then
+        -- TODO 读取时会关闭notification，可能导致no matching notification found to replace
         require("mini.sessions").read(project_name)
+    end
+
+    local nvim_lua_path = vim.fn.expand('%:p:h') .. '/.nvim.lua'
+    if vim.fn.filereadable(nvim_lua_path) == 1 then
+        vim.cmd.so(".nvim.lua")
+        vim.notify(".nvim.lua is loaded")
     end
 end
 
@@ -175,19 +183,11 @@ return {
                 autoread = false,
                 autowrite = false,
                 force = { read = true, write = true, delete = true },
-                verbose = { read = false, write = true, delete = true },
+                verbose = { read = false, write = false, delete = false },
                 directory = vim.fn.stdpath("data") .. "/sessions",
                 file = "",
                 hooks = {
-                    pre = {
-                        read = nil,
-                        write = function()
-                            if require("nvim-tree.view").is_visible() then
-                                require("nvim-tree.view").close()
-                            end
-                        end,
-                        delete = nil
-                    },
+                    pre = { read = nil, write = nil, delete = nil },
                     post = { read = nil, write = nil, delete = nil },
                 },
             })
