@@ -53,25 +53,11 @@ end
 -- test
 
 Test = function()
-    vim.print(vim.o.shortmess)
-    -- local wins = vim.api.nvim_list_wins()
-    -- for _, win in ipairs(wins) do
-    --     local buf_of_win = vim.api.nvim_win_get_buf(win)
-    --     if vim.bo[buf_of_win].filetype == "notify" then
-    --         vim.api.nvim_win_close(win, true)
-    --     end
-    -- end
-    --
-    -- local list = {}
-    -- local bufs = vim.api.nvim_list_bufs()
-    -- for _, buf in ipairs(bufs) do
-    --     if vim.bo[buf].filetype == "notify" then
-    --         table.insert(list, buf)
-    --         vim.cmd.bd(buf)
-    --     end
-    -- end
-    --
-    -- vim.print(list)
+    local qflist = vim.fn.getqflist()
+    for _, qf in ipairs(qflist) do
+        qf.text = vim.fn.iconv(qf.text, "cp936", "utf-8")
+    end
+    vim.print(qflist)
 end
 
 keymap.set({ "n", "v" }, "<leader>/", [[<Esc><cmd>lua Test()<CR>]], { silent = true })
