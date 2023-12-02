@@ -53,7 +53,9 @@ end
 -- test
 
 Test = function()
-    vim.print("11111")
+    local buf = vim.fn.bufnr()
+    vim.print(vim.bo[buf].ft)
+
 end
 
 keymap.set({ "n", "v" }, "<leader>/", [[<Esc><cmd>lua Test()<CR>]], { silent = true })
