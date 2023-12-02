@@ -53,11 +53,7 @@ end
 -- test
 
 Test = function()
-    local qflist = vim.fn.getqflist()
-    for _, qf in ipairs(qflist) do
-        qf.text = vim.fn.iconv(qf.text, "cp936", "utf-8")
-    end
-    vim.print(qflist)
+    vim.print("11111")
 end
 
 keymap.set({ "n", "v" }, "<leader>/", [[<Esc><cmd>lua Test()<CR>]], { silent = true })

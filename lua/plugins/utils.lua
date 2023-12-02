@@ -31,6 +31,8 @@ RestoreSession = function()
     local project_path = vim.fn.getcwd()
     local project_name = string.match(project_path, "\\([^\\]+)$")
 
+    require("nvim-tree").change_dir(project_path)
+
     local found = false
     for session, _ in pairs(require("mini.sessions").detected) do
         if tostring(session) == project_name then
@@ -42,7 +44,7 @@ RestoreSession = function()
         require("mini.sessions").read(project_name)
     end
 
-    local nvim_lua_path = vim.fn.expand('%:p:h') .. '/.nvim.lua'
+    local nvim_lua_path = project_path .. '/.nvim.lua'
     if vim.fn.filereadable(nvim_lua_path) == 1 then
         vim.cmd.so(".nvim.lua")
         vim.notify(".nvim.lua is loaded")
@@ -118,12 +120,12 @@ return {
                 },
 
                 -- for project
-                sync_root_with_cwd = true,
-                respect_buf_cwd = true,
-                update_focused_file = {
-                    enable = true,
-                    update_root = true,
-                },
+                -- sync_root_with_cwd = true,
+                -- respect_buf_cwd = true,
+                -- update_focused_file = {
+                --     enable = true,
+                --     update_root = true,
+                -- },
             })
         end
     },
@@ -237,7 +239,7 @@ return {
             })
             function _G.set_terminal_keymaps()
                 local opts = { buffer = 0 }
-                vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], opts)
+                -- vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], opts)
                 vim.keymap.set("t", "<C-h>", [[<cmd>wincmd h<CR>]], opts)
                 vim.keymap.set("t", "<C-j>", [[<cmd>wincmd j<CR>]], opts)
                 vim.keymap.set("t", "<C-k>", [[<cmd>wincmd k<CR>]], opts)

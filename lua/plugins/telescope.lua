@@ -84,9 +84,10 @@ return {
             }
 
         })
+        -- TODO 替换插件以支持删除功能
         require("workspaces").setup({
             path = vim.fn.stdpath("data") .. "/project_nvim/workspaces.txt",
-            auto_open = true,
+            auto_open = false,
             notify_info = false,
             hooks = {
                 add = {},
