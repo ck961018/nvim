@@ -46,7 +46,24 @@ return {
                     NvimTree = { event = 'BufWinLeave', text = "NvimTree" },
                 },
                 icons = {
-                    preset = "default"
+                    diagnostics = {
+                        [vim.diagnostic.severity.ERROR] = { enabled = true, icon = " * " },
+                        [vim.diagnostic.severity.WARN] = { enabled = true, icon = " ! " },
+                        [vim.diagnostic.severity.INFO] = { enabled = true, icon = " i " },
+                        [vim.diagnostic.severity.HINT] = { enabled = true, icon = " ? " },
+                    },
+                    filetype = {
+                        -- Sets the icon's highlight group.
+                        -- If false, will use nvim-web-devicons colors
+                        custom_colors = false,
+
+                        -- Requires `nvim-web-devicons` if `true`
+                        enabled = true,
+                    },
+                    preset = "default",
+                    separator = { left = "", right = "" },
+                    separator_at_end = false,
+                    inactive = { button = "" },
                 },
                 exclude_ft = IgnoredFiletypes,
             })
@@ -75,7 +92,11 @@ return {
         "lukas-reineke/indent-blankline.nvim",
         event = { "BufReadPost", "BufNewFile" },
         main = "ibl",
-        --     config = true,
+        config = true,
+    },
+    {
+        -- 可能需要安装
+        --"NMAC427/guess-indent.nvim"
     },
     {
         "lewis6991/gitsigns.nvim",

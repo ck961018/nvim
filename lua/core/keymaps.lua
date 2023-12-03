@@ -53,9 +53,14 @@ end
 -- test
 
 Test = function()
-    local buf = vim.fn.bufnr()
-    vim.print(vim.bo[buf].ft)
+    function _G.set_lazygit_keymaps()
+        local opts = { buffer = 0 }
+        vim.keymap.del("t", "<Esc>", opts)
+        -- vim.keymap.set("t", "<leader>q", )
+    end
 
+    -- if you only want these mappings for toggle term use term://*toggleterm#* instead
+    -- set_lazygit_keymaps()
 end
 
-keymap.set({ "n", "v" }, "<leader>/", [[<Esc><cmd>lua Test()<CR>]], { silent = true })
+keymap.set({ "n" }, "<leader>/", [[<cmd>lua Test()<CR>]], { silent = true })

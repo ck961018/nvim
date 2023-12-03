@@ -13,7 +13,7 @@ return {
             ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc", "query", "elixir", "heex", "html", "markdown", "markdown_inline" },
             sync_install = false,
             highlight = { enable = true },
-            indent = { enable = true },
+            indent = { enable = false },
         })
         if type(opts.ensure_installed) == "table" then
             vim.list_extend(opts.ensure_installed, { "cmake" })

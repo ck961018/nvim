@@ -1,3 +1,21 @@
+Lazygit = function()
+    require("toggleterm.terminal").Terminal:new({
+        cmd = "lazygit",
+        close_on_exit = true,
+        on_open = function(term)
+            vim.api.nvim_buf_del_keymap(term.bufnr, "t", "<Esc>")
+            if vim.g.neovide then
+                vim.g.neovide_input_ime = true
+            end
+        end,
+        on_exit = function()
+            if vim.g.neovide then
+                vim.g.neovide_input_ime = false
+            end
+        end
+    }):toggle()
+end
+vim.keymap.set({ "n" }, "<leader>g", Lazygit, { silent = true })
 return {
     -- TODO 为Lazygit增加快捷键
 

@@ -17,14 +17,14 @@ IgnoredFiletypes      = {
 
 local option          = vim.opt
 local global          = vim.g
-local buffer          = vim.b
+-- local buffer          = vim.b
 
 option.tabstop        = 4
 option.softtabstop    = 4
 option.shiftwidth     = 4
 option.expandtab      = true
-option.smartindent    = true
 option.shiftround     = true
+option.smartindent    = true
 option.autoindent     = true
 option.smarttab       = true
 
@@ -48,6 +48,7 @@ option.swapfile       = false
 option.exrc           = true
 option.signcolumn     = "yes"
 
+option.termencoding   = "utf-8"
 option.fileencodings  = { "ucs-bom", "utf-8", "cp936" }
 
 --neovide
