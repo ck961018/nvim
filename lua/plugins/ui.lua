@@ -88,7 +88,6 @@ return {
         version = '^1.0.0',
     },
     {
-        -- TODO 缩进存在bug，此插件正在尝试解决
         "lukas-reineke/indent-blankline.nvim",
         event = { "BufReadPost", "BufNewFile" },
         main = "ibl",

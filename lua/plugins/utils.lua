@@ -49,6 +49,9 @@ RestoreSession = function()
         vim.cmd.so(".nvim.lua")
         vim.notify(".nvim.lua is loaded")
     end
+
+    -- fix lsp
+    vim.cmd.e()
 end
 
 return {
