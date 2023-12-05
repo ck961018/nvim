@@ -53,6 +53,8 @@ end
 -- test
 
 Test = function()
+    local str = vim.loop.cwd()
+    vim.print(str)
 end
 
 keymap.set({ "n" }, "<leader>/", [[<cmd>lua Test()<CR>]], { silent = true })
