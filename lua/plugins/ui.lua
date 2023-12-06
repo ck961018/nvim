@@ -98,15 +98,6 @@ return {
         --"NMAC427/guess-indent.nvim"
     },
     {
-        "lewis6991/gitsigns.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("gitsigns").setup({
-                current_line_blame = true,
-            })
-        end
-    },
-    {
         "goolord/alpha-nvim",
         config = function()
             local alpha = require("alpha")

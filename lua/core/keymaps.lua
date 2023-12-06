@@ -3,7 +3,7 @@ local keymap = vim.keymap
 vim.g.mapleader = " "
 
 -- save
-keymap.set("n", "<leader>w", "<cmd>w<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>w", [[<cmd>w<CR>]], { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader><TAB>", function()
     if vim.bo.mod then
@@ -11,19 +11,19 @@ vim.keymap.set("n", "<leader><TAB>", function()
     end
     SaveSession()
     vim.cmd.qa()
-end)
+end, { desc = "Exit" })
 
 -- spilt
-keymap.set("n", "<leader>sv", "<C-w>v")
-keymap.set("n", "<leader>sx", "<cmd>close<CR>")
+keymap.set("n", "<leader>sv", [[<C-w>v]])
+keymap.set("n", "<leader>sx", [[<cmd>close<CR>]])
 
 -- move
-keymap.set("n", "<C-h>", "<C-w>h")
-keymap.set("n", "<C-l>", "<C-w>l")
-keymap.set("n", "<C-j>", "<C-w>j")
-keymap.set("n", "<C-k>", "<C-w>k")
-keymap.set({ "n", "v" }, "<A-j>", "10jzz")
-keymap.set({ "n", "v" }, "<A-k>", "10kzz")
+keymap.set("n", "<A-h>", "<C-w>h")
+keymap.set("n", "<A-l>", "<C-w>l")
+keymap.set("n", "<A-j>", "<C-w>j")
+keymap.set("n", "<A-k>", "<C-w>k")
+keymap.set({ "n", "v" }, "<C-j>", "10jzz", { noremap = true, silent = true })
+keymap.set({ "n", "v" }, "<C-k>", "10kzz", { noremap = true, silent = true })
 
 -- edit
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -33,7 +33,7 @@ keymap.set({ "n", "v" }, "<leader>y", "\"+y", { noremap = true })
 keymap.set({ "n", "v" }, "<leader>p", "\"+p", { noremap = true })
 
 -- view
-keymap.set("n", "<CR>", ":nohlsearch<CR><CR>", { noremap = true, silent = true })
+keymap.set("n", "<CR>", [[<cmd>nohlsearch<CR><CR>]], { noremap = true, silent = true })
 
 -- disable
 keymap.set("n", "q", "<NOP>", { noremap = true, silent = true })

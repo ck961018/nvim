@@ -15,9 +15,27 @@ Lazygit = function()
         end
     }):toggle()
 end
-vim.keymap.set({ "n" }, "<leader>g", Lazygit, { silent = true })
+vim.keymap.set({ "n" }, "<leader>gt", Lazygit, { silent = true, desc = "Lazy[g]it [T]erminal" })
+
 return {
-    -- TODO 为Lazygit增加快捷键
+    {
+        "lewis6991/gitsigns.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("gitsigns").setup({
+                current_line_blame = true,
+                on_attach = function(bufnr)
+                    local function map(mode, l, r, opts)
+                        opts = opts or {}
+                        opts.buffer = bufnr
+                        vim.keymap.set(mode, l, r, opts)
+                    end
+                    map({ "n", "v" }, "<leader>gp", package.loaded.gitsigns.preview_hunk)
+                        -- { desc = "[G]itsigns [P]review" })
+                end
+            })
+        end
+    },
 
     -- "NeogitOrg/neogit",
     -- dependencies = {
