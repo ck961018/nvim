@@ -30,8 +30,8 @@ return {
                         opts.buffer = bufnr
                         vim.keymap.set(mode, l, r, opts)
                     end
-                    map({ "n", "v" }, "<leader>gp", package.loaded.gitsigns.preview_hunk)
-                        -- { desc = "[G]itsigns [P]review" })
+                    map({ "n", "v" }, "<leader>gp", package.loaded.gitsigns.preview_hunk,
+                        { desc = "[G]itsigns [P]review" })
                 end
             })
         end
