@@ -29,8 +29,8 @@ keymap.set({ "n", "v" }, "<C-k>", "10kzz", { noremap = true, silent = true })
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
-keymap.set({ "n", "v" }, "<leader>y", "\"+y", { noremap = true })
-keymap.set({ "n", "v" }, "<leader>p", "\"+p", { noremap = true })
+keymap.set({ "n", "v" }, "<leader>y", [["+y]], { noremap = true })
+keymap.set({ "n", "v" }, "<leader>p", [["+p]], { noremap = true })
 
 -- view
 keymap.set("n", "<CR>", [[<cmd>nohlsearch<CR><CR>]], { noremap = true, silent = true })
