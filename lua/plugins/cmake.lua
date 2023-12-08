@@ -47,10 +47,7 @@ return {
                             show = "always",     -- "always", "only_on_error"
                             position = "belowright", -- "bottom", "top"
                             size = 10,
-                        },
-                        overseer = {
-                            new_task_opts = {},           -- options to pass into the `overseer.new_task` command
-                            on_new_task = function(task) end, -- a function that gets overseer.Task when it is created, before calling `task:start`
+                            encoding = "cp936",
                         },
                         terminal = {},                    -- terminal executor uses the values in cmake_terminal
                     },

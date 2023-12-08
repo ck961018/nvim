@@ -5,55 +5,55 @@
 --     end,
 -- })
 
+local get_nvim_num = function()
+    local tasklist = vim.fn.systemlist([[tasklist /FI "IMAGENAME eq nvim.exe" /NH]])
+    local num = 0
+    for _, line in ipairs(tasklist) do
+        if string.find(line, [[nvim.exe]]) then
+            num = num + 1
+        end
+    end
+    return num
+end
+
+local get_autohotkey_pid = function()
+    local tasklist = vim.fn.systemlist([[tasklist /FI "IMAGENAME eq AutoHotkey64.exe" /NH]])
+
+    local pid = nil
+    for _, line in ipairs(tasklist) do
+        local fields = {}
+        for field in string.gmatch(line, "[^%s]+") do
+            table.insert(fields, field)
+        end
+
+        if #fields >= 2 and fields[1] == "AutoHotkey64.exe" then
+            pid = tonumber(fields[2])
+            break
+        end
+    end
+    return pid
+end
+
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
     callback = function()
-        local autohotkey_path = vim.fn.stdpath("config") .. [[/dependencies/bin/Win64/AutoHotkey_2.0.10]]
-        local file = io.open(autohotkey_path .. [[/JobId]], "r")
-        local job_id, nvim_num
-        if file ~= nil then
-            job_id = file:read("*n")
-            nvim_num = file:read("*n")
-            file:close()
-        end
-
-        if job_id == 0 then
+        local job_id = get_autohotkey_pid()
+        if job_id == nil then
+            local autohotkey_path = vim.fn.stdpath("config") .. [[/dependencies/bin/Win64/AutoHotkey_2.0.10]]
             local exe = autohotkey_path .. [[/AutoHotKey64.exe]]
             local script = autohotkey_path .. [[/Cap2EscAndCtrl.ahk]]
-            job_id = tostring(vim.fn.jobstart(exe .. " " .. script))
-        end
-
-        file = io.open(autohotkey_path .. [[/JobId]], "w")
-        if file ~= nil then
-            file:write(job_id)
-            file:write(" ")
-            file:write(nvim_num + 1)
-            file:close()
+            vim.fn.jobstart(exe .. " " .. script)
         end
     end
 })
 
-vim.api.nvim_create_autocmd({"ExitPre"}, {
+vim.api.nvim_create_autocmd({ "ExitPre" }, {
     callback = function()
-        local autohotkey_path = vim.fn.stdpath("config") .. [[/dependencies/bin/Win64/AutoHotkey_2.0.10]]
-        local file = io.open(autohotkey_path .. [[/JobId]], "r")
-        local job_id, nvim_num
-        if file ~= nil then
-            job_id = file:read("*n")
-            nvim_num = file:read("*n")
-            file:close()
-        end
+        local nvim_num = get_nvim_num()
 
         if nvim_num == 1 then
-            vim.fn.jobstop(job_id)
-            job_id = 0
-        end
-
-        file = io.open(autohotkey_path .. [[/JobId]], "w")
-        if file ~= nil then
-            file:write(job_id)
-            file:write(" ")
-            file:write(nvim_num - 1)
-            file:close()
+            local pid = get_autohotkey_pid()
+            local cmd = string.format([[taskkill /F /PID %d]], pid)
+            vim.fn.system(cmd)
         end
     end
 })
