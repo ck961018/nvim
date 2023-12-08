@@ -22,14 +22,14 @@ SaveSession = function()
 
     if vim.bo[vim.fn.bufnr()].filetype ~= "" then
         local project_path = vim.fn.getcwd()
-        local project_name = string.match(project_path, "\\([^\\]+)$")
+        local project_name = string.match(project_path, "[/\\]([^/\\]+)$")
         require("mini.sessions").write(project_name)
     end
 end
 
 RestoreSession = function()
     local project_path = vim.fn.getcwd()
-    local project_name = string.match(project_path, "\\([^\\]+)$")
+    local project_name = string.match(project_path, "[/\\]([^/\\]+)$")
 
     require("nvim-tree").change_dir(project_path)
 
@@ -44,7 +44,7 @@ RestoreSession = function()
         require("mini.sessions").read(project_name)
     end
 
-    local nvim_lua_path = project_path .. '/.nvim.lua'
+    local nvim_lua_path = project_path .. "/.nvim.lua"
     if vim.fn.filereadable(nvim_lua_path) == 1 then
         vim.cmd.so(".nvim.lua")
         vim.notify(".nvim.lua is loaded")

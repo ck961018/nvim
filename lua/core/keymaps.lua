@@ -52,8 +52,8 @@ end
 
 -- test
 Test = function()
-    local str = get_autohotkey_pid()
-    vim.print(str)
+    local bufs_of_barbar = require("barbar.state").get_buffer_list()
+    vim.print(#bufs_of_barbar)
 end
 
 keymap.set({ "n" }, "<leader>/", [[<cmd>lua Test()<CR>]], { silent = true })
