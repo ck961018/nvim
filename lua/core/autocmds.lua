@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd({ "ExitPre" }, {
 
         if nvim_num == 1 then
             local pid = get_autohotkey_pid()
-            local cmd = string.format([[taskkill /F /PID %d]], pid)
+            local cmd = string.format([[tskill %d]], pid)
             vim.fn.system(cmd)
         end
     end
