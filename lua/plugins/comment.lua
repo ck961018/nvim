@@ -22,7 +22,7 @@ return {
                     pattern = [[.*<(KEYWORDS)\s*]],
                 },
                 search = {
-                    pattern = [[\b(KEYWORDS)\b]],
+                    pattern = [[(\\\*+|\\\\|--)\s*\b(KEYWORDS)\b]],
                 }
             })
         end,

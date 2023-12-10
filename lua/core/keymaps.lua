@@ -3,7 +3,7 @@ local keymap = vim.keymap
 vim.g.mapleader = " "
 
 -- save
-keymap.set("n", "<leader>w", [[<cmd>w<CR>]], { noremap = true, silent = true })
+keymap.set("n", "<leader>w", [[<cmd>w<CR>]], { noremap = true, silent = true, desc = "Save Buffer" })
 
 vim.keymap.set("n", "<leader><TAB>", function()
     if vim.bo.mod then
@@ -29,8 +29,8 @@ keymap.set({ "n", "v" }, "<C-k>", "10kzz", { noremap = true, silent = true })
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
-keymap.set({ "n", "v" }, "<leader>y", [["+y]], { noremap = true })
-keymap.set({ "n", "v" }, "<leader>p", [["+p]], { noremap = true })
+keymap.set({ "n", "v" }, "<leader>y", [["+y]], { noremap = true, silent = true })
+keymap.set({ "n", "v" }, "<leader>p", [["+p]], { noremap = true, silent = true })
 
 -- view
 keymap.set("n", "<CR>", [[<cmd>nohlsearch<CR><CR>]], { noremap = true, silent = true })
@@ -52,8 +52,6 @@ end
 
 -- test
 Test = function()
-    local bufs_of_barbar = require("barbar.state").get_buffer_list()
-    vim.print(#bufs_of_barbar)
 end
 
 keymap.set({ "n" }, "<leader>/", [[<cmd>lua Test()<CR>]], { silent = true })

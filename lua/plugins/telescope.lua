@@ -22,6 +22,7 @@ end
 
 return {
     "nvim-telescope/telescope.nvim",
+    event = "VeryLazy",
     keys = {
         -- telescope
         { "<leader>ff", [[<cmd>Telescope find_files<CR>]], desc = "[F]ind [F]iles" },
@@ -52,6 +53,9 @@ return {
 
         -- notify
         "rcarriga/nvim-notify",
+
+        -- dap
+        "nvim-telescope/telescope-dap.nvim",
     },
     config = function()
         require("telescope").setup({
@@ -118,5 +122,7 @@ return {
         require("telescope").load_extension("undo")
         require("telescope").load_extension("ui-select")
         require("telescope").load_extension("noice")
+
+        require("telescope").load_extension("dap")
     end,
 }

@@ -27,6 +27,11 @@ option.shiftround     = true
 option.smartindent    = true
 option.autoindent     = true
 option.smarttab       = true
+option.cindent        = true
+option.cino           = "N-s, g0"
+option.equalprg       = "clang-format"
+
+option.ignorecase     = true
 
 option.smartcase      = true
 option.number         = true

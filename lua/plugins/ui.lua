@@ -7,7 +7,6 @@ function QuitBuffer()
     end
 
     local cur_id = vim.fn.bufnr()
-
     if vim.tbl_contains(IgnoredFiletypes, vim.bo[cur_id].filetype) == false and vim.bo[cur_id].ft ~= "" and vim.bo[cur_id].mod then
         vim.cmd.w()
     end
@@ -21,9 +20,11 @@ function QuitBuffer()
     end
 
     if #vim.api.nvim_list_wins() > 1 and found == false then
-        vim.cmd.q()
+        vim.cmd.close()
     elseif #bufs_list == 1 and found then
         vim.cmd.qa()
+    elseif vim.bo[cur_id].ft == "" then
+        vim.cmd([[bd! ]] .. cur_id)
     else
         vim.cmd.BufferClose()
     end
@@ -92,10 +93,6 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         main = "ibl",
         config = true,
-    },
-    {
-        -- 可能需要安装
-        --"NMAC427/guess-indent.nvim"
     },
     {
         "goolord/alpha-nvim",

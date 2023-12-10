@@ -72,6 +72,7 @@ return {
     },
     {
         "folke/flash.nvim",
+        event = "VeryLazy",
         keys = {
             { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
             { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
@@ -79,7 +80,16 @@ return {
             { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
             { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
         },
-        opts = {},
+        opts = {
+            labels = "abcdefghijklmnopqrstuvwxyz",
+            search = {
+                mode = "fuzzy",
+            },
+            label = {
+                after = false,
+                before = true,
+            }
+        },
     },
     {
         "nvim-tree/nvim-tree.lua",
@@ -103,6 +113,7 @@ return {
                     api.config.mappings.default_on_attach(bufnr)
                     vim.keymap.set("n", "<leader>e", api.tree.close, opts("Close"))
                     vim.keymap.set("n", "<leader>q", api.tree.close, opts("Close"))
+                    vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
                 end,
                 view = {
                     width = 30,
@@ -256,18 +267,30 @@ return {
             vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
         end,
     },
+    -- 自动缩进
     {
         "vidocqh/auto-indent.nvim",
+        event = "VeryLazy",
         config = function()
             require("auto-indent").setup({
-                lightmode = true, -- Lightmode assumes tabstop and indentexpr not change within buffer's lifetime
+                lightmode = true,
                 indentexpr = function(lnum)
-                    return require("nvim-treesitter.indent").get_indent(lnum)
+                    return vim.fn.cindent(lnum)
                 end,
                 ignore_filetype = {}, -- Disable plugin for specific filetypes, e.g. ignore_filetype = { 'javascript' }
             })
         end
     },
+    -- 智能识别缩进
+    {
+        "nmac427/guess-indent.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("guess-indent").setup({
+                autocmd = true,
+            })
+        end
+    }
     -- 编码检测
     -- {
     --     "mbbill/fencview",
