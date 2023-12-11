@@ -67,7 +67,8 @@ return {
     },
     {
         "ethanholz/nvim-lastplace",
-        event = { "BufReadPost", "BufNewFile" },
+        event = "VeryLazy",
+        -- event = { "BufReadPost", "BufNewFile" },
         config = true,
     },
     {
@@ -93,6 +94,7 @@ return {
     },
     {
         "nvim-tree/nvim-tree.lua",
+        event = "VeryLazy",
         keys = {
             { "<leader>e", [[<cmd>NvimTreeFocus<CR>]], { desc = "NvimTr[E]e", noremap = true, silent = true } },
         },

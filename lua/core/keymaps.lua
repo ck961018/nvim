@@ -40,7 +40,7 @@ keymap.set("n", "q", "<NOP>", { noremap = true, silent = true })
 
 -- neovide
 if vim.g.neovide then
-    keymap.set("n", "<F11>", [[<cmd>lua SwitchScreenMode()<CR>]])
+    keymap.set("n", "<C-F11>", [[<cmd>lua SwitchScreenMode()<CR>]])
     function SwitchScreenMode()
         if vim.g.neovide_fullscreen == true then
             vim.g.neovide_fullscreen = false
@@ -51,7 +51,23 @@ if vim.g.neovide then
 end
 
 -- test
+local get_nvim_num = function()
+    if vim.fn.has("win32") then
+        local tasklist = vim.fn.systemlist([[tasklist /FI "IMAGENAME eq nvim.exe" /NH]])
+        local num = 0
+        for _, line in ipairs(tasklist) do
+            if string.find(line, [[nvim.exe]]) then
+                num = num + 1
+            end
+        end
+        return num
+    else
+        return nil
+    end
+end
 Test = function()
+    local str = get_nvim_num()
+    vim.print(str)
 end
 
 keymap.set({ "n" }, "<leader>/", [[<cmd>lua Test()<CR>]], { silent = true })

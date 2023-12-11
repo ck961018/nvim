@@ -1,6 +1,6 @@
 local keymap = vim.keymap
 
-local exe = "main.exe"
+local exe = "tmp_cmake.exe"
 
 local release_path = vim.fn.getcwd() .. [[\build\bin\Release\]] .. exe
 local debug_path = vim.fn.getcwd() .. [[\build\bin\Debug\]] .. exe
@@ -14,6 +14,7 @@ dap.configurations.cpp = {
         program = debug_path,
         cwd = '${workspaceFolder}',
         stopOnEntry = false,
+        integratedTerminal = true,
     },
 }
 
@@ -24,14 +25,25 @@ local release = function()
 end
 
 local debug = function()
-    local tasklist = vim.fn.systemlist([[tasklist /FI "IMAGENAME eq codelldb.exe" /NH]])
-    local is_running = false
-    for _, line in ipairs(tasklist) do
-        if string.find(line, [[codelldb.exe]]) then
-            is_running = true
+    if require("dap").session() == nil then
+        local tasklist = vim.fn.systemlist([[tasklist /FI "IMAGENAME eq codelldb.exe" /NH]])
+        local pid = nil
+        for _, line in ipairs(tasklist) do
+            local fields = {}
+            for field in string.gmatch(line, "[^%s]+") do
+                table.insert(fields, field)
+            end
+
+            if #fields >= 2 and fields[1] == "codelldb.exe" then
+                pid = tonumber(fields[2])
+                break
+            end
         end
-    end
-    if is_running == false then
+        if pid ~= nil then
+            local cmd = string.format([[tskill %d]], pid)
+            vim.fn.jobstart(cmd)
+        end
+
         local command = require("dap").adapters.codelldb.command
         local port = require("dap").adapters.codelldb.port
         vim.fn.jobstart(command .. [[ --port ]] .. tostring(port))

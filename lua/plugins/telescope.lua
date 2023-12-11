@@ -38,24 +38,46 @@ return {
         { "<leader>`",  [[<cmd>lua ListProjects()<CR>]],   { desc = "Projects", noremap = true, silent = true } }
     },
     dependencies = {
-        "nvim-telescope/telescope-ui-select.nvim",
-        "nvim-lua/plenary.nvim",
-        "debugloop/telescope-undo.nvim",
+        {
+            "nvim-telescope/telescope-ui-select.nvim",
+            event = "VeryLazy"
+        },
+        {
+            "nvim-lua/plenary.nvim",
+            event = "VeryLazy"
+        },
+        {
+            "debugloop/telescope-undo.nvim",
+            event = "VeryLazy"
+        },
         {
             "nvim-telescope/telescope-fzf-native.nvim",
             build =
             "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+            event = "VeryLazy"
         },
 
         -- project
-        "ahmedkhalf/project.nvim",
-        "natecraddock/workspaces.nvim",
+        {
+            "ahmedkhalf/project.nvim",
+            event = "VeryLazy"
+        },
+        {
+            "natecraddock/workspaces.nvim",
+            event = "VeryLazy"
+        },
 
         -- notify
-        "rcarriga/nvim-notify",
+        {
+            "rcarriga/nvim-notify",
+            event = "VeryLazy"
+        },
 
         -- dap
-        "nvim-telescope/telescope-dap.nvim",
+        {
+            "nvim-telescope/telescope-dap.nvim",
+            event = "VeryLazy"
+        }
     },
     config = function()
         require("telescope").setup({

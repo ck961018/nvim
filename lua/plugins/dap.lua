@@ -2,10 +2,20 @@ return {
     -- TODO
     --
     "mfussenegger/nvim-dap",
+    event = "VeryLazy",
     dependencies = {
-        "rcarriga/nvim-dap-ui",
-        "theHamsta/nvim-dap-virtual-text",
-        "nvim-telescope/telescope-dap.nvim",
+        {
+            "rcarriga/nvim-dap-ui",
+            event = "VeryLazy"
+        },
+        {
+            "theHamsta/nvim-dap-virtual-text",
+            event = "VeryLazy"
+        },
+        {
+            "nvim-telescope/telescope-dap.nvim",
+            event = "VeryLazy"
+        }
     },
     keys = {
         -- { "<F5>",       function() require("dap").continue() end },
@@ -56,7 +66,6 @@ return {
             dapui.close()
         end
 
-        dap.defaults.fallback.focus_terminal = true
         if vim.fn.has("win32") then
             dap.adapters.codelldb = {
                 type = "server",
@@ -67,5 +76,7 @@ return {
                 detached = false,
             }
         end
+
+        dap.defaults.fallback.focus_terminal = true
     end
 }

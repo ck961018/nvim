@@ -1,6 +1,5 @@
 function QuitBuffer()
     local bufs_list = require("barbar.state").get_buffer_list()
-
     if #bufs_list == 0 then
         vim.cmd.qa()
         return
@@ -11,7 +10,9 @@ function QuitBuffer()
         vim.cmd.w()
     end
 
+    local wins_list = vim.api.nvim_list_wins()
     local found = false
+    local buf_found = false
     for _, buf_id in ipairs(bufs_list) do
         if buf_id == cur_id then
             found = true
@@ -19,11 +20,21 @@ function QuitBuffer()
         end
     end
 
-    if #vim.api.nvim_list_wins() > 1 and found == false then
+    for _, win_id in ipairs(wins_list) do
+        local buf_id = vim.api.nvim_win_get_buf(win_id)
+        if vim.tbl_contains(bufs_list, buf_id) then
+            buf_found = true
+            break
+        end
+    end
+
+
+    if #wins_list > 1 and found == false and buf_found == true then
         vim.cmd.close()
     elseif #bufs_list == 1 and found then
         vim.cmd.qa()
     elseif vim.bo[cur_id].ft == "" then
+        vim.cmd.BufferGoto(1)
         vim.cmd([[bd! ]] .. cur_id)
     else
         vim.cmd.BufferClose()
@@ -184,7 +195,10 @@ return {
         end,
         dependencies = {
             -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-            "MunifTanjim/nui.nvim",
+            {
+                "MunifTanjim/nui.nvim",
+                event = "VeryLazy"
+            },
             -- OPTIONAL:
             --   `nvim-notify` is only needed, if you want to use the notification view.
             --   If not available, we use `mini` as the fallback

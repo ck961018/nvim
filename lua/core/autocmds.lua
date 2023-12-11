@@ -63,7 +63,7 @@ vim.api.nvim_create_autocmd({ "ExitPre" }, {
                 local pid = get_autohotkey_pid()
                 if pid ~= nil then
                     local cmd = string.format([[tskill %d]], pid)
-                    vim.fn.system(cmd)
+                    vim.fn.jobstart(cmd)
                 end
             end
         end
