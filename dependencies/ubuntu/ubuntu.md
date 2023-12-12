@@ -8,7 +8,7 @@ rm lazygit
 rm lazygit.tar.gz
 
 git clone https://gitlab.com/interception/linux/tools.git
-git clone https://gitlab.com/interception/linux/plugins/caps2esc.git
+git clone --depth 1 https://gitlab.com/interception/linux/plugins/caps2esc.git
 
 cd tools
 cmake -B build -DCMAKE_BUILD_TYPE=Release
@@ -17,7 +17,7 @@ cd build
 sudo make install
 cd ..
 cd ..
-rm -rf tools
+sudo rm -rf tools
 
 
 cd caps2esc
@@ -27,7 +27,7 @@ cd build
 sudo make install
 cd ..
 cd ..
-rm -rf caps2esc
+sudo rm -rf caps2esc
 
 sudo cp udevmon.yaml /etc/
 sudo cp udevmon.service /etc/systemd/system/
