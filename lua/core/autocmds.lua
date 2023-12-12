@@ -41,16 +41,45 @@ local get_autohotkey_pid = function()
     end
 end
 
+local read_hotkey_info = function()
+    local autohotkey_path = vim.fn.stdpath("config") .. [[/dependencies/bin/Win64/AutoHotkey_2.0.10]]
+    local file = io.open(autohotkey_path .. "/pid", "rb")
+    if file ~= nil then
+        local pid = file:read("*n")
+        local nvim_num = file:read("*n")
+        file:close()
+        return pid, nvim_num
+    end
+    return nil
+end
+
+local write_hotkey_info = function(pid, nvim_num)
+    local autohotkey_path = vim.fn.stdpath("config") .. [[/dependencies/bin/Win64/AutoHotkey_2.0.10]]
+    local file = io.open(autohotkey_path .. "/pid", "wb")
+    if file ~= nil then
+        file:write(tostring(pid) .. " " .. tostring(nvim_num))
+        file:close()
+    end
+end
+
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
     callback = function()
         if vim.fn.has("win32") then
-            local job_id = get_autohotkey_pid()
-            if job_id == nil then
+            -- local job_id = get_autohotkey_pid()
+            -- if job_id == nil then
+            --     local autohotkey_path = vim.fn.stdpath("config") .. [[/dependencies/bin/Win64/AutoHotkey_2.0.10]]
+            --     local exe = autohotkey_path .. [[/AutoHotKey64.exe]]
+            --     local script = autohotkey_path .. [[/Cap2EscAndCtrl.ahk]]
+            --     vim.fn.jobstart(exe .. " " .. script)
+            -- end
+            local pid, nvim_num = read_hotkey_info()
+            if pid == 0 then
                 local autohotkey_path = vim.fn.stdpath("config") .. [[/dependencies/bin/Win64/AutoHotkey_2.0.10]]
                 local exe = autohotkey_path .. [[/AutoHotKey64.exe]]
                 local script = autohotkey_path .. [[/Cap2EscAndCtrl.ahk]]
-                vim.fn.jobstart(exe .. " " .. script)
+                pid = vim.fn.jobstart(exe .. " " .. script)
             end
+            write_hotkey_info(pid, nvim_num + 1)
         end
     end
 })
@@ -58,14 +87,20 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 vim.api.nvim_create_autocmd({ "ExitPre" }, {
     callback = function()
         if vim.fn.has("win32") then
-            local nvim_num = get_nvim_num()
-            if nvim_num == 1 then
-                local pid = get_autohotkey_pid()
-                if pid ~= nil then
-                    local cmd = string.format([[tskill %d]], pid)
-                    vim.fn.jobstart(cmd)
-                end
+            -- local nvim_num = get_nvim_num()
+            -- if nvim_num == 1 then
+            --     local pid = get_autohotkey_pid()
+            --     if pid ~= nil then
+            --         local cmd = string.format([[tskill %d]], pid)
+            --         vim.fn.jobstart(cmd)
+            --     end
+            -- end
+            local pid, nvim_num = read_hotkey_info()
+            if nvim_num == 1 and pid ~= 0 then
+                vim.fn.jobstop(pid)
+                pid = 0
             end
+            write_hotkey_info(pid, nvim_num - 1)
         end
     end
 })

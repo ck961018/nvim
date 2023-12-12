@@ -1,7 +1,6 @@
 return {
     "nvim-treesitter/nvim-treesitter",
-    event = "VeryLazy",
-    -- event = { "BufReadPost", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = {
         -- TODO learn vim objects
         -- "nvim-treesitter/nvim-treesitter-textobjects",

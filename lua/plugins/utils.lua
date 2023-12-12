@@ -57,7 +57,7 @@ end
 return {
     {
         "windwp/nvim-autopairs",
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
         opts = {
             enable_check_bracket_line = false,
             ignored_next_char = "[%w%.]",
@@ -67,8 +67,7 @@ return {
     },
     {
         "ethanholz/nvim-lastplace",
-        event = "VeryLazy",
-        -- event = { "BufReadPost", "BufNewFile" },
+        event = { "BufReadPost", "BufNewFile" },
         config = true,
     },
     {
@@ -94,7 +93,6 @@ return {
     },
     {
         "nvim-tree/nvim-tree.lua",
-        event = "VeryLazy",
         keys = {
             { "<leader>e", [[<cmd>NvimTreeFocus<CR>]], { desc = "NvimTr[E]e", noremap = true, silent = true } },
         },
@@ -166,7 +164,7 @@ return {
     -- 代码大纲
     {
         "simrat39/symbols-outline.nvim",
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
             require("symbols-outline").setup({
                 keymaps = {
@@ -272,7 +270,7 @@ return {
     -- 自动缩进
     {
         "vidocqh/auto-indent.nvim",
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
             require("auto-indent").setup({
                 lightmode = true,
@@ -286,7 +284,7 @@ return {
     -- 智能识别缩进
     {
         "nmac427/guess-indent.nvim",
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
             require("guess-indent").setup({
                 autocmd = true,

@@ -18,14 +18,14 @@ return {
     },
     {
         "utilyre/barbecue.nvim",
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
         opts = {
             theme = "tokyonight",
         },
     },
     {
         "nvim-lualine/lualine.nvim",
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
         opts = {
             options = {
                 theme = "tokyonight",

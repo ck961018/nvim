@@ -51,23 +51,26 @@ if vim.g.neovide then
 end
 
 -- test
-local get_nvim_num = function()
-    if vim.fn.has("win32") then
-        local tasklist = vim.fn.systemlist([[tasklist /FI "IMAGENAME eq nvim.exe" /NH]])
-        local num = 0
-        for _, line in ipairs(tasklist) do
-            if string.find(line, [[nvim.exe]]) then
-                num = num + 1
-            end
-        end
-        return num
-    else
-        return nil
+local get_info = function()
+    local autohotkey_path = vim.fn.stdpath("config") .. [[/dependencies/bin/Win64/AutoHotkey_2.0.10]]
+    local file = io.open(autohotkey_path .. "/pid", "rb")
+    if file~=nil then
+        local pid = file:read("*n")
+        local nvim_num = file:read("*n")
+        file:close()
+        return pid, nvim_num
     end
+    return nil
 end
 Test = function()
-    local str = get_nvim_num()
-    vim.print(str)
+    -- local autohotkey_path = vim.fn.stdpath("config") .. [[/dependencies/bin/Win64/AutoHotkey_2.0.10]]
+    -- local file = io.open(autohotkey_path .. "/pid", "wb")
+    -- if file~=nil then
+    --     file:write("10 10")
+    --     file:close()
+    -- end
+    local a, b = get_info()
+    vim.print(a, b)
 end
 
 keymap.set({ "n" }, "<leader>/", [[<cmd>lua Test()<CR>]], { silent = true })

@@ -20,7 +20,7 @@ vim.keymap.set({ "n" }, "<leader>gt", Lazygit, { silent = true, desc = "Lazy[g]i
 return {
     {
         "lewis6991/gitsigns.nvim",
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
             require("gitsigns").setup({
                 current_line_blame = true,

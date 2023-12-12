@@ -29,7 +29,6 @@ option.autoindent     = true
 option.smarttab       = true
 option.cindent        = true
 option.cino           = "N-s, g0"
-option.equalprg       = "clang-format"
 
 option.ignorecase     = true
 

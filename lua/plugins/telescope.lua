@@ -22,7 +22,6 @@ end
 
 return {
     "nvim-telescope/telescope.nvim",
-    event = "VeryLazy",
     keys = {
         -- telescope
         { "<leader>ff", [[<cmd>Telescope find_files<CR>]], desc = "[F]ind [F]iles" },
@@ -38,46 +37,22 @@ return {
         { "<leader>`",  [[<cmd>lua ListProjects()<CR>]],   { desc = "Projects", noremap = true, silent = true } }
     },
     dependencies = {
-        {
-            "nvim-telescope/telescope-ui-select.nvim",
-            event = "VeryLazy"
-        },
-        {
-            "nvim-lua/plenary.nvim",
-            event = "VeryLazy"
-        },
-        {
-            "debugloop/telescope-undo.nvim",
-            event = "VeryLazy"
-        },
+        "nvim-telescope/telescope-ui-select.nvim",
+        "nvim-lua/plenary.nvim",
+        "debugloop/telescope-undo.nvim",
         {
             "nvim-telescope/telescope-fzf-native.nvim",
             build =
             "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-            event = "VeryLazy"
         },
 
         -- project
-        {
-            "ahmedkhalf/project.nvim",
-            event = "VeryLazy"
-        },
-        {
-            "natecraddock/workspaces.nvim",
-            event = "VeryLazy"
-        },
+        "ahmedkhalf/project.nvim",
+        "natecraddock/workspaces.nvim",
 
         -- notify
-        {
-            "rcarriga/nvim-notify",
-            event = "VeryLazy"
-        },
+        "rcarriga/nvim-notify",
 
-        -- dap
-        {
-            "nvim-telescope/telescope-dap.nvim",
-            event = "VeryLazy"
-        }
     },
     config = function()
         require("telescope").setup({
@@ -144,7 +119,5 @@ return {
         require("telescope").load_extension("undo")
         require("telescope").load_extension("ui-select")
         require("telescope").load_extension("noice")
-
-        require("telescope").load_extension("dap")
     end,
 }

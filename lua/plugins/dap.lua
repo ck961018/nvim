@@ -2,20 +2,9 @@ return {
     -- TODO
     --
     "mfussenegger/nvim-dap",
-    event = "VeryLazy",
     dependencies = {
-        {
-            "rcarriga/nvim-dap-ui",
-            event = "VeryLazy"
-        },
-        {
-            "theHamsta/nvim-dap-virtual-text",
-            event = "VeryLazy"
-        },
-        {
-            "nvim-telescope/telescope-dap.nvim",
-            event = "VeryLazy"
-        }
+        "rcarriga/nvim-dap-ui",
+        "theHamsta/nvim-dap-virtual-text",
     },
     keys = {
         -- { "<F5>",       function() require("dap").continue() end },

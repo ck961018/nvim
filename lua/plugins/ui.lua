@@ -44,7 +44,7 @@ end
 return {
     {
         "romgrk/barbar.nvim",
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
         dependencies = {
             "lewis6991/gitsigns.nvim",     -- OPTIONAL: for git status
             "nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
@@ -123,7 +123,7 @@ return {
     },
     {
         "kevinhwang91/nvim-ufo",
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
         dependencies = {
             -- 该插件与其它异步插件可能会产生冲突
             "kevinhwang91/promise-async",
