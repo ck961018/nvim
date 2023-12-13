@@ -57,6 +57,7 @@ return {
     config = function()
         require("telescope").setup({
             defaults = {
+                initial_mode = "insert",
                 mappings = {
                     n = {
                         ["<leader>q"] = require("telescope.actions").close,
@@ -64,6 +65,7 @@ return {
                 }
 
             },
+            
             extensions = {
                 fzf = {
                     fuzzy = true,                   -- false will only do exact matching

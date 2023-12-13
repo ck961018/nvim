@@ -51,26 +51,11 @@ if vim.g.neovide then
 end
 
 -- test
-local get_info = function()
-    local autohotkey_path = vim.fn.stdpath("config") .. [[/dependencies/bin/Win64/AutoHotkey_2.0.10]]
-    local file = io.open(autohotkey_path .. "/pid", "rb")
-    if file ~= nil then
-        local pid = file:read("*n")
-        local nvim_num = file:read("*n")
-        file:close()
-        return pid, nvim_num
-    end
-    return nil
-end
 Test = function()
-    -- local autohotkey_path = vim.fn.stdpath("config") .. [[/dependencies/bin/Win64/AutoHotkey_2.0.10]]
-    -- local exe = autohotkey_path .. [[/AutoHotkey64.exe]]
-    -- local script = autohotkey_path .. [[/Cap2EscAndCtrl.ahk]]
-    -- local wsl = vim.fn.has("wsl")
-    -- local pid = nil
-    -- vim.fn.jobstart(exe .. " " .. script)
-    -- if wsl == 1 then
-    -- end
+    local str = require("lspconfig.configs").clangd.get_root_dir()
+    -- local str = require("cmake-tools").select_cwd()
+    
+    vim.print(str)
 end
 
 keymap.set({ "n" }, "<leader>/", [[<cmd>lua Test()<CR>]], { silent = true })

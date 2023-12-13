@@ -1,3 +1,9 @@
+if vim.fn.has("wsl") == 1 then
+    System = "wsl"
+elseif vim.fn.has("win32") == 1 then
+    System = "windows"
+end
+
 IgnoredFiletypes      = {
     "qf",
     "lazy",

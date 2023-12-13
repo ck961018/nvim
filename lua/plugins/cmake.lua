@@ -1,3 +1,10 @@
+local select_cwd = function()
+    local cwd = vim.fn.getcwd()
+    if System == "wsl" then
+        cwd = vim.fn.system("wslpath -w " .. cwd)
+    end
+    vim.cmd.CMakeSelectCwd(cwd)
+end
 return {
     {
         -- TODO wait cmake run to be fixed
@@ -6,18 +13,22 @@ return {
         "Civitasv/cmake-tools.nvim",
         keys = {
             { "<C-F6>", mode = "n", [[<cmd>CMakeSelectBuildPreset<CR>]] },
-            { "<C-F7>", mode = "n", [[<cmd>CMakeSelectCwd ./<CR>]], },
+            { "<C-F7>", mode = "n", [[<cmd>lua select_cwd()<CR>]], },
             { "<F7>",   mode = "n", [[<cmd>CMakeBuild<CR>]] },
 
             { "<C-F6>", mode = "i", [[<Esc><cmd>CMakeSelectBuildPreset<CR>]] },
-            { "<C-F7>", mode = "i", [[<Esc><cmd>CMakeSelectCwd ./<CR>]] },
+            { "<C-F7>", mode = "i", [[<Esc><cmd>lua select_cwd()<CR>]] },
             { "<F7>",   mode = "i", [[<Esc><cmd>CMakeBuild<CR>]] },
         },
         config = function()
+            local cmake = "cmake"
+            if System == "windows" or System == "wsl" then
+                cmake = cmake .. ".exe"
+            end
             require("cmake-tools").setup({
-                cmake_command = "cmake",                                      -- this is used to specify cmake command path
+                cmake_command = cmake,                                      -- this is used to specify cmake command path
                 cmake_regenerate_on_save = true,                              -- auto generate when save CMakeLists.txt
-                cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" }, -- this will be passed when invoke `CMakeGenerate`
+                -- cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" }, -- this will be passed when invoke `CMakeGenerate`
                 cmake_build_options = {},                                     -- this will be passed when invoke `CMakeBuild`
                 -- support macro expansion:
                 --       ${kit}

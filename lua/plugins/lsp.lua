@@ -14,6 +14,12 @@ return {
         }
     },
     config = function()
+        local clangd = "clangd"
+        local clang = "clang"
+        if System == "wsl" then
+            -- clangd = clangd .. ".exe"
+            -- clang = tostring(vim.fn.system("which " .. clang .. ".exe"))
+        end
         local servers = {
             lua_ls = {
                 settings = {
@@ -26,7 +32,8 @@ return {
             clangd = {
                 filetypes = { "c", "cpp", "objc", "objcpp", "h" },
                 cmd = {
-                    "clangd",
+                    clangd,
+                    "--query-driver=" .. clang,
                     "--header-insertion=never",
                     "--clang-tidy",
                     "--clang-tidy-checks=performance-*,bugprone-*",
