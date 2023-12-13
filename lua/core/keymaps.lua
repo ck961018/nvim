@@ -54,7 +54,7 @@ end
 local get_info = function()
     local autohotkey_path = vim.fn.stdpath("config") .. [[/dependencies/bin/Win64/AutoHotkey_2.0.10]]
     local file = io.open(autohotkey_path .. "/pid", "rb")
-    if file~=nil then
+    if file ~= nil then
         local pid = file:read("*n")
         local nvim_num = file:read("*n")
         file:close()
@@ -64,13 +64,13 @@ local get_info = function()
 end
 Test = function()
     -- local autohotkey_path = vim.fn.stdpath("config") .. [[/dependencies/bin/Win64/AutoHotkey_2.0.10]]
-    -- local file = io.open(autohotkey_path .. "/pid", "wb")
-    -- if file~=nil then
-    --     file:write("10 10")
-    --     file:close()
+    -- local exe = autohotkey_path .. [[/AutoHotkey64.exe]]
+    -- local script = autohotkey_path .. [[/Cap2EscAndCtrl.ahk]]
+    -- local wsl = vim.fn.has("wsl")
+    -- local pid = nil
+    -- vim.fn.jobstart(exe .. " " .. script)
+    -- if wsl == 1 then
     -- end
-    local a, b = get_info()
-    vim.print(a, b)
 end
 
 keymap.set({ "n" }, "<leader>/", [[<cmd>lua Test()<CR>]], { silent = true })

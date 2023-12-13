@@ -1,0 +1,14 @@
+[Unit]
+Description=interception-tools udevmon service
+Wants=systemd-udev-settle.service
+After=systemd-udev-settle.service
+Documentation=man:udev(7)
+
+[Service]
+ExecStart=/usr/local/bin/udevmon
+Nice=-20
+Restart=on-failure
+OOMScoreAdjust=-1000
+
+[Install]
+WantedBy=multi-user.target

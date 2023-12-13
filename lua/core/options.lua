@@ -52,7 +52,7 @@ option.swapfile       = false
 option.exrc           = true
 option.signcolumn     = "yes"
 
-option.termencoding   = "utf-8"
+-- option.termencoding   = "utf-8"
 option.fileencodings  = { "ucs-bom", "utf-8", "cp936" }
 
 --neovide
