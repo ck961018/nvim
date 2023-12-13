@@ -1,6 +1,6 @@
 local keymap = vim.keymap
 
-local exe = "tmp_cmake.exe"
+local exe = "exe"
 
 local release_path = vim.fn.getcwd() .. [[\build\bin\Release\]] .. exe
 local debug_path = vim.fn.getcwd() .. [[\build\bin\Debug\]] .. exe
