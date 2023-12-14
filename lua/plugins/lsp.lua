@@ -1,3 +1,8 @@
+vim.keymap.set({"n", "v"}, "<leader>ccd", function()
+    local bash_path = vim.fn.stdpath("config") .. "/dependencies/env/wsl/convert_clangd_database.sh"
+    local database_path = vim.fn.getcwd() .. "/build/compile_commands.json"
+    vim.fn.system("sh " .. bash_path .. " " .. database_path)
+end, {desc = "[C]onvert [C]langd [D]database"})
 return {
     "neovim/nvim-lspconfig",
     cmd = { "Mason", "Neoconf" },
@@ -16,10 +21,6 @@ return {
     config = function()
         local clangd = "clangd"
         local clang = "clang"
-        if System == "wsl" then
-            -- clangd = clangd .. ".exe"
-            -- clang = tostring(vim.fn.system("which " .. clang .. ".exe"))
-        end
         local servers = {
             lua_ls = {
                 settings = {

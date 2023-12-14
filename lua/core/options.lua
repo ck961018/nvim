@@ -37,8 +37,11 @@ option.cindent        = true
 option.cino           = "N-s, g0"
 
 option.ignorecase     = true
-
 option.smartcase      = true
+
+option.hlsearch       = true
+option.incsearch      = true
+
 option.number         = true
 option.relativenumber = true
 option.showmode       = false
@@ -52,11 +55,12 @@ option.undofile       = true
 option.splitright     = true
 option.splitbelow     = true
 option.hidden         = true
-option.wrap           = false
 option.title          = true
 option.swapfile       = false
 option.exrc           = true
 option.signcolumn     = "yes"
+
+-- option.wrap           = false
 
 -- option.termencoding   = "utf-8"
 option.fileencodings  = { "ucs-bom", "utf-8", "cp936" }

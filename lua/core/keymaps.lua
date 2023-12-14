@@ -18,6 +18,8 @@ keymap.set("n", "<leader>sv", [[<C-w>v]])
 keymap.set("n", "<leader>sx", [[<cmd>close<CR>]])
 
 -- move
+keymap.set("n", "j", [[v:count?'j':'gj']], { noremap = true, expr = true })
+keymap.set("n", "k", [[v:count?'k':'gk']], { noremap = true, expr = true })
 keymap.set("n", "<A-h>", "<C-w>h")
 keymap.set("n", "<A-l>", "<C-w>l")
 keymap.set("n", "<A-j>", "<C-w>j")
@@ -26,9 +28,6 @@ keymap.set({ "n", "v" }, "<C-j>", "10jzz", { noremap = true, silent = true })
 keymap.set({ "n", "v" }, "<C-k>", "10kzz", { noremap = true, silent = true })
 
 -- edit
-keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
 keymap.set({ "n", "v" }, "<leader>y", [["+y]], { noremap = true, silent = true })
 keymap.set({ "n", "v" }, "<leader>p", [["+p]], { noremap = true, silent = true })
 
@@ -52,9 +51,9 @@ end
 
 -- test
 Test = function()
-    local str = require("lspconfig.configs").clangd.get_root_dir()
+    local str = require("lspconfig.util").path
     -- local str = require("cmake-tools").select_cwd()
-    
+
     vim.print(str)
 end
 
