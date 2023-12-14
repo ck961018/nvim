@@ -1,4 +1,4 @@
-local select_cwd = function()
+SelectCwd = function()
     local cwd = vim.fn.getcwd()
     if System == "wsl" then
         cwd = vim.fn.system("wslpath -w " .. cwd)
@@ -13,11 +13,11 @@ return {
         "Civitasv/cmake-tools.nvim",
         keys = {
             { "<C-F6>", mode = "n", [[<cmd>CMakeSelectBuildPreset<CR>]] },
-            { "<C-F7>", mode = "n", [[<cmd>lua select_cwd()<CR>]], },
+            { "<C-F7>", mode = "n", [[<cmd>lua SelectCwd()<CR>]], },
             { "<F7>",   mode = "n", [[<cmd>CMakeBuild<CR>]] },
 
             { "<C-F6>", mode = "i", [[<Esc><cmd>CMakeSelectBuildPreset<CR>]] },
-            { "<C-F7>", mode = "i", [[<Esc><cmd>lua select_cwd()<CR>]] },
+            { "<C-F7>", mode = "i", [[<Esc><cmd>lua SelectCwd()<CR>]] },
             { "<F7>",   mode = "i", [[<Esc><cmd>CMakeBuild<CR>]] },
         },
         config = function()

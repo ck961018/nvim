@@ -68,7 +68,9 @@ return {
     {
         "ethanholz/nvim-lastplace",
         event = { "BufReadPost", "BufNewFile" },
-        config = true,
+        opts = {
+            lastplace_open_folds = false,
+        }
     },
     {
         "folke/flash.nvim",
@@ -83,7 +85,7 @@ return {
         opts = {
             labels = "abcdefghijklmnopqrstuvwxyz",
             search = {
-                mode = "fuzzy",
+                mode = "extra",
             },
             label = {
                 after = false,
