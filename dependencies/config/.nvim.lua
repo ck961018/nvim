@@ -1,9 +1,7 @@
-local keymap = vim.keymap
+local prog = "tmp_cmake.exe"
 
-local exe = "exe"
-
-local release_path = vim.fn.getcwd() .. [[\build\bin\Release\]] .. exe
-local debug_path = vim.fn.getcwd() .. [[\build\bin\Debug\]] .. exe
+local release_path = vim.fn.getcwd() .. [[/build/bin/Release/]] .. prog
+local debug_path = vim.fn.getcwd() .. [[/build/bin/Debug/]] .. prog
 
 local dap = require('dap')
 dap.configurations.cpp = {
@@ -19,8 +17,15 @@ dap.configurations.cpp = {
 }
 
 local release = function()
-    return require("async")(function()
-        os.execute("start " .. release_path)
+    require("async")(function()
+        local command = nil
+        if System == "wsl" then
+            local path = vim.fn.system("wslpath -w " .. release_path)
+            command = "cmd.exe /C 'start " .. path .. "' &"
+        else
+            command = "start " .. release_path
+        end
+        os.execute(command)
     end)
 end
 
@@ -51,5 +56,12 @@ local debug = function()
     require("dap").continue()
 end
 
-keymap.set("n", "<C-F5>", release, { noremap = true, silent = true })
-keymap.set("n", "<F5>", debug, { noremap = true, silent = true })
+Launch = function()
+    local type = require("cmake-tools").get_build_type()
+    vim.print(type)
+    if type == "Release" then
+        release()
+    else
+        debug()
+    end
+end

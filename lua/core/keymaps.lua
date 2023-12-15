@@ -18,8 +18,8 @@ keymap.set("n", "<leader>sv", [[<C-w>v]])
 keymap.set("n", "<leader>sx", [[<cmd>close<CR>]])
 
 -- move
-keymap.set("n", "j", [[v:count?'j':'gj']], { noremap = true, expr = true })
-keymap.set("n", "k", [[v:count?'k':'gk']], { noremap = true, expr = true })
+-- keymap.set("n", "j", [[v:count?'j':'gj']], { noremap = true, expr = true })
+-- keymap.set("n", "k", [[v:count?'k':'gk']], { noremap = true, expr = true })
 keymap.set("n", "<A-h>", "<C-w>h")
 keymap.set("n", "<A-l>", "<C-w>l")
 keymap.set("n", "<A-j>", "<C-w>j")
@@ -51,10 +51,8 @@ end
 
 -- test
 Test = function()
-    local str = require("lspconfig.util").path
-    -- local str = require("cmake-tools").select_cwd()
-
-    vim.print(str)
+    vim.print("dsfsdafdsfa")
 end
 
 keymap.set({ "n" }, "<leader>/", [[<cmd>lua Test()<CR>]], { silent = true })
+keymap.set({ "n" }, "<F5>", [[<cmd>lua Test()<CR>]], { silent = false })

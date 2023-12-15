@@ -1,8 +1,11 @@
-vim.keymap.set({"n", "v"}, "<leader>ccd", function()
-    local bash_path = vim.fn.stdpath("config") .. "/dependencies/env/wsl/convert_clangd_database.sh"
-    local database_path = vim.fn.getcwd() .. "/build/compile_commands.json"
-    vim.fn.system("sh " .. bash_path .. " " .. database_path)
-end, {desc = "[C]onvert [C]langd [D]database"})
+if System == "wsl" then
+    vim.keymap.set({ "n", "v" }, "<leader>ccd", function()
+        local bash_path = vim.fn.stdpath("config") .. "/dependencies/env/wsl/convert_clangd_database.sh"
+        local database_path = vim.fn.getcwd() .. "/build/compile_commands.json"
+        vim.fn.system("sh " .. bash_path .. " " .. database_path)
+    end, { desc = "[C]onvert [C]langd [D]database" })
+end
+
 return {
     "neovim/nvim-lspconfig",
     cmd = { "Mason", "Neoconf" },
