@@ -9,11 +9,11 @@ if [ ! -f "$compile_commands_file" ]; then
     exit 1
 fi
 
-sed -i 's/\\\\/\//g' $compile_commands_file
-sed -i 's/\\/\//g' $compile_commands_file
+sed -i 's/\\\"//g' $compile_commands_file
+sed -i 's/\(\\\\\|\\\)/\//g' $compile_commands_file
 
 sed -i 's/\([A-Z]\):/\/mnt\/\l\1/g' $compile_commands_file
 
-sed -i 's/\/mnt\/[^ \t]*cl\.exe/\/usr\/bin\/c++/g' $compile_commands_file
+sed -i 's/\/mnt\/[^ \t]*\/\(cl\|clang++\)\.exe/\/usr\/bin\/c++/g' $compile_commands_file
 
-sed -i 's/std:c++20/std=gnu++20/g' $compile_commands_file
+sed -i 's/std[:=]c++/std=gnu++/g' $compile_commands_file
