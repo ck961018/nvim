@@ -85,15 +85,4 @@ return {
             })
         end,
     },
-    -- {
-    --     "cdelledonne/vim-cmake",
-    --     keys = {
-    --         { "<C-F7>", mode = "n", [[<cmd>CMakeGenerate<CR>]], },
-    --         { "<F7>",   mode = "n", [[<cmd>CMakeBuild<CR>]] },
-    --
-    --         { "<C-F7>", mode = "i", [[<Esc><cmd>CMakeGenerate<CR>]] },
-    --         { "<F7>",   mode = "i", [[<Esc><cmd>CMakeBuild<CR>]] },
-    --     },
-    --
-    -- }
 }
