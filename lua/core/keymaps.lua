@@ -51,8 +51,6 @@ end
 
 -- test
 Test = function()
-    vim.print("dsfsdafdsfa")
 end
 
 keymap.set({ "n" }, "<leader>/", [[<cmd>lua Test()<CR>]], { silent = true })
-keymap.set({ "n" }, "<F5>", [[<cmd>lua Test()<CR>]], { silent = false })

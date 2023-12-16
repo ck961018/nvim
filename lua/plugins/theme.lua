@@ -2,6 +2,7 @@ return {
     {
         "folke/tokyonight.nvim",
         lazy = false,
+        priority = 1000,
         dependencies = {
             "nvim-tree/nvim-web-devicons",
             "SmiteshP/nvim-navic",
@@ -12,6 +13,11 @@ return {
                 styles = {
                     comments = { italic = false },
                 },
+                on_highlights = function(hl, c)
+                    hl.DiagnosticUnnecessary  = {
+                        fg = c.comment,
+                    }
+                end
             })
             vim.cmd([[colorscheme tokyonight]])
         end
