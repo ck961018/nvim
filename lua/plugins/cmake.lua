@@ -16,9 +16,6 @@ return {
         },
         config = function()
             local cmake = "cmake"
-            if System == "windows" or System == "wsl" then
-                cmake = cmake .. ".exe"
-            end
             require("cmake-tools").setup({
                 cmake_command = cmake,           -- this is used to specify cmake command path
                 cmake_regenerate_on_save = true, -- auto generate when save CMakeLists.txt
