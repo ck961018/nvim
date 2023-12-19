@@ -292,12 +292,36 @@ return {
                 autocmd = true,
             })
         end
-    }
+    },
+    -- tmux
+    {
+        "aserowy/tmux.nvim",
+        keys = {
+            { "<M-h>", [[<cmd>lua require("tmux").move_left()<CR>]] },
+            { "<M-j>", [[<cmd>lua require("tmux").move_botoom()<CR>]] },
+            { "<M-k>", [[<cmd>lua require("tmux").move_top()<CR>]] },
+            { "<M-l>", [[<cmd>lua require("tmux").move_right()<CR>]] },
+            { "<M-H>", [[<cmd>lua require("tmux").resize_left()<CR>]] },
+            { "<M-J>", [[<cmd>lua require("tmux").resize_botoom()<CR>]] },
+            { "<M-K>", [[<cmd>lua require("tmux").resize_top()<CR>]] },
+            { "<M-L>", [[<cmd>lua require("tmux").resize_right()<CR>]] },
+        },
+        config = function()
+            require("tmux").setup({
+                navigation = {
+                    enable_default_keybindings = false,
+                },
+                resize = {
+                    enable_default_keybindings = false,
+                },
+            })
+        end
+    },
     -- 编码检测
     -- {
     --     "mbbill/fencview",
     --     config = function()
     --         vim.g.fencview_autodetect = 1
     --     end
-    -- }
+   -- }
 }
