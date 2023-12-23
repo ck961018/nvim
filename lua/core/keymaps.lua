@@ -34,7 +34,7 @@ keymap.set({ "n", "v" }, "<leader>p", [["+p]], { noremap = true, silent = true }
 keymap.set("n", "<CR>", [[<cmd>nohlsearch<CR><CR>]], { noremap = true, silent = true })
 
 -- disable
-keymap.set("n", "q", "<nop>", { noremap = true, silent = true })
+-- keymap.set("n", "q", "<nop>", { noremap = true, silent = true })
 
 -- neovide
 if vim.g.neovide then

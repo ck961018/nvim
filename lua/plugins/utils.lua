@@ -298,11 +298,11 @@ return {
         "aserowy/tmux.nvim",
         keys = {
             { "<M-h>", [[<cmd>lua require("tmux").move_left()<CR>]] },
-            { "<M-j>", [[<cmd>lua require("tmux").move_botoom()<CR>]] },
+            { "<M-j>", [[<cmd>lua require("tmux").move_bottom()<CR>]] },
             { "<M-k>", [[<cmd>lua require("tmux").move_top()<CR>]] },
             { "<M-l>", [[<cmd>lua require("tmux").move_right()<CR>]] },
             { "<M-H>", [[<cmd>lua require("tmux").resize_left()<CR>]] },
-            { "<M-J>", [[<cmd>lua require("tmux").resize_botoom()<CR>]] },
+            { "<M-J>", [[<cmd>lua require("tmux").resize_bottom()<CR>]] },
             { "<M-K>", [[<cmd>lua require("tmux").resize_top()<CR>]] },
             { "<M-L>", [[<cmd>lua require("tmux").resize_right()<CR>]] },
         },
