@@ -315,6 +315,21 @@ return {
                     enable_default_keybindings = false,
                 },
             })
+            local status, which_key = pcall(require, "which-key")
+            if status then
+                vim.keymap.set("n", [["]], function()
+                    if vim.env.TMUX then
+                        require("tmux.copy").sync_registers()
+                    end
+                    which_key.show([["]], { mode = "n", auto = true })
+                end)
+                vim.keymap.set("x", [["]], function()
+                    if vim.env.TMUX then
+                        require("tmux.copy").sync_registers()
+                    end
+                    which_key.show([["]], { mode = "v", auto = true })
+                end)
+            end
         end
     },
     -- 编码检测
@@ -323,5 +338,5 @@ return {
     --     config = function()
     --         vim.g.fencview_autodetect = 1
     --     end
-   -- }
+    -- }
 }
