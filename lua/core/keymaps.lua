@@ -33,12 +33,6 @@ keymap.set({ "n", "v" }, "<leader>p", [["+p]], { noremap = true, silent = true }
 -- view
 keymap.set("n", "<CR>", [[<cmd>nohlsearch<CR><CR>]], { noremap = true, silent = true })
 
--- WhichKeyOfDoubleQuotes = function()
---     vim.cmd.WhichKey([["]])
---     vim.api.nvim_feedkeys([["]], "n", true)
--- end
--- keymap.set({ "n", "v" }, [["]], [[<cmd>lua WhichKeyOfDoubleQuotes()<CR>]])
-
 -- disable
 -- keymap.set("n", "q", "<nop>", { noremap = true, silent = true })
 

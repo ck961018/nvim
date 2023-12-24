@@ -22,6 +22,7 @@ SaveSession = function()
 
     if vim.bo[vim.fn.bufnr()].filetype ~= "" then
         local project_path = vim.fn.getcwd()
+        ---@diagnostic disable-next-line: param-type-mismatch
         local project_name = string.match(project_path, "[/\\]([^/\\]+)$")
         require("mini.sessions").write(project_name)
     end
@@ -29,6 +30,7 @@ end
 
 RestoreSession = function()
     local project_path = vim.fn.getcwd()
+    ---@diagnostic disable-next-line: param-type-mismatch
     local project_name = string.match(project_path, "[/\\]([^/\\]+)$")
 
     require("nvim-tree").change_dir(project_path)
@@ -277,6 +279,7 @@ return {
             require("auto-indent").setup({
                 lightmode = true,
                 indentexpr = function(lnum)
+                    ---@diagnostic disable-next-line: return-type-mismatch
                     return vim.fn.cindent(lnum)
                 end,
                 ignore_filetype = {}, -- Disable plugin for specific filetypes, e.g. ignore_filetype = { 'javascript' }
@@ -330,6 +333,17 @@ return {
                     which_key.show([["]], { mode = "v", auto = true })
                 end)
             end
+        end
+    },
+    {
+        "kylechui/nvim-surround",
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        event = "VeryLazy",
+        config = function()
+            ---@diagnostic disable-next-line: missing-fields
+            require("nvim-surround").setup({
+                move_cursor = false,
+            })
         end
     },
     -- 编码检测
