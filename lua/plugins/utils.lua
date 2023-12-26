@@ -68,11 +68,9 @@ return {
         },
     },
     {
-        "ethanholz/nvim-lastplace",
+        "vladdoster/remember.nvim",
         event = { "BufReadPost", "BufNewFile" },
-        opts = {
-            lastplace_open_folds = false,
-        }
+        opts = {}
     },
     {
         "folke/flash.nvim",
