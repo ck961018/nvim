@@ -50,7 +50,7 @@ end
 
 -- test
 Test = function()
-    vim.api.nvim_feedkeys([["]], "n", true)
+    local luasnip = require("luasnip")
 end
 
 keymap.set({ "n" }, "<leader>/", [[<cmd>lua Test()<CR>]], { silent = true })
