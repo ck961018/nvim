@@ -156,11 +156,11 @@ return {
         "danymat/neogen",
         keys = {
             {
-                "<leader>nc", [[<cmd> require("neogen").generate({type = "class"})<CR>]],
+                "<leader>nc", [[<cmd>lua require("neogen").generate({type = "class"})<CR>]],
                 { desc = "[N]eogen [C]lass Doxygen", noremap = true, silent = true }
             },
             {
-                "<leader>nf", [[<cmd> require("neogen").generate({type = "func"})<CR>]],
+                "<leader>nf", [[<cmd>lua require("neogen").generate({type = "func"})<CR>]],
                 { desc = "[N]eogen [F]unction Doxygen", noremap = true, silent = true }
             },
         },
