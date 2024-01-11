@@ -68,7 +68,7 @@ return {
                 ["<tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.confirm({ select = true }) -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-                    elseif luasnip.expand_or_jumpable() then
+                    elseif luasnip.expand_or_locally_jumpable() then
                         luasnip.expand_or_jump()
                     else
                         fallback()
