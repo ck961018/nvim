@@ -114,8 +114,8 @@ return {
 
                     api.config.mappings.default_on_attach(bufnr)
 
-                    vim.keymap.del("n", "<C-k>", { buffer = bufnr })
-                    vim.keymap.set({ "n", "v" }, "<C-k>", "10kzz", { noremap = true, silent = true })
+                    -- vim.keymap.del("n", "<C-k>", { buffer = bufnr })
+                    -- vim.keymap.set({ "n", "v" }, "<C-k>", "10kzz", { noremap = true, silent = true })
 
                     vim.keymap.set("n", "i", api.node.show_info_popup, opts("Info"))
 

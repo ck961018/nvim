@@ -23,8 +23,8 @@ keymap.set("n", "<A-h>", "<C-w>h")
 keymap.set("n", "<A-l>", "<C-w>l")
 keymap.set("n", "<A-j>", "<C-w>j")
 keymap.set("n", "<A-k>", "<C-w>k")
-keymap.set({ "n", "v" }, "<C-j>", "10jzz", { noremap = true, silent = true })
-keymap.set({ "n", "v" }, "<C-k>", "10kzz", { noremap = true, silent = true })
+-- keymap.set({ "n", "v" }, "<C-j>", "10jzz", { noremap = true, silent = true })
+-- keymap.set({ "n", "v" }, "<C-k>", "10kzz", { noremap = true, silent = true })
 
 -- edit
 keymap.set({ "n", "v" }, "<leader>y", [["+y]], { noremap = true, silent = true })
