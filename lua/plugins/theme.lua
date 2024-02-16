@@ -12,9 +12,10 @@ return {
                 style = "moon",
                 styles = {
                     comments = { italic = false },
+                    keywords = { italic = false },
                 },
                 on_highlights = function(hl, c)
-                    hl.DiagnosticUnnecessary  = {
+                    hl.DiagnosticUnnecessary = {
                         fg = c.comment,
                     }
                 end
