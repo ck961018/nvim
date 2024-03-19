@@ -13,16 +13,11 @@ vim.keymap.set("n", "<leader><TAB>", function()
     vim.cmd.qa()
 end, { desc = "Exit" })
 
--- spilt
-keymap.set("n", "<leader>sv", [[<C-w>v]])
-keymap.set("n", "<leader>sh", [[<C-w>s]])
-keymap.set("n", "<leader>sx", [[<cmd>close<CR>]])
-
 -- move
-keymap.set("n", "<A-h>", "<C-w>h")
-keymap.set("n", "<A-l>", "<C-w>l")
-keymap.set("n", "<A-j>", "<C-w>j")
-keymap.set("n", "<A-k>", "<C-w>k")
+-- keymap.set("n", "<A-h>", "<C-w>h")
+-- keymap.set("n", "<A-l>", "<C-w>l")
+-- keymap.set("n", "<A-j>", "<C-w>j")
+-- keymap.set("n", "<A-k>", "<C-w>k")
 -- keymap.set({ "n", "v" }, "<C-j>", "10jzz", { noremap = true, silent = true })
 -- keymap.set({ "n", "v" }, "<C-k>", "10kzz", { noremap = true, silent = true })
 
