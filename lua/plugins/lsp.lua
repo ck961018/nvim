@@ -15,6 +15,9 @@ return {
     },
     config = function()
         local clangd = "clangd"
+        if System == "windows" then
+            clangd = "clangd.exe"
+        end
         local clang = "clang"
         local servers = {
             lua_ls = {
