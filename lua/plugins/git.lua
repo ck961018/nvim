@@ -23,6 +23,7 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         config = function()
             require("gitsigns").setup({
+                attach_to_untracked = true,
                 current_line_blame = true,
                 on_attach = function(bufnr)
                     local function map(mode, l, r, opts)
