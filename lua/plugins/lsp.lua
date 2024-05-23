@@ -1,6 +1,7 @@
 return {
     {
         "neovim/nvim-lspconfig",
+        event = "LazyFile",
         opts = {
             servers = {
                 lua_ls = {},
@@ -31,6 +32,7 @@ return {
     },
     {
         "iamcco/ds-pinyin-lsp",
+        event = "LazyFile",
         config = function()
             local db_directory = vim.fn.stdpath("config") .. "/dependencies/db"
             local db_path = db_directory .. "/dict.db3"
