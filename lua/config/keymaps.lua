@@ -37,10 +37,6 @@ del("t", "<C-l>")
 del("t", "<C-/>")
 del("t", "<C-_>")
 map("t", "<esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
-map("t", "<A-h>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window" })
-map("t", "<A-j>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window" })
-map("t", "<A-k>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
-map("t", "<A-l>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 
 del("n", "<leader>ww")
 del("n", "<leader>wd")
@@ -48,3 +44,10 @@ del("n", "<leader>w-")
 del("n", "<leader>w|")
 del("n", "<leader>-")
 del("n", "<leader>|")
+
+Test = function()
+    local list = require("persistence").list()
+    vim.print(list)
+end
+
+map("n", "<leader>t", [[<cmd>lua Test()<CR>]])
