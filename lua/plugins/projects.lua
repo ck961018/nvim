@@ -75,7 +75,7 @@ return {
         },
         config = function()
             require("workspaces").setup({
-                path = vim.fn.stdpath("data") .. "/sessions/workspaces",
+                path = vim.fn.stdpath("state") .. "/sessions/workspaces",
                 auto_open = false,
                 notify_info = true,
                 hooks = {

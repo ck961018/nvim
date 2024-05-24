@@ -1,3 +1,7 @@
+if vim.lsp ~= nil and vim.lsp.inlay_hint ~= nil then
+  vim.lsp.inlay_hint.enable = false
+end
+
 return {
     {
         "neovim/nvim-lspconfig",
