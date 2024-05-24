@@ -46,8 +46,6 @@ del("n", "<leader>-")
 del("n", "<leader>|")
 
 Test = function()
-    local list = require("persistence").list()
-    vim.print(list)
 end
 
 map("n", "<leader>t", [[<cmd>lua Test()<CR>]])
