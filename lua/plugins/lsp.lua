@@ -8,7 +8,6 @@ return {
         event = "LazyFile",
         opts = {
             servers = {
-                lua_ls = {},
                 clangd = {
                     keys = {
                         { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
@@ -30,7 +29,6 @@ return {
                         end
                     end,
                 },
-                rust_analyzer = {},
             },
         },
     },

@@ -3,9 +3,9 @@ return {
         "sindrets/diffview.nvim",
         event = { "BufReadPost", "BufNewFile" },
         keys = {
-            { "<leader>dg", [[<cmd>DiffviewOpen<CR>]], desc = "[D]iffview [G]it" },
-            { "<leader>dh", [[<cmd>DiffviewFileHistory %<CR>]], desc = "[D]iffview [H]istory" },
-            { "<leader>dx", [[<cmd>DiffviewClose<CR>]], desc = "[D]iffview Close[X]" },
+            { "<leader>gdg", [[<cmd>DiffviewOpen<CR>]], desc = "[D]iffview [G]it" },
+            { "<leader>gdh", [[<cmd>DiffviewFileHistory %<CR>]], desc = "[D]iffview [H]istory" },
+            { "<leader>gdx", [[<cmd>DiffviewClose<CR>]], desc = "[D]iffview Close[X]" },
         },
         config = function()
             local actions = require("diffview.actions")
@@ -37,7 +37,7 @@ return {
         event = "VeryLazy",
         opts = {
             defaults = {
-                ["<leader>d"] = { name = "+diffview" },
+                ["<leader>gd"] = { name = "+diffview" },
             },
         }
     },
