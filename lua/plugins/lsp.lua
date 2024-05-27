@@ -1,5 +1,5 @@
 if vim.lsp ~= nil and vim.lsp.inlay_hint ~= nil then
-  vim.lsp.inlay_hint.enable = false
+    vim.lsp.inlay_hint.enable = false
 end
 
 return {
@@ -7,6 +7,11 @@ return {
         "neovim/nvim-lspconfig",
         event = "LazyFile",
         opts = {
+            setup = {
+                rust_analyzer = function()
+                    return true
+                end,
+            },
             servers = {
                 clangd = {
                     keys = {
