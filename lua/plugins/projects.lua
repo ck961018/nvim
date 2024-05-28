@@ -77,7 +77,7 @@ return {
             require("workspaces").setup({
                 path = vim.fn.stdpath("state") .. "/sessions/workspaces",
                 auto_open = false,
-                notify_info = true,
+                notify_info = false,
                 hooks = {
                     add = {},
                     remove = {},
