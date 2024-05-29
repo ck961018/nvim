@@ -39,6 +39,7 @@ return {
             options = vim.opt.sessionoptions:get(),
             pre_save = function()
                 require("neo-tree.command").execute({ action = "close" })
+                require("cmake-tools").close_runner()
             end,
         },
         keys = {
