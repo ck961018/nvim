@@ -24,7 +24,6 @@ return {
                         "--header-insertion=never",
                         "--completion-style=detailed",
                         "--function-arg-placeholders",
-                        "--fallback-style=llvm",
                     },
                     filetypes = { "c", "cpp", "objc", "objcpp", "h" },
                     on_new_config = function(new_config, _)
