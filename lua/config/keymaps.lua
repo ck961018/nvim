@@ -46,6 +46,8 @@ del("n", "<leader>-")
 del("n", "<leader>|")
 
 Test = function()
+    vim.cmd.stopinsert()
+    vim.print(require("config.utils").get_visual_selection())
 end
 
-map("n", "<leader>t", [[<cmd>lua Test()<CR>]])
+map({ "n", "v" }, "<leader>t", [[<cmd>lua Test()<CR>]])
