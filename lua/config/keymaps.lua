@@ -38,6 +38,7 @@ del("t", "<C-/>")
 del("t", "<C-_>")
 map("t", "<esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
+del("n", "<leader>wm")
 del("n", "<leader>ww")
 del("n", "<leader>wd")
 del("n", "<leader>w-")
