@@ -82,6 +82,5 @@ vim.opt.pumheight = 10
 vim.opt.shortmess = vim.opt.shortmess + "c"
 
 vim.opt.fileencoding = "utf-8"
-vim.opt.matchpairs = vim.opt.matchpairs + "<:>"
 
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
