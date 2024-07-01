@@ -7,6 +7,12 @@ function ListProjects()
         local project_path = string.match(project, "[\\/]([^\\^/]+)%.vim")
         project_path = string.gsub(project_path, "%%", "/")
         project_path = string.gsub(project_path, "//", ":/")
+
+        local stat = vim.uv.fs_stat(project_path)
+        if stat == nil then
+            goto continue
+        end
+
         local project_name = string.match(project_path, "[\\/]([^\\^/]+)$")
         for _, history_project in ipairs(history_projects) do
             local history_project_name = string.match(history_project.name, "%S+")
@@ -19,6 +25,8 @@ function ListProjects()
             require("workspaces").add(project_path, project_name)
         end
         visited[project_name] = true
+
+        ::continue::
     end
 
     for _, history_project in ipairs(history_projects) do
