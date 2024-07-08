@@ -11,7 +11,7 @@ return {
                 vim.schedule(function()
                     local visual_selection = require("config.utils").get_visual_selection()
                     require("telescope.builtin").find_files()
-                    vim.api.nvim_input(visual_selection)
+                    vim.api.nvim_feedkeys(visual_selection, 't', true)
                 end)
             end,
             desc = "Find Files (Root Dir)",
@@ -24,7 +24,7 @@ return {
                 vim.schedule(function()
                     local visual_selection = require("config.utils").get_visual_selection()
                     require("telescope.builtin").live_grep()
-                    vim.api.nvim_input(visual_selection)
+                    vim.api.nvim_feedkeys(visual_selection, 't', true)
                 end)
             end,
             desc = "Grep (Root Dir)",
