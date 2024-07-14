@@ -3,6 +3,7 @@ return {
         "sindrets/diffview.nvim",
         event = { "BufReadPost", "BufNewFile" },
         keys = {
+            { "<leader>gd", "", desc = "+diffview" },
             { "<leader>gdg", [[<cmd>DiffviewOpen<CR>]], desc = "[D]iffview [G]it" },
             { "<leader>gdh", [[<cmd>DiffviewFileHistory %<CR>]], desc = "[D]iffview [H]istory" },
             { "<leader>gdx", [[<cmd>DiffviewClose<CR>]], desc = "[D]iffview Close[X]" },
@@ -31,14 +32,5 @@ return {
                 },
             })
         end,
-    },
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        opts = {
-            defaults = {
-                ["<leader>gd"] = { name = "+diffview" },
-            },
-        }
     },
 }
