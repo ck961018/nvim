@@ -39,41 +39,15 @@ function ListProjects()
     vim.cmd([[Telescope workspaces]])
 end
 
+vim.api.nvim_create_autocmd("User", {
+    pattern = "PersistenceSavePre",
+    callback = function()
+        require("neo-tree.command").execute({ action = "close" })
+        require("cmake-tools").close_runner()
+    end,
+})
+
 return {
-    {
-        "folke/persistence.nvim",
-        event = "BufReadPre",
-        opts = {
-            options = vim.opt.sessionoptions:get(),
-            pre_save = function()
-                require("neo-tree.command").execute({ action = "close" })
-                require("cmake-tools").close_runner()
-            end,
-        },
-        keys = {
-            {
-                "<leader>qs",
-                function()
-                    require("persistence").load()
-                end,
-                desc = "Restore Session",
-            },
-            {
-                "<leader>ql",
-                function()
-                    require("persistence").load({ last = true })
-                end,
-                desc = "Restore Last Session",
-            },
-            {
-                "<leader>qd",
-                function()
-                    require("persistence").stop()
-                end,
-                desc = "Don't Save Current Session",
-            },
-        },
-    },
     {
         "natecraddock/workspaces.nvim",
         keys = {
