@@ -21,7 +21,7 @@ return {
         event = "LazyFile",
         dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
         opts = {
-            max_count = 100
+            max_count = 100,
         },
     },
 }
