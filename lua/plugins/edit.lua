@@ -1,10 +1,5 @@
 return {
     {
-        "keaising/im-select.nvim",
-        event = "LazyFile",
-        opts = {},
-    },
-    {
         "vidocqh/auto-indent.nvim",
         event = "InsertEnter",
         config = function()
