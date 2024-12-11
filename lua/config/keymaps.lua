@@ -2,7 +2,7 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-local map = LazyVim.safe_keymap_set
+local map = vim.keymap.set
 local del = vim.keymap.del
 
 map("n", "<A-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
@@ -29,13 +29,13 @@ del("n", "<leader>K")
 del("n", "<leader>l")
 del("n", "<leader>L")
 
-del("t", "<esc><esc>")
-del("t", "<C-h>")
-del("t", "<C-j>")
-del("t", "<C-k>")
-del("t", "<C-l>")
-del("t", "<C-/>")
-del("t", "<C-_>")
+-- del("t", "<esc><esc>")
+-- del("t", "<C-h>")
+-- del("t", "<C-j>")
+-- del("t", "<C-k>")
+-- del("t", "<C-l>")
+-- del("t", "<C-/>")
+-- del("t", "<C-_>")
 map("t", "<esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
 Test = function()

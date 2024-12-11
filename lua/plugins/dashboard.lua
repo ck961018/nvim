@@ -8,9 +8,9 @@ return {
             key = "p",
         }
 
-        projects.desc = projects.desc .. string.rep(" ", 43 - #projects.desc)
-        projects.key_format = "  %s"
+        -- projects.desc = projects.desc .. string.rep(" ", 43 - #projects.desc)
+        -- projects.key_format = "  %s"
 
-        table.insert(opts.config.center, 3, projects)
+        -- table.insert(opts.config.center, 3, projects)
     end,
 }
