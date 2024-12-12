@@ -29,12 +29,9 @@ del("n", "<leader>K")
 del("n", "<leader>l")
 del("n", "<leader>L")
 
-del("t", "<C-/>")
-del("t", "<C-_>")
+-- Test = function()
+--     vim.cmd.stopinsert()
+--     vim.print(require("config.utils").get_visual_selection())
+-- end
 
-Test = function()
-    vim.cmd.stopinsert()
-    vim.print(require("config.utils").get_visual_selection())
-end
-
-map({ "n", "v" }, "<leader>t", [[<cmd>lua Test()<CR>]])
+-- map("n", "<leader>t", function() Test() end)

@@ -10,8 +10,6 @@ function ListProjects()
         end
         project_path = project_path:gsub("//.*", "")
 
-        LazyVim.notify(project_path)
-
         local stat = vim.uv.fs_stat(project_path)
         if stat == nil then
             goto continue
