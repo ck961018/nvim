@@ -2,11 +2,11 @@ return {
     {
         "Civitasv/cmake-tools.nvim",
         keys = {
-            -- { "<F5>", mode = { "n", "v" }, [[<cmd>CMakeRun<CR>]] },
+            { "<F5>", mode = { "n", "v" }, [[<cmd>CMakeRun<CR>]] },
             { "<F6>", mode = { "n", "v" }, [[<cmd>CMakeSelectCwd<CR>]] },
             { "<F7>", mode = { "n", "v" }, [[<cmd>CMakeBuild<CR>]] },
 
-            -- { "<F5>", mode = "i", [[<ESC><cmd>CMakeRun<CR>]] },
+            { "<F5>", mode = "i", [[<ESC><cmd>CMakeRun<CR>]] },
             { "<F6>", mode = "i", [[<ESC><cmd>CMakeSelectCwd<CR>]] },
             { "<F7>", mode = "i", [[<ESC><cmd>CMakeBuild<CR>]] },
         },
@@ -19,7 +19,7 @@ return {
                 default_opts = { -- a list of default and possible values for executors
                     quickfix = {
                         encoding = "cp936",
-                        auto_close_when_success = false,
+                        auto_close_when_success = true,
                     },
                 },
             },

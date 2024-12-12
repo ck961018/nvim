@@ -84,4 +84,6 @@ vim.opt.shortmess = vim.opt.shortmess + "c"
 
 vim.opt.fileencoding = "utf-8"
 
+-- vim.o.jumpoptions = "stack"
+
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
